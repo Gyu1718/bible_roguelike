@@ -40,12 +40,17 @@ body .game-stage.home-v4-screen::before {
 body .game-stage.home-v4-screen::after {
   content: "HOME V4 LAST OVERRIDE" !important;
   position: absolute !important;
+  inset: auto !important;
+  left: auto !important;
+  bottom: auto !important;
   right: 18px !important;
   top: 18px !important;
   z-index: 999999 !important;
   display: block !important;
   width: auto !important;
   height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
   padding: 7px 10px !important;
   background: #00ffff !important;
   color: #001111 !important;
