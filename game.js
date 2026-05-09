@@ -256,6 +256,14 @@ function restart() {
   render();
 }
 
+function goHome() {
+  state.screen = "home";
+  state.feedback = null;
+  state.pendingChoice = null;
+  state.roll = null;
+  render();
+}
+
 function statBar(label, value, key) {
   return `
     <div class="stat">
@@ -299,15 +307,31 @@ function choiceButton(choice, index) {
 
 function homeScreen() {
   return `
-    <main class="layout">
-      <section class="art"><div><p class="eyebrow">BIBLICAL WITNESS ROGUELIKE</p><h2>물벽 사이의 길</h2></div></section>
-      <section class="card">
-        <p class="eyebrow">1편</p>
+    <main class="home-screen">
+      <nav class="main-menu">
+        <button class="menu-item active">▣ 챕터</button>
+        <button class="menu-item disabled">증인</button>
+        <button class="menu-item disabled">기록</button>
+        <button class="menu-item disabled">유물</button>
+        <button class="menu-item disabled">업적</button>
+        <button class="menu-item disabled">설정</button>
+      </nav>
+      <section class="home-hero">
+        <p class="eyebrow">기억하라 · 기록하라 · 전하라</p>
         <h2>벽돌과 바다</h2>
-        <p>선택지의 위험도 숫자와 바는 숨겼습니다. 주사위 아이콘이 붙은 선택지만 2d6 판정이 발생합니다. 치명적인 선택은 표시 없이 선택 결과에서 드러납니다.</p>
-        <button class="primary" onclick="restart()">시작하기</button>
+        <p>그들이 우리에게 벽돌을 만들라 하였고, 우리는 피와 땀으로 대답하였다.</p>
+        <button class="primary" onclick="restart()">1장 시작하기</button>
       </section>
-      ${side()}
+      <section class="chapter-grid">
+        <button class="chapter-card active" onclick="restart()">
+          <span>1장</span>
+          <strong>벽돌과 바다</strong>
+          <em>홍해를 건너기 위한 믿음과 선택의 순간</em>
+        </button>
+        <button class="chapter-card locked"><span>2장</span><strong>광야의 메아리</strong><em>잠김</em></button>
+        <button class="chapter-card locked"><span>3장</span><strong>무너진 성벽</strong><em>잠김</em></button>
+        <button class="chapter-card locked"><span>4장</span><strong>불 가운데서</strong><em>잠김</em></button>
+      </section>
     </main>
   `;
 }
@@ -315,9 +339,9 @@ function homeScreen() {
 function playScreen() {
   const scene = scenes[state.index];
   return `
-    <main class="layout">
-      <section class="art"><div><p class="eyebrow">ILLUSTRATION</p><h2>${scene.art}</h2></div></section>
-      <section class="card">
+    <main class="layout play-screen">
+      <section class="art scene-art"><div><p class="eyebrow">ILLUSTRATION</p><h2>${scene.art}</h2></div></section>
+      <section class="card story-card">
         <p class="eyebrow">벽돌과 바다 · ${state.index + 1}/${scenes.length}</p>
         <h2>${scene.title}</h2>
         <p>${scene.text}</p>
@@ -337,9 +361,9 @@ function rollScreen() {
   const modText = roll.modifier === 0 ? "보정 없음" : `보정 ${roll.modifier > 0 ? "+" : ""}${roll.modifier}`;
 
   return `
-    <main class="layout">
-      <section class="art"><div><p class="eyebrow">2D6 CHECK</p><h2>${scene.art}</h2></div></section>
-      <section class="card">
+    <main class="layout play-screen roll-screen">
+      <section class="art scene-art"><div><p class="eyebrow">2D6 CHECK</p><h2>${scene.art}</h2></div></section>
+      <section class="card story-card">
         <p class="eyebrow">판정</p>
         <h2>${choice.label}</h2>
         <p>위험한 선택이다. 주사위 두 개를 굴려 목표값 이상이면 성공한다.</p>
@@ -360,9 +384,9 @@ function feedbackScreen() {
   const scene = scenes[state.index];
   const feedback = state.feedback;
   return `
-    <main class="layout">
-      <section class="art"><div><p class="eyebrow">선택의 결과</p><h2>${scene.art}</h2></div></section>
-      <section class="card">
+    <main class="layout play-screen feedback-screen">
+      <section class="art scene-art"><div><p class="eyebrow">선택의 결과</p><h2>${scene.art}</h2></div></section>
+      <section class="card story-card">
         <p class="eyebrow">선택의 결과</p>
         <h2>${feedback.title}</h2>
         <p>${feedback.text}</p>
@@ -383,23 +407,24 @@ function endingScreen() {
   const ending = state.ending;
   const type = testimonyType();
   return `
-    <main class="layout">
-      <section class="art"><div><p class="eyebrow">목격의 끝</p><h2>물벽 사이의 길</h2></div></section>
-      <section class="card">
+    <main class="ending-screen">
+      <section class="ending-panel">
         <p class="eyebrow">엔딩</p>
         <h2>${ending.title}</h2>
+        <div class="type-ribbon">당신의 증언 유형: ${type.title}</div>
         <p>${ending.text}</p>
-        <div class="meta">
-          <div><span>당신의 증언 유형</span><strong>${type.title}</strong></div>
-          <div><span>현재 상태</span><strong>생존 ${state.stats.endurance} · 공포 ${state.stats.panic} · 증언 ${state.stats.witness}</strong></div>
-        </div>
         <p>${type.text}</p>
+        <div class="meta">
+          <div><span>생존</span><strong>${state.stats.endurance}</strong></div>
+          <div><span>공포</span><strong>${state.stats.panic}</strong></div>
+          <div><span>증언</span><strong>${state.stats.witness}</strong></div>
+          <div><span>기록</span><strong>${state.log.length}개</strong></div>
+        </div>
         <div class="row">
           <button class="primary" onclick="restart()">다시 도전</button>
-          <button class="secondary" onclick="state.screen='home';render()">처음으로</button>
+          <button class="secondary" onclick="goHome()">처음으로</button>
         </div>
       </section>
-      ${side()}
     </main>
   `;
 }
@@ -414,7 +439,7 @@ function render() {
     playScreen();
 
   root.innerHTML = `
-    <div class="app">
+    <div class="app screen-${state.screen}">
       <header class="top">
         <div>
           <p class="eyebrow">BIBLICAL WITNESS ROGUELIKE</p>
@@ -432,6 +457,7 @@ window.restart = restart;
 window.choose = choose;
 window.proceed = proceed;
 window.resolveRoll = resolveRoll;
+window.goHome = goHome;
 window.state = state;
 window.render = render;
 render();
