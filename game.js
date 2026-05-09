@@ -7,7 +7,6 @@ let state = {
   feedback: null,
   ending: null,
   log: ["새로운 목격자의 기록이 열렸다."],
-  showEffects: true,
 };
 
 function clamp(v, min, max) {
@@ -36,16 +35,6 @@ function riskInfo(value = 0) {
   if (value >= 70) return { label: "높음", className: "high", width: value };
   if (value >= 45) return { label: "주의", className: "mid", width: value };
   return { label: "낮음", className: "low", width: value };
-}
-
-function formatEffects(effects = {}, badEnding) {
-  if (badEnding) return "실패 분기 가능성 있음";
-  const labels = { endurance: "생존", panic: "공포", witness: "증언" };
-  const parts = Object.entries(effects).map(([key, value]) => {
-    const sign = value > 0 ? "+" : "";
-    return `${labels[key] || key} ${sign}${value}`;
-  });
-  return parts.length ? parts.join(" · ") : "변화 없음";
 }
 
 function needsFeedback(choice) {
@@ -127,13 +116,7 @@ function restart() {
     feedback: null,
     ending: null,
     log: ["벽돌과 바다 기록을 시작했다."],
-    showEffects: state.showEffects,
   };
-  render();
-}
-
-function toggleEffects() {
-  state.showEffects = !state.showEffects;
   render();
 }
 
@@ -164,8 +147,6 @@ function side() {
 
 function choiceButton(choice, index) {
   const risk = riskInfo(choice.risk);
-  const effects = formatEffects(choice.effects, choice.badEnding);
-  const modeLabel = needsFeedback(choice) ? "결과창" : "자동 진행";
   return `
     <button class="choice-btn" onclick="choose(${index})">
       <div class="choice-top">
@@ -173,8 +154,6 @@ function choiceButton(choice, index) {
         <span class="risk-badge risk-${risk.className}">위험도 ${risk.label}</span>
       </div>
       <div class="risk-meter"><div class="risk-fill ${risk.className}" style="width:${risk.width}%"></div></div>
-      <div class="effects">진행: ${modeLabel}</div>
-      ${state.showEffects ? `<div class="effects">${effects}</div>` : ""}
     </button>
   `;
 }
@@ -186,11 +165,8 @@ function homeScreen() {
       <section class="card">
         <p class="eyebrow">1편</p>
         <h2>벽돌과 바다</h2>
-        <p>일반 선택은 기록창에만 남고 바로 진행됩니다. 위험도가 높거나 치명적인 선택, 증언이 크게 변하는 선택만 결과창이 열립니다.</p>
-        <div class="row">
-          <button class="primary" onclick="restart()">시작하기</button>
-          <button class="secondary" onclick="toggleEffects()">상태 변화 ${state.showEffects ? "숨기기" : "보이기"}</button>
-        </div>
+        <p>핍박받던 히브리 노예가 출애굽을 경험하는 선택지형 로그라이크입니다. 선택지에는 위험도만 표시됩니다. 일반 선택은 바로 진행되고, 위험하거나 치명적인 선택은 결과창이 열립니다.</p>
+        <button class="primary" onclick="restart()">시작하기</button>
       </section>
       ${side()}
     </main>
@@ -273,10 +249,7 @@ function render() {
           <h1>이름 없는 증인들</h1>
           <p>성경 세계관 선택지형 로그라이크</p>
         </div>
-        <div class="row">
-          <button class="secondary" onclick="toggleEffects()">상태 변화 ${state.showEffects ? "숨기기" : "보이기"}</button>
-          <button class="secondary" onclick="restart()">새 회차</button>
-        </div>
+        <button class="secondary" onclick="restart()">새 회차</button>
       </header>
       ${body}
     </div>
@@ -286,7 +259,6 @@ function render() {
 window.restart = restart;
 window.choose = choose;
 window.proceed = proceed;
-window.toggleEffects = toggleEffects;
 window.state = state;
 window.render = render;
 render();
