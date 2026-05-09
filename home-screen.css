@@ -1,5 +1,5 @@
-/* Home Assets Pack 02
-   목표: 홈 화면 이미지 경로를 home-assets.css 변수로 분리합니다.
+/* Home Visual Match 04
+   스크린샷 기준: 기존 고품질 WebP 복구 + 우측 보드 재배치 + 제목 패널 겹침 제거.
 */
 
 .home-screen-shell {
@@ -31,21 +31,21 @@
 .home-bg {
   z-index: 0;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.12), rgba(0,0,0,.04) 48%, rgba(0,0,0,.42)),
-    linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.52)),
+    linear-gradient(90deg, rgba(0,0,0,.26), rgba(0,0,0,.06) 52%, rgba(0,0,0,.40)),
+    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.52)),
     var(--home-asset-bg),
     #030405;
   background-size: cover;
   background-position: center 48%;
-  filter: brightness(.76) contrast(1.22) saturate(.96);
+  filter: brightness(.74) contrast(1.18) saturate(.96);
 }
 
 .home-vignette {
   z-index: 1;
   background:
-    radial-gradient(circle at 22% 58%, rgba(193,104,44,.16), transparent 26%),
+    radial-gradient(circle at 24% 58%, rgba(193,104,44,.16), transparent 26%),
     radial-gradient(circle at 77% 11%, rgba(215,180,106,.13), transparent 27%),
-    linear-gradient(90deg, rgba(0,0,0,.50), transparent 34%, transparent 69%, rgba(0,0,0,.45)),
+    linear-gradient(90deg, rgba(0,0,0,.48), transparent 34%, transparent 69%, rgba(0,0,0,.45)),
     linear-gradient(180deg, rgba(0,0,0,.25), transparent 39%, rgba(0,0,0,.56));
 }
 
@@ -242,22 +242,23 @@
 .home-board {
   position: absolute;
   z-index: 6;
-  left: 794px;
-  right: 48px;
-  top: 132px;
-  bottom: 126px;
+  left: 720px;
+  right: 58px;
+  top: 58px;
+  bottom: 128px;
   display: grid;
-  grid-template-rows: 1.06fr 1fr;
+  grid-template-rows: 72px minmax(0, 1.28fr) minmax(0, 1fr);
   gap: 16px;
 }
 
 .home-act-title {
-  position: absolute;
+  position: relative;
   z-index: 8;
-  left: 64.25%;
-  top: 46px;
-  transform: translateX(-50%);
-  width: 505px;
+  left: auto;
+  top: auto;
+  transform: none;
+  justify-self: center;
+  width: min(520px, 70%);
   height: 66px;
   display: grid;
   place-items: center;
@@ -286,7 +287,7 @@
 .home-chapter-main {
   position: relative;
   min-height: 0;
-  grid-row: 1;
+  grid-row: 2;
   padding: 34px 42px;
   display: flex;
   align-items: flex-end;
@@ -295,7 +296,7 @@
     linear-gradient(90deg, rgba(0,0,0,.05), rgba(0,0,0,.20)),
     linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.78)),
     var(--home-asset-main-card);
-  background-size: 118% auto;
+  background-size: cover;
   background-position: center 46%;
   border: 2px solid rgba(215,180,106,.50);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.66), 0 22px 58px rgba(0,0,0,.34);
@@ -361,7 +362,7 @@
 }
 
 .home-chapter-grid {
-  grid-row: 2;
+  grid-row: 3;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
