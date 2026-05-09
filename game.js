@@ -48,6 +48,39 @@ function formatEffects(effects = {}, badEnding) {
   return parts.length ? parts.join(" · ") : "변화 없음";
 }
 
+function needsFeedback(choice) {
+  if (choice.feedbackMode === "inline") return false;
+  if (choice.feedbackMode === "modal") return true;
+  if (choice.badEnding) return true;
+  if ((choice.risk || 0) >= 70) return true;
+  const effects = choice.effects || {};
+  if ((effects.witness || 0) >= 3) return true;
+  if ((effects.panic || 0) >= 3) return true;
+  return false;
+}
+
+function goNextOrEnd() {
+  if (state.stats.endurance <= 0 || state.stats.panic >= 14) {
+    state.ending = evaluate();
+    state.screen = "ending";
+    render();
+    return;
+  }
+
+  state.index += 1;
+
+  if (!scenes[state.index] || scenes[state.index]?.final) {
+    state.ending = evaluate();
+    state.screen = "ending";
+    render();
+    return;
+  }
+
+  state.feedback = null;
+  state.screen = "play";
+  render();
+}
+
 function choose(index) {
   const choice = scenes[state.index].choices[index];
   apply(choice.effects);
@@ -59,8 +92,13 @@ function choose(index) {
   else if (state.stats.endurance <= 0 || state.stats.panic >= 14) state.feedback.next = "ending";
   else state.feedback.next = "continue";
 
-  state.screen = "feedback";
-  render();
+  if (needsFeedback(choice)) {
+    state.screen = "feedback";
+    render();
+    return;
+  }
+
+  goNextOrEnd();
 }
 
 function proceed() {
@@ -78,18 +116,7 @@ function proceed() {
     return;
   }
 
-  state.index += 1;
-
-  if (scenes[state.index]?.final) {
-    state.ending = evaluate();
-    state.screen = "ending";
-    render();
-    return;
-  }
-
-  state.feedback = null;
-  state.screen = "play";
-  render();
+  goNextOrEnd();
 }
 
 function restart() {
@@ -138,6 +165,7 @@ function side() {
 function choiceButton(choice, index) {
   const risk = riskInfo(choice.risk);
   const effects = formatEffects(choice.effects, choice.badEnding);
+  const modeLabel = needsFeedback(choice) ? "결과창" : "자동 진행";
   return `
     <button class="choice-btn" onclick="choose(${index})">
       <div class="choice-top">
@@ -145,6 +173,7 @@ function choiceButton(choice, index) {
         <span class="risk-badge risk-${risk.className}">위험도 ${risk.label}</span>
       </div>
       <div class="risk-meter"><div class="risk-fill ${risk.className}" style="width:${risk.width}%"></div></div>
+      <div class="effects">진행: ${modeLabel}</div>
       ${state.showEffects ? `<div class="effects">${effects}</div>` : ""}
     </button>
   `;
@@ -157,7 +186,7 @@ function homeScreen() {
       <section class="card">
         <p class="eyebrow">1편</p>
         <h2>벽돌과 바다</h2>
-        <p>핍박받던 히브리 노예가 출애굽을 경험하는 선택지형 로그라이크입니다. 선택지마다 위험도가 표시되고, 일부 판단은 즉시 배드엔딩으로 이어집니다.</p>
+        <p>일반 선택은 기록창에만 남고 바로 진행됩니다. 위험도가 높거나 치명적인 선택, 증언이 크게 변하는 선택만 결과창이 열립니다.</p>
         <div class="row">
           <button class="primary" onclick="restart()">시작하기</button>
           <button class="secondary" onclick="toggleEffects()">상태 변화 ${state.showEffects ? "숨기기" : "보이기"}</button>
