@@ -1,5 +1,5 @@
-/* Home Visual Match 05
-   스크린샷 기준: 홈 CSS를 마지막 로드하고, 홈 전용 선택자 우선순위를 강화합니다.
+/* Home Visual Match 06
+   목표: 우측 보드를 중앙 쪽으로 더 확장하고, 카드 텍스트 겹침을 완화합니다.
 */
 
 .home-screen-shell {
@@ -242,13 +242,13 @@
 .home-board {
   position: absolute;
   z-index: 6;
-  left: 640px;
+  left: 560px;
   right: 58px;
-  top: 58px;
-  bottom: 128px;
+  top: 54px;
+  bottom: 122px;
   display: grid;
-  grid-template-rows: 72px minmax(0, 1.34fr) minmax(0, 1fr);
-  gap: 16px;
+  grid-template-rows: 74px minmax(0, 1.42fr) minmax(0, 1fr);
+  gap: 17px;
 }
 
 .home-act-title {
@@ -259,7 +259,7 @@
   transform: none;
   justify-self: center;
   align-self: stretch;
-  width: min(540px, 70%);
+  width: min(560px, 64%);
   height: auto;
   min-height: 66px;
   display: grid;
@@ -274,7 +274,7 @@
 }
 
 .home-act-title strong {
-  font-size: 21px;
+  font-size: 20px;
   letter-spacing: .055em;
   color: #f2d58f;
 }
@@ -282,7 +282,7 @@
 .home-act-cross {
   position: absolute;
   top: -25px;
-  font-size: 34px;
+  font-size: 32px;
   color: #f2d58f;
 }
 
@@ -290,7 +290,7 @@
   position: relative;
   min-height: 0;
   grid-row: 2;
-  padding: 34px 42px;
+  padding: 32px 38px;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -328,18 +328,19 @@
 .home-chapter-copy {
   position: relative;
   z-index: 2;
+  max-width: 420px;
 }
 
 .home-chapter-kicker {
   display: block;
-  margin-bottom: 8px;
-  font-size: 18px;
+  margin-bottom: 7px;
+  font-size: 17px;
   color: rgba(242,213,143,.86);
 }
 
 .home-chapter-copy h2 {
   margin: 0;
-  font-size: 50px;
+  font-size: 47px;
   line-height: .98;
   letter-spacing: -.06em;
   color: #f6dd9b;
@@ -347,15 +348,15 @@
 }
 
 .home-chapter-copy p {
-  margin: 8px 0 17px;
-  font-size: 16px;
+  margin: 7px 0 15px;
+  font-size: 15px;
   color: rgba(242,213,143,.74);
 }
 
 .home-chapter-copy button {
-  height: 43px;
-  min-width: 192px;
-  padding: 0 21px;
+  height: 41px;
+  min-width: 184px;
+  padding: 0 20px;
   color: #f6dd9b;
   background: rgba(0,0,0,.52);
   border: 1px solid rgba(215,180,106,.42);
@@ -376,7 +377,7 @@
   position: relative;
   min-height: 0;
   overflow: hidden;
-  padding: 23px 25px;
+  padding: 20px 22px;
   color: #f2d58f;
   background:
     linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.80)),
@@ -394,7 +395,7 @@
 .home-chapter-card span {
   position: relative;
   z-index: 2;
-  font-size: 18px;
+  font-size: 17px;
   color: rgba(242,213,143,.72);
 }
 
@@ -402,23 +403,25 @@
   display: block;
   position: relative;
   z-index: 2;
-  margin-top: 4px;
-  font-size: 16px;
+  margin-top: 3px;
+  max-width: 46%;
+  font-size: 15px;
   color: rgba(242,213,143,.44);
+  line-height: 1.25;
 }
 
 .home-chapter-card i {
   position: absolute;
   left: 50%;
-  top: 52%;
+  top: 54%;
   transform: translate(-50%, -50%);
   z-index: 3;
   display: grid;
   place-items: center;
-  width: 64px;
-  height: 64px;
+  width: 58px;
+  height: 58px;
   font-style: normal;
-  font-size: 28px;
+  font-size: 25px;
   color: rgba(242,213,143,.82);
   background: rgba(0,0,0,.48);
   border: 1px solid rgba(215,180,106,.36);
@@ -446,7 +449,7 @@
   z-index: 8;
   left: 410px;
   right: 180px;
-  bottom: 56px;
+  bottom: 54px;
   text-align: center;
   color: rgba(242,213,143,.78);
 }
@@ -474,15 +477,15 @@
   bottom: 48px;
 }
 
-/* Home-only hard overrides: keep menu screen independent from later shared CSS. */
+/* Home-only hard overrides: keep menu screen independent from shared CSS. */
 body .home-screen .home-board {
-  left: 640px !important;
+  left: 560px !important;
   right: 58px !important;
-  top: 58px !important;
-  bottom: 128px !important;
+  top: 54px !important;
+  bottom: 122px !important;
   display: grid !important;
-  grid-template-rows: 72px minmax(0, 1.34fr) minmax(0, 1fr) !important;
-  gap: 16px !important;
+  grid-template-rows: 74px minmax(0, 1.42fr) minmax(0, 1fr) !important;
+  gap: 17px !important;
 }
 
 body .home-screen .home-act-title {
@@ -493,7 +496,7 @@ body .home-screen .home-act-title {
   grid-row: 1 !important;
   justify-self: center !important;
   align-self: stretch !important;
-  width: min(540px, 70%) !important;
+  width: min(560px, 64%) !important;
   height: auto !important;
   min-height: 66px !important;
 }
