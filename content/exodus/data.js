@@ -32,12 +32,12 @@ window.EXODUS_DATA = {
       { label: "노인을 대신해 한 걸음 나선다", risk: 70, effects: { endurance: -3, witness: 3, panic: 1 }, profile: { witness: 2, resistance: 2 }, title: "한 걸음의 대가", text: "제국은 그것을 어리석음이라 불렀지만, 당신은 그 얼굴을 잊지 않았다." },
       { label: "감독관에게 달려든다", risk: 100, badEnding: "rebellionCrushed", profile: { resistance: 3, fear: 1 }, title: "즉시 배드엔딩 분기", text: "분노는 정당했다. 그러나 지금 이 자리의 반란은 공동체 전체를 더 위험하게 만들었다." }
     ]},
-    { id: "scene_03_straw_decree", title: "짚 없는 명령", art: "짚 없는 벽돌", artLabel: "짚 없는 벽돌", artSrc: "./assets/scenes/exodus/scene_01_brickyard.svg", text: "짚은 주어지지 않았다. 그러나 벽돌 수량은 그대로였다. 사람들은 모세의 이름을 원망하기 시작한다.", choices: [
+    { id: "scene_03_straw_decree", title: "짚 없는 명령", art: "짚 없는 벽돌", artLabel: "짚 없는 벽돌", artSrc: "./assets/scenes/exodus/scene_03_straw_decree.svg", text: "짚은 주어지지 않았다. 그러나 벽돌 수량은 그대로였다. 사람들은 모세의 이름을 원망하기 시작한다.", choices: [
       { label: "모세 때문에 고통이 커졌다고 원망한다", risk: 55, effects: { panic: 2, witness: -1 }, profile: { fear: 2 }, title: "해방의 말이 채찍처럼 들렸다", text: "원망은 고통을 설명해주어도, 길을 열어주지는 못했다." },
       { label: "그 이름을 마음에 담아둔다", risk: 45, effects: { witness: 2, panic: 1 }, profile: { witness: 1, obedience: 1 }, title: "아직 믿음은 아니지만 기억이 되었다", text: "확신은 없었다. 그래도 당신은 모세라는 이름을 지우지 않았다." },
       { label: "그 소문을 감독관에게 알린다", risk: 100, badEnding: "informer", profile: { avoidance: 3, fear: 1 }, title: "즉시 배드엔딩 분기", text: "당신은 위험을 피하려고 소문을 넘겼다. 하지만 공동체의 밤은 더 어두워졌다." }
     ]},
-    { id: "scene_06_darkness_plague", title: "어둠의 사흘", art: "재앙이 덮은 애굽", artLabel: "어둠의 재앙", artSrc: "./assets/scenes/exodus/scene_01_brickyard.svg", text: "낮인데도 어둠이 내려앉는다. 애굽의 집들은 숨죽이고, 사람들은 벽을 더듬는다.", choices: [
+    { id: "scene_06_darkness_plague", title: "어둠의 사흘", art: "재앙이 덮은 애굽", artLabel: "어둠의 재앙", artSrc: "./assets/scenes/exodus/scene_06_darkness_plague.svg", text: "낮인데도 어둠이 내려앉는다. 애굽의 집들은 숨죽이고, 사람들은 벽을 더듬는다.", choices: [
       { label: "어둠 속에서 본 일을 마음에 새긴다", risk: 30, effects: { witness: 3, panic: -1 }, profile: { witness: 3 }, title: "어둠 속의 구별", text: "당신은 빛을 설명하지 못했다. 그러나 그 구별을 보았다." },
       { label: "공포에 눌려 아무 말도 하지 않는다", risk: 50, effects: { panic: 2, witness: -1 }, profile: { fear: 2, avoidance: 1 }, title: "침묵이 깊어진다", text: "침묵은 때로 두려움의 방이 되었다." },
       { label: "애굽인의 집으로 숨어들어 보호를 구한다", risk: 100, badEnding: "egyptianShelter", profile: { avoidance: 3, fear: 2 }, title: "즉시 배드엔딩 분기", text: "권력 곁이 안전하다고 생각했다. 그러나 그 밤의 안전은 권력의 지붕 아래 있지 않았다." }
@@ -47,7 +47,7 @@ window.EXODUS_DATA = {
       { label: "피를 바르지 않고 안에서 버틴다", risk: 100, badEnding: "unmarkedDoor", profile: { resistance: 1, avoidance: 2 }, title: "즉시 배드엔딩 분기", text: "당신은 표식을 미루었다. 그러나 그 밤은 미룬 결정을 기다려주지 않았다." },
       { label: "불안을 견디지 못해 문밖으로 나간다", risk: 100, badEnding: "leftHouse", profile: { fear: 3, avoidance: 2 }, title: "즉시 배드엔딩 분기", text: "당신은 상황을 확인하고 싶었다. 그러나 그 밤에는 머무름이 순종이었다." }
     ]},
-    { id: "scene_09_departure_dawn", title: "급히 떠나는 새벽", art: "급히 떠나는 새벽", artLabel: "떠나는 새벽", artSrc: "./assets/scenes/exodus/scene_11_red_sea_waiting.svg", text: "울음소리와 외침이 애굽을 가른다. 자유는 노래보다 먼저 혼란의 발걸음으로 왔다.", choices: [
+    { id: "scene_09_departure_dawn", title: "급히 떠나는 새벽", art: "급히 떠나는 새벽", artLabel: "떠나는 새벽", artSrc: "./assets/scenes/exodus/scene_09_departure_dawn.svg", text: "울음소리와 외침이 애굽을 가른다. 자유는 노래보다 먼저 혼란의 발걸음으로 왔다.", choices: [
       { label: "뒤돌아보지 않고 행렬을 따라간다", risk: 35, effects: { endurance: -1, witness: 1 }, profile: { obedience: 2 }, title: "노예의 길에서 낯선 길로", text: "당신은 익숙한 길을 버리고 낯선 길에 발을 올렸다." },
       { label: "망설이는 이들을 기다리다 늦어진다", risk: 60, effects: { endurance: -2, witness: 2, panic: 1 }, profile: { witness: 2, survival: 1 }, title: "함께 늦게 걷는 길", text: "혼자 빠르게 사는 길보다 함께 늦게 걷는 길을 택했다." },
       { label: "애굽으로 돌아가 숨는다", risk: 100, badEnding: "returnEgypt", profile: { avoidance: 3, fear: 2 }, title: "즉시 배드엔딩 분기", text: "익숙한 공포가 낯선 자유보다 안전하다고 느꼈다. 그러나 돌아간 길은 더 이상 집이 아니었다." }
@@ -57,7 +57,7 @@ window.EXODUS_DATA = {
       { label: "주변 사람들에게 병거가 온다고 외친다", risk: 55, effects: { panic: 2, witness: 1 }, profile: { witness: 1, fear: 1 }, title: "경고는 필요했지만 공포도 번졌다", text: "당신의 외침은 사람들을 깨웠다. 그러나 공포도 함께 퍼졌다." },
       { label: "병거 쪽으로 달려가 항복하겠다고 외친다", risk: 100, badEnding: "returnEgypt", profile: { avoidance: 3, fear: 2 }, title: "즉시 배드엔딩 분기", text: "목숨을 구하려고 돌아섰다. 그러나 그 길은 구원이 아니라 다시 묶임으로 이어졌다." }
     ]},
-    { id: "scene_11_red_sea_waiting", title: "바다 앞에서", art: "바다 앞의 밤", artLabel: "홍해 앞의 밤", artSrc: "./assets/scenes/exodus/scene_11_red_sea_waiting.svg", text: "뒤에서는 병거 소리가 가까워진다. 앞에는 바다가 있다. 사람들은 원망하고, 밤바람은 소금 냄새를 실어온다.", choices: [
+    { id: "scene_11_red_sea_waiting", title: "바다 앞에서", art: "바다 앞의 밤", artLabel: "홍해 앞의 밤", artSrc: "./assets/scenes/exodus/scene_11_red_sea_waiting_final.svg", text: "뒤에서는 병거 소리가 가까워진다. 앞에는 바다가 있다. 사람들은 원망하고, 밤바람은 소금 냄새를 실어온다.", choices: [
       { label: "원망하는 무리에 섞인다", risk: 70, effects: { panic: 3, witness: -2 }, profile: { fear: 3 }, title: "말은 쉬웠고 공포는 빨랐다", text: "공포는 사람을 과거로 되돌린다." },
       { label: "가만히 서서 바다를 바라본다", risk: 45, effects: { panic: -1, witness: 2 }, profile: { obedience: 2, witness: 1 }, title: "아무것도 못할 때 보는 법을 배운다", text: "그 밤의 침묵은 패배가 아니었다." },
       { label: "병거 앞으로 달려가 막으려 한다", risk: 100, badEnding: "chariotRush", profile: { resistance: 3, fear: 1 }, title: "즉시 배드엔딩 분기", text: "용기와 무모함은 같은 말이 아니었다." },
