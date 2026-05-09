@@ -1,8 +1,14 @@
 /* Home V4 Last Override
-   모든 CSS 뒤에서 홈 화면만 강제 복구합니다.
+   홈 화면에서 game-stage 공용 CSS를 완전히 피한 독립 레이아웃입니다.
 */
 
-body .game-stage.home-v4-screen {
+body .home-v4-shell {
+  width: min(100%, 1920px) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+body .home-v4-screen {
   position: relative !important;
   display: grid !important;
   grid-template-columns: 300px minmax(0, 1fr) !important;
@@ -25,9 +31,10 @@ body .game-stage.home-v4-screen {
   border: 3px solid #ffcc00 !important;
   border-radius: 28px !important;
   isolation: isolate !important;
+  box-sizing: border-box !important;
 }
 
-body .game-stage.home-v4-screen::before {
+body .home-v4-screen::before {
   content: "" !important;
   position: absolute !important;
   inset: 10px !important;
@@ -37,18 +44,9 @@ body .game-stage.home-v4-screen::before {
   pointer-events: none !important;
 }
 
-body .game-stage.home-v4-screen::after {
+body .home-v4-screen::after {
   content: none !important;
   display: none !important;
-  background: transparent !important;
-  border: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  inset: auto !important;
-  pointer-events: none !important;
 }
 
 body .home-v4-vignette {
@@ -74,6 +72,7 @@ body .home-v4-footer {
   visibility: visible !important;
   transform: none !important;
   filter: none !important;
+  box-sizing: border-box !important;
 }
 
 body .home-v4-left {
@@ -102,13 +101,13 @@ body .home-v4-logo p,
 body .home-v4-menu-button,
 body .home-v4-menu-button span,
 body .home-v4-menu-button strong {
-  display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
   color: inherit !important;
 }
 
 body .home-v4-logo h2 {
+  display: block !important;
   margin: 0 0 10px !important;
   font-size: 40px !important;
   line-height: 1.05 !important;
@@ -116,6 +115,7 @@ body .home-v4-logo h2 {
 }
 
 body .home-v4-logo p {
+  display: block !important;
   margin: 0 !important;
   font-size: 13px !important;
   line-height: 1.55 !important;
@@ -290,7 +290,7 @@ body .home-v4-footer div {
 }
 
 @media (max-width: 980px) {
-  body .game-stage.home-v4-screen {
+  body .home-v4-screen {
     display: block !important;
     min-height: 100vh !important;
     aspect-ratio: auto !important;
