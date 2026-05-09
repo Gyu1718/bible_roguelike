@@ -28,31 +28,29 @@ function formatDate(iso) {
 function stageChaptersPage(save) {
   const cleared = save.clearedChapters?.includes("exodus");
   return `
-    <section class="stage-main-content stage-main-chapters">
-      <div class="stage-main-head clean-main-head">
+    <section class="home-v3-chapters">
+      <header class="home-v3-header">
         <div>
-          <p class="eyebrow">제1막</p>
+          <p>제1막</p>
           <h2>시작의 증인</h2>
         </div>
-      </div>
+      </header>
 
-      <article class="stage-feature-card clean-feature-card">
-        <div>
+      <article class="home-v3-feature">
+        <div class="home-v3-feature-copy">
           <span>${cleared ? "다시 열리는 기록" : "열린 이야기"}</span>
           <h3>벽돌과 바다</h3>
           <p>제국의 벽돌가마 아래에서 시작된 이름 없는 사람의 기록.</p>
-          <div class="stage-start-actions">
-            <button class="stage-start-primary" onclick="restart()">${cleared ? "다시 시작하기" : "이야기 시작"}</button>
-          </div>
+          <button onclick="restart()">${cleared ? "다시 시작하기" : "이야기 시작"}</button>
         </div>
       </article>
 
-      <div class="stage-locked-grid clean-locked-grid">
+      <section class="home-v3-locked-board">
         <article><span>잠김</span><strong>광야의 메아리</strong></article>
         <article><span>잠김</span><strong>무너진 성벽</strong></article>
         <article><span>잠김</span><strong>불 가운데서</strong></article>
         <article><span>잠김</span><strong>포로의 강가</strong></article>
-      </div>
+      </section>
     </section>
   `;
 }
