@@ -1,5 +1,5 @@
-/* Home Visual Match 06
-   목표: 우측 보드를 중앙 쪽으로 더 확장하고, 카드 텍스트 겹침을 완화합니다.
+/* Home Visual Match 07
+   목표: 우측 보드를 더 중앙으로 이동하고, 예시 화면처럼 큰 챕터 보드 인상을 강화합니다.
 */
 
 .home-screen-shell {
@@ -242,7 +242,7 @@
 .home-board {
   position: absolute;
   z-index: 6;
-  left: 560px;
+  left: 470px;
   right: 58px;
   top: 54px;
   bottom: 122px;
@@ -259,7 +259,7 @@
   transform: none;
   justify-self: center;
   align-self: stretch;
-  width: min(560px, 64%);
+  width: min(560px, 58%);
   height: auto;
   min-height: 66px;
   display: grid;
@@ -479,7 +479,7 @@
 
 /* Home-only hard overrides: keep menu screen independent from shared CSS. */
 body .home-screen .home-board {
-  left: 560px !important;
+  left: 470px !important;
   right: 58px !important;
   top: 54px !important;
   bottom: 122px !important;
@@ -496,7 +496,7 @@ body .home-screen .home-act-title {
   grid-row: 1 !important;
   justify-self: center !important;
   align-self: stretch !important;
-  width: min(560px, 64%) !important;
+  width: min(560px, 58%) !important;
   height: auto !important;
   min-height: 66px !important;
 }
