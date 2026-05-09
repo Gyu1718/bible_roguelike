@@ -1,19 +1,38 @@
-/* Home Screen Position Fix 01
-   목적: 보드 자체뿐 아니라 내부 카드들이 전체 보드 폭을 반드시 사용하도록 강제합니다.
+/* Home Screen Position Fix 02
+   Real blueprint 기준 1차 좌표 보정입니다.
+   기준 이미지 위에서 실제 UI 요소의 큰 틀 위치를 맞춥니다.
 */
 
+body .home-screen .home-sidebar {
+  width: 330px !important;
+  padding-top: 28px !important;
+  padding-left: 42px !important;
+}
+
+body .home-screen .home-title h1 {
+  font-size: 34px !important;
+}
+
+body .home-screen .home-menu {
+  gap: 8px !important;
+}
+
+body .home-screen .home-menu-button {
+  min-height: 58px !important;
+}
+
 body .home-screen .home-board {
-  left: 390px !important;
-  right: 56px !important;
-  top: 54px !important;
-  bottom: 122px !important;
+  left: 408px !important;
+  right: 76px !important;
+  top: 52px !important;
+  bottom: 126px !important;
   width: auto !important;
   max-width: none !important;
   min-width: 0 !important;
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
-  grid-template-rows: 74px minmax(0, 1.42fr) minmax(0, 1fr) !important;
-  gap: 17px !important;
+  grid-template-rows: 68px minmax(0, 1.38fr) minmax(0, 1fr) !important;
+  gap: 15px !important;
   justify-items: stretch !important;
   align-items: stretch !important;
   box-sizing: border-box !important;
@@ -30,12 +49,16 @@ body .home-screen .home-act-title {
   transform: none !important;
   justify-self: center !important;
   align-self: stretch !important;
-  width: min(560px, 54%) !important;
+  width: min(520px, 48%) !important;
   max-width: none !important;
-  min-width: 420px !important;
+  min-width: 390px !important;
   height: auto !important;
-  min-height: 66px !important;
+  min-height: 62px !important;
   box-sizing: border-box !important;
+}
+
+body .home-screen .home-act-title strong {
+  font-size: 19px !important;
 }
 
 body .home-screen .home-chapter-main {
@@ -47,6 +70,24 @@ body .home-screen .home-chapter-main {
   justify-self: stretch !important;
   align-self: stretch !important;
   box-sizing: border-box !important;
+  padding: 30px 36px !important;
+}
+
+body .home-screen .home-chapter-copy {
+  max-width: 390px !important;
+}
+
+body .home-screen .home-chapter-copy h2 {
+  font-size: 43px !important;
+}
+
+body .home-screen .home-chapter-copy p {
+  font-size: 14px !important;
+}
+
+body .home-screen .home-chapter-copy button {
+  height: 39px !important;
+  min-width: 172px !important;
 }
 
 body .home-screen .home-chapter-grid {
@@ -60,7 +101,7 @@ body .home-screen .home-chapter-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
-  gap: 16px !important;
+  gap: 14px !important;
   box-sizing: border-box !important;
 }
 
@@ -69,15 +110,36 @@ body .home-screen .home-chapter-card {
   max-width: none !important;
   min-width: 0 !important;
   box-sizing: border-box !important;
+  padding: 18px 20px !important;
 }
 
-body .home-screen .home-chapter-copy {
-  max-width: 430px !important;
+body .home-screen .home-chapter-card span {
+  font-size: 16px !important;
+}
+
+body .home-screen .home-chapter-card strong {
+  max-width: 48% !important;
+  font-size: 14px !important;
+}
+
+body .home-screen .home-chapter-card i {
+  width: 52px !important;
+  height: 52px !important;
+  font-size: 23px !important;
 }
 
 body .home-screen .home-footer {
-  left: 390px !important;
-  right: 180px !important;
+  left: 408px !important;
+  right: 220px !important;
+  bottom: 54px !important;
+}
+
+body .home-screen .home-footer p {
+  font-size: 14px !important;
+}
+
+body .home-screen .home-footer strong {
+  font-size: 13px !important;
 }
 
 @media (max-width: 980px) {
