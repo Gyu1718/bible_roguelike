@@ -5,7 +5,7 @@ let state = {
   activeMenu: "chapters",
   index: 0,
   stats: { endurance: 10, panic: 5, witness: 0 },
-  profile: { obedience: 0, witness: 0, survival: 0, fear: 0, resistance: 0, avoidance: 0 },
+  profile: window.NW_PROFILE.defaultProfile(),
   feedback: null,
   pendingChoice: null,
   roll: null,
@@ -39,28 +39,15 @@ function apply(effects = {}) {
 }
 
 function applyProfile(profile = {}) {
-  const next = { ...state.profile };
-  Object.entries(profile).forEach(([key, value]) => { next[key] = (next[key] || 0) + value; });
-  state.profile = next;
+  state.profile = window.NW_PROFILE.apply(state.profile, profile);
 }
 
 function testimonyType() {
-  const entries = Object.entries(state.profile).sort((a, b) => b[1] - a[1]);
-  const [key, value] = entries[0];
-  if (!value) return { title: "아직 이름 붙지 않은 걸음", text: "당신의 선택은 아직 뚜렷한 한 방향으로 굳어지지 않았다. 그러나 그 모호함도 억압의 시간을 통과하는 한 방식이었다." };
-  const types = {
-    obedience: { title: "두려움 속의 순종자", text: "당신은 모든 것을 이해해서 움직인 사람이 아니다. 그러나 떨림 속에서도 주어진 말씀과 표식 앞에 몸을 맞추는 쪽을 선택했다." },
-    witness: { title: "해방의 증언자", text: "당신은 사건을 단순한 생존으로만 넘기지 않았다. 본 것을 마음에 새기고, 그 의미를 언어로 남기려는 방향을 택했다." },
-    survival: { title: "상처 입은 생존자", text: "당신은 먼저 살아남아야 했다. 그 선택은 비겁함만이 아니라, 오래 억압받은 사람이 몸으로 배운 현실적인 지혜이기도 했다." },
-    fear: { title: "공포에 흔들린 사람", text: "당신의 선택은 자주 두려움에 끌려갔다. 그러나 그 두려움은 단순한 약함이 아니라, 노예의 시간 속에서 새겨진 상처의 흔적이었다." },
-    resistance: { title: "무모한 저항자", text: "당신은 불의 앞에서 쉽게 침묵하지 않았다. 다만 분노가 앞설 때, 용기와 무모함의 경계가 흐려지기도 했다." },
-    avoidance: { title: "피하려는 생존자", text: "당신은 위험을 피하고 익숙한 안전을 찾으려 했다. 그러나 해방의 길은 때로 안전해 보이는 곳을 떠나는 결단을 요구했다." },
-  };
-  return types[key];
+  return window.NW_PROFILE.getType(state.profile);
 }
 
 function allTestimonyTypes() {
-  return ["두려움 속의 순종자", "해방의 증언자", "상처 입은 생존자", "공포에 흔들린 사람", "무모한 저항자", "피하려는 생존자"];
+  return window.NW_PROFILE.allTitles();
 }
 
 function evaluate() {
@@ -72,24 +59,11 @@ function evaluate() {
   return endings.survivor;
 }
 
-function isRollChoice(choice) { return !choice.badEnding && (choice.risk || 0) >= 70 && (choice.risk || 0) < 100; }
-function roll2d6() { const d1 = Math.floor(Math.random() * 6) + 1; const d2 = Math.floor(Math.random() * 6) + 1; return { d1, d2, total: d1 + d2 }; }
-function rollTarget(choice) { const risk = choice.risk || 0; if (risk >= 85) return 9; if (risk >= 70) return 8; return 7; }
-function rollModifier(choice) {
-  const stats = state.stats;
-  let mod = 0;
-  if ((choice.effects?.witness || 0) > 0 && stats.witness >= 6) mod += 1;
-  if ((choice.effects?.endurance || 0) < 0 && stats.endurance >= 8) mod += 1;
-  if (stats.panic >= 9) mod -= 1;
-  if (stats.panic >= 12) mod -= 1;
-  return mod;
-}
-function failureEffects(choice) { return { endurance: choice.failEffects?.endurance ?? -1, panic: choice.failEffects?.panic ?? 2, witness: choice.failEffects?.witness ?? -1 }; }
 function needsFeedback(choice) {
   if (choice.feedbackMode === "inline") return false;
   if (choice.feedbackMode === "modal") return true;
   if (choice.badEnding) return true;
-  if (isRollChoice(choice)) return true;
+  if (window.NW_ROLL.isRollChoice(choice)) return true;
   const effects = choice.effects || {};
   if ((effects.witness || 0) >= 3) return true;
   if ((effects.panic || 0) >= 3) return true;
@@ -97,24 +71,61 @@ function needsFeedback(choice) {
 }
 
 function goNextOrEnd() {
-  if (state.stats.endurance <= 0 || state.stats.panic >= 14) { state.ending = evaluate(); state.screen = "ending"; render(); return; }
+  if (state.stats.endurance <= 0 || state.stats.panic >= 14) {
+    state.ending = evaluate();
+    state.screen = "ending";
+    render();
+    return;
+  }
+
   state.index += 1;
-  if (!scenes[state.index] || scenes[state.index]?.final) { state.ending = evaluate(); state.screen = "ending"; render(); return; }
-  state.feedback = null; state.pendingChoice = null; state.roll = null; state.screen = "play"; render();
+
+  if (!scenes[state.index] || scenes[state.index]?.final) {
+    state.ending = evaluate();
+    state.screen = "ending";
+    render();
+    return;
+  }
+
+  state.feedback = null;
+  state.pendingChoice = null;
+  state.roll = null;
+  state.screen = "play";
+  render();
 }
 
 function choose(index) {
   const choice = scenes[state.index].choices[index];
   applyProfile(choice.profile);
-  if (choice.badEnding) { state.feedback = { ...choice, next: "bad" }; state.log.unshift(choice.text); state.log = state.log.slice(0, 6); state.screen = "feedback"; render(); return; }
-  if (isRollChoice(choice)) {
-    const dice = roll2d6(); const target = rollTarget(choice); const modifier = rollModifier(choice); const score = dice.total + modifier;
-    state.pendingChoice = choice; state.roll = { ...dice, target, modifier, score, success: score >= target }; state.screen = "roll"; render(); return;
+
+  if (choice.badEnding) {
+    state.feedback = { ...choice, next: "bad" };
+    state.log.unshift(choice.text);
+    state.log = state.log.slice(0, 6);
+    state.screen = "feedback";
+    render();
+    return;
   }
+
+  if (window.NW_ROLL.isRollChoice(choice)) {
+    state.pendingChoice = choice;
+    state.roll = window.NW_ROLL.makeRoll(choice, state.stats);
+    state.screen = "roll";
+    render();
+    return;
+  }
+
   apply(choice.effects);
-  state.log.unshift(choice.text); state.log = state.log.slice(0, 6);
+  state.log.unshift(choice.text);
+  state.log = state.log.slice(0, 6);
   state.feedback = { ...choice, next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue" };
-  if (needsFeedback(choice)) { state.screen = "feedback"; render(); return; }
+
+  if (needsFeedback(choice)) {
+    state.screen = "feedback";
+    render();
+    return;
+  }
+
   goNextOrEnd();
 }
 
@@ -122,50 +133,121 @@ function resolveRoll() {
   const choice = state.pendingChoice;
   const roll = state.roll;
   if (!choice || !roll) return;
+
   if (roll.success) {
     apply(choice.effects);
-    state.feedback = { ...choice, title: choice.successTitle || choice.title, text: choice.successText || choice.text, next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue" };
+    state.feedback = {
+      ...choice,
+      title: choice.successTitle || choice.title,
+      text: choice.successText || choice.text,
+      next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue",
+    };
     state.log.unshift(choice.successText || choice.text);
   } else {
-    const fail = failureEffects(choice); apply(fail);
-    state.feedback = { ...choice, title: choice.failTitle || "판정 실패", text: choice.failText || "위험한 선택은 뜻대로 풀리지 않았다. 몸과 마음이 흔들렸다.", next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue" };
+    const fail = window.NW_ROLL.failureEffects(choice);
+    apply(fail);
+    state.feedback = {
+      ...choice,
+      title: choice.failTitle || "판정 실패",
+      text: choice.failText || "위험한 선택은 뜻대로 풀리지 않았다. 몸과 마음이 흔들렸다.",
+      next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue",
+    };
     state.log.unshift(state.feedback.text);
   }
-  state.log = state.log.slice(0, 6); state.screen = "feedback"; render();
+
+  state.log = state.log.slice(0, 6);
+  state.screen = "feedback";
+  render();
 }
 
 function proceed() {
-  if (state.feedback?.next === "bad") { state.ending = endings[state.feedback.badEnding]; state.screen = "ending"; render(); return; }
-  if (state.feedback?.next === "ending") { state.ending = evaluate(); state.screen = "ending"; render(); return; }
+  if (state.feedback?.next === "bad") {
+    state.ending = endings[state.feedback.badEnding];
+    state.screen = "ending";
+    render();
+    return;
+  }
+  if (state.feedback?.next === "ending") {
+    state.ending = evaluate();
+    state.screen = "ending";
+    render();
+    return;
+  }
   goNextOrEnd();
 }
 
 function restart() {
-  state = { ...state, screen: "play", index: 0, stats: { endurance: 10, panic: 5, witness: 0 }, profile: { obedience: 0, witness: 0, survival: 0, fear: 0, resistance: 0, avoidance: 0 }, feedback: null, pendingChoice: null, roll: null, ending: null, log: ["벽돌과 바다 기록을 시작했다."] };
+  state = {
+    ...state,
+    screen: "play",
+    index: 0,
+    stats: { endurance: 10, panic: 5, witness: 0 },
+    profile: window.NW_PROFILE.defaultProfile(),
+    feedback: null,
+    pendingChoice: null,
+    roll: null,
+    ending: null,
+    log: ["벽돌과 바다 기록을 시작했다."],
+  };
   render();
 }
-function goHome(menu = state.activeMenu || "chapters") { state.screen = "home"; state.activeMenu = menu; state.feedback = null; state.pendingChoice = null; state.roll = null; render(); }
-function setMenu(menu) { state.activeMenu = menu; state.screen = "home"; render(); }
 
-function statIconSrc(key) { return { endurance: "./assets/ui/icons/icon_endurance.svg", panic: "./assets/ui/icons/icon_panic.svg", witness: "./assets/ui/icons/icon_witness.svg" }[key] || ""; }
+function goHome(menu = state.activeMenu || "chapters") {
+  state.screen = "home";
+  state.activeMenu = menu;
+  state.feedback = null;
+  state.pendingChoice = null;
+  state.roll = null;
+  render();
+}
+
+function setMenu(menu) {
+  state.activeMenu = menu;
+  state.screen = "home";
+  render();
+}
+
+function statIconSrc(key) {
+  return {
+    endurance: "./assets/ui/icons/icon_endurance.svg",
+    panic: "./assets/ui/icons/icon_panic.svg",
+    witness: "./assets/ui/icons/icon_witness.svg",
+  }[key] || "";
+}
+
 function statBar(label, value, key) {
   return `<div class="stat"><div class="stat-row"><span class="stat-label"><img class="stat-icon" src="${statIconSrc(key)}" alt="${label}" /><span>${label}</span></span><strong>${value}</strong></div><div class="bar"><div class="fill ${key === "panic" ? "panic" : ""}" style="width:${Math.min(100, value * 8)}%"></div></div></div>`;
 }
+
 function side() {
   const stats = state.stats;
   return `<aside class="side"><h3>상태</h3>${statBar("생존", stats.endurance, "endurance")}${statBar("공포", stats.panic, "panic")}${statBar("증언", stats.witness, "witness")}<div class="log"><h3>기록</h3>${state.log.map((entry) => `<p>${entry}</p>`).join("")}</div></aside>`;
 }
 
-function choiceIcon(choice) { return isRollChoice(choice) ? `<span class="choice-icon dice" title="판정 선택"><img src="./assets/ui/icons/icon_dice.svg" alt="판정" /></span>` : `<span class="choice-icon none" aria-hidden="true"></span>`; }
-function choiceButton(choice, index) { return `<button class="choice-btn" onclick="choose(${index})"><div class="choice-top"><span>${choice.label}</span>${choiceIcon(choice)}</div></button>`; }
+function choiceIcon(choice) {
+  return window.NW_ROLL.isRollChoice(choice)
+    ? `<span class="choice-icon dice" title="판정 선택"><img src="./assets/ui/icons/icon_dice.svg" alt="판정" /></span>`
+    : `<span class="choice-icon none" aria-hidden="true"></span>`;
+}
+
+function choiceButton(choice, index) {
+  return `<button class="choice-btn" onclick="choose(${index})"><div class="choice-top"><span>${choice.label}</span>${choiceIcon(choice)}</div></button>`;
+}
+
 function sceneArtSection(scene, eyebrowText = "ILLUSTRATION") {
   const artSrc = scene.artSrc || "./assets/scenes/exodus/scene_01_brickyard.svg";
   const artLabel = scene.artLabel || scene.art || "장면 삽화";
   return `<section class="art scene-art asset-art"><img class="scene-asset-img" src="${artSrc}" alt="${artLabel}" /><div><p class="eyebrow">${eyebrowText}</p><h2>${scene.art}</h2></div></section>`;
 }
 
-function menuButton(id, label, icon = "") { const active = state.activeMenu === id ? "active" : ""; return `<button class="menu-item ${active}" onclick="setMenu('${id}')">${icon}${label}</button>`; }
-function menuNav() { return `<nav class="main-menu">${menuButton("chapters", "챕터", "▣ ")}${menuButton("witnesses", "증인")}${menuButton("records", "기록")}${menuButton("artifacts", "유물")}${menuButton("achievements", "업적")}${menuButton("settings", "설정")}</nav>`; }
+function menuButton(id, label, icon = "") {
+  const active = state.activeMenu === id ? "active" : "";
+  return `<button class="menu-item ${active}" onclick="setMenu('${id}')">${icon}${label}</button>`;
+}
+
+function menuNav() {
+  return `<nav class="main-menu">${menuButton("chapters", "챕터", "▣ ")}${menuButton("witnesses", "증인")}${menuButton("records", "기록")}${menuButton("artifacts", "유물")}${menuButton("achievements", "업적")}${menuButton("settings", "설정")}</nav>`;
+}
 
 function chaptersPage(save) {
   const cleared = save.clearedChapters?.includes("exodus");
