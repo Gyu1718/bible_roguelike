@@ -1,4 +1,5 @@
 const SAVE_KEY = "nameless_witnesses_save_v1";
+let lastRecordedRunSignature = null;
 
 function defaultSaveData() {
   return {
@@ -7,7 +8,10 @@ function defaultSaveData() {
     clearedChapters: [],
     endingsSeen: [],
     testimonyTypesSeen: [],
+    artifactsUnlocked: [],
+    achievementsUnlocked: [],
     totalRuns: 0,
+    runHistory: [],
     lastRun: null,
     updatedAt: null,
   };
@@ -17,7 +21,8 @@ function loadSaveData() {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
     if (!raw) return defaultSaveData();
-    return { ...defaultSaveData(), ...JSON.parse(raw) };
+    const parsed = JSON.parse(raw);
+    return { ...defaultSaveData(), ...parsed };
   } catch (error) {
     console.warn("저장 데이터를 불러오지 못했습니다.", error);
     return defaultSaveData();
@@ -40,6 +45,17 @@ function uniquePush(list, value) {
   return Array.from(new Set([...(list || []), value]));
 }
 
+function uniquePushMany(list, values = []) {
+  return Array.from(new Set([...(list || []), ...values.filter(Boolean)]));
+}
+
+function extractStatValue(statTexts, label) {
+  const found = statTexts.find((item) => item.includes(label));
+  if (!found) return null;
+  const number = found.match(/\d+/)?.[0];
+  return number ? Number(number) : null;
+}
+
 function readEndingFromDom() {
   const panel = document.querySelector(".ending-panel");
   if (!panel) return null;
@@ -55,18 +71,57 @@ function readEndingFromDom() {
     chapterTitle: window.GAME_DATA?.meta?.title || "벽돌과 바다",
     endingTitle,
     testimonyType: typeText || "알 수 없음",
-    stats: statTexts,
+    stats: {
+      endurance: extractStatValue(statTexts, "생존"),
+      panic: extractStatValue(statTexts, "공포"),
+      witness: extractStatValue(statTexts, "증언"),
+    },
     completedAt: new Date().toISOString(),
   };
+}
+
+function artifactsForEnding(ending) {
+  const artifacts = [];
+  if (ending.chapterId === "exodus") artifacts.push("벽돌");
+  if (["해방의 증인", "살아남은 자"].includes(ending.endingTitle)) artifacts.push("물벽의 길");
+  if (ending.endingTitle === "해방의 증인") artifacts.push("지팡이의 그림자");
+  if ((ending.stats?.witness || 0) >= 8) artifacts.push("기억의 조각");
+  if ((ending.stats?.panic || 0) >= 10) artifacts.push("떨리는 숨");
+  return artifacts;
+}
+
+function achievementsForSave(save, ending) {
+  const nextTotalRuns = Math.max(save.totalRuns || 0, 0) + 1;
+  const nextEndings = uniquePush(save.endingsSeen, `${ending.chapterId}:${ending.endingTitle}`);
+  const nextTypes = uniquePush(save.testimonyTypesSeen, ending.testimonyType);
+  const cleared = ["해방의 증인", "살아남은 자"].includes(ending.endingTitle);
+  const badEnding = !cleared;
+
+  return [
+    nextTotalRuns >= 1 ? "첫 기록" : null,
+    cleared ? "해방의 길" : null,
+    nextTypes.length >= 3 ? "다른 증언들" : null,
+    badEnding ? "죽음도 기록이다" : null,
+    nextEndings.length >= 5 ? "다섯 갈래의 기억" : null,
+  ].filter(Boolean);
 }
 
 function recordEndingIfVisible() {
   const ending = readEndingFromDom();
   if (!ending) return;
 
+  const signature = `${ending.chapterId}:${ending.endingTitle}:${ending.testimonyType}:${ending.stats.endurance}:${ending.stats.panic}:${ending.stats.witness}`;
+  if (lastRecordedRunSignature === signature) return;
+  lastRecordedRunSignature = signature;
+
   const save = loadSaveData();
   const endingKey = `${ending.chapterId}:${ending.endingTitle}`;
   const chapterCleared = ending.endingTitle === "해방의 증인" || ending.endingTitle === "살아남은 자";
+  const runRecord = {
+    ...ending,
+    id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+  };
+  const runHistory = [runRecord, ...(save.runHistory || [])].slice(0, 20);
 
   writeSaveData({
     ...save,
@@ -74,40 +129,15 @@ function recordEndingIfVisible() {
     clearedChapters: chapterCleared ? uniquePush(save.clearedChapters, ending.chapterId) : save.clearedChapters,
     endingsSeen: uniquePush(save.endingsSeen, endingKey),
     testimonyTypesSeen: uniquePush(save.testimonyTypesSeen, ending.testimonyType),
-    lastRun: ending,
-  });
-}
-
-function decorateHomeWithSaveData() {
-  const save = loadSaveData();
-  const hero = document.querySelector(".home-hero");
-  if (!hero || hero.querySelector(".save-summary")) return;
-
-  const summary = document.createElement("div");
-  summary.className = "save-summary";
-  summary.innerHTML = `
-    <span>회차 ${save.totalRuns || 0}</span>
-    <span>엔딩 ${save.endingsSeen?.length || 0}</span>
-    <span>증언 유형 ${save.testimonyTypesSeen?.length || 0}</span>
-  `;
-  hero.appendChild(summary);
-}
-
-function decorateRecordsMenu() {
-  const save = loadSaveData();
-  document.querySelectorAll(".menu-item.disabled").forEach((item) => {
-    if (item.textContent.includes("기록")) {
-      item.classList.remove("disabled");
-      item.classList.add("soft-active");
-      item.title = `본 엔딩 ${save.endingsSeen?.length || 0}개`;
-    }
+    artifactsUnlocked: uniquePushMany(save.artifactsUnlocked, artifactsForEnding(ending)),
+    achievementsUnlocked: uniquePushMany(save.achievementsUnlocked, achievementsForSave(save, ending)),
+    runHistory,
+    lastRun: runRecord,
   });
 }
 
 function afterRenderSaveHook() {
   recordEndingIfVisible();
-  decorateHomeWithSaveData();
-  decorateRecordsMenu();
 }
 
 function installSaveSystem() {
