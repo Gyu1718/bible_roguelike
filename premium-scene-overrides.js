@@ -6,6 +6,9 @@
 
   const premiumArt = {
     scene_01_brickyard: "./assets/premium/play/scenes/scene_01_brickyard.webp",
+    scene_02_overseer_whip: "./assets/premium/play/scenes/scene_02_overseer_whip.webp",
+    scene_08_blood_door: "./assets/premium/play/scenes/scene_08_blood_door.webp",
+    scene_10_chariots_dust: "./assets/premium/play/scenes/scene_10_chariots_dust.webp",
     scene_11_red_sea_waiting: "./assets/premium/play/scenes/scene_11_red_sea_waiting.webp",
     scene_12_red_sea_crossing: "./assets/premium/play/scenes/scene_12_red_sea_crossing.webp",
   };
