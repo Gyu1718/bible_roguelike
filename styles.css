@@ -115,6 +115,36 @@ p { color: #d6cbbb; line-height: 1.8; font-size: 17px; }
 .ending-panel .meta div { background: rgba(24, 32, 45, .06); border-color: rgba(24, 32, 45, .12); }
 
 /* Production UI asset pass */
+.screen-home::before {
+  background: linear-gradient(90deg, rgba(8,7,6,.34), rgba(8,7,6,.86) 58%, rgba(8,7,6,.92)), url("./assets/backgrounds/menu/menu_bg_brickworks.svg");
+  background-size: cover;
+  background-position: center;
+}
+.screen-play::before,
+.screen-roll::before,
+.screen-feedback::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(8,7,6,.88), rgba(8,7,6,.62), rgba(8,7,6,.9)), url("./assets/backgrounds/play/play_bg_dark_sea.svg");
+  background-size: cover;
+  background-position: center;
+}
+.screen-ending::before {
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.28)), url("./assets/backgrounds/ending/ending_bg_liberation.svg");
+  background-size: cover;
+  background-position: center;
+}
+.asset-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background-image: url("./assets/ui/frames/illustration_frame.svg");
+  background-size: 100% 100%;
+  pointer-events: none;
+}
 .story-card {
   border: 0;
   background-image: url("./assets/ui/panels/story_panel.svg");
@@ -149,6 +179,23 @@ p { color: #d6cbbb; line-height: 1.8; font-size: 17px; }
   background-repeat: no-repeat;
   background-color: transparent;
   padding: 30px;
+}
+.chapter-card.locked {
+  border: 0;
+  background-image: url("./assets/ui/cards/chapter_card_locked.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  padding: 30px;
+  opacity: .82;
+}
+.ending-panel {
+  border: 0;
+  background-image: url("./assets/ui/panels/ending_result_panel.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  padding: 52px;
 }
 .type-ribbon {
   border: 0;
