@@ -1,6 +1,8 @@
-/* Home Fixed Canvas Refactor 01
+/* Home Fixed Canvas Refactor 02
    기준 해상도: 1672 x 941
    원칙: 홈 화면은 고정 좌표 게임 캔버스이고, 반응형은 캔버스 전체 scale만 사용합니다.
+   참고 문서 기준: 배경/카드 이미지는 에셋으로, UI/텍스트는 코드로 분리합니다.
+   이번 패치: 기준 이미지와 비교 시 크기 차이를 유발하는 과한 border/shadow를 줄입니다.
 */
 
 body:has(.home-screen) {
@@ -35,7 +37,7 @@ body:has(.home-screen) {
   isolation: isolate !important;
   background: #030405 !important;
   border: none !important;
-  box-shadow: 0 36px 140px rgba(0,0,0,.66) !important;
+  box-shadow: 0 24px 80px rgba(0,0,0,.54) !important;
 }
 
 .home-bg,
@@ -49,22 +51,22 @@ body:has(.home-screen) {
 .home-bg {
   z-index: 0 !important;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.26), rgba(0,0,0,.06) 52%, rgba(0,0,0,.40)),
-    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.52)),
+    linear-gradient(90deg, rgba(0,0,0,.22), rgba(0,0,0,.05) 52%, rgba(0,0,0,.34)),
+    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.46)),
     var(--home-asset-bg),
     #030405 !important;
   background-size: cover !important;
   background-position: center !important;
-  filter: brightness(.74) contrast(1.18) saturate(.96) !important;
+  filter: brightness(.78) contrast(1.12) saturate(.96) !important;
 }
 
 .home-vignette {
   z-index: 1 !important;
   background:
-    radial-gradient(circle at 24% 58%, rgba(193,104,44,.16), transparent 26%),
-    radial-gradient(circle at 77% 11%, rgba(215,180,106,.13), transparent 27%),
-    linear-gradient(90deg, rgba(0,0,0,.48), transparent 34%, transparent 69%, rgba(0,0,0,.45)),
-    linear-gradient(180deg, rgba(0,0,0,.25), transparent 39%, rgba(0,0,0,.56)) !important;
+    radial-gradient(circle at 24% 58%, rgba(193,104,44,.12), transparent 26%),
+    radial-gradient(circle at 77% 11%, rgba(215,180,106,.10), transparent 27%),
+    linear-gradient(90deg, rgba(0,0,0,.42), transparent 34%, transparent 69%, rgba(0,0,0,.40)),
+    linear-gradient(180deg, rgba(0,0,0,.20), transparent 39%, rgba(0,0,0,.50)) !important;
 }
 
 .home-outer-frame {
@@ -72,9 +74,8 @@ body:has(.home-screen) {
   inset: 9px 10px 14px 10px !important;
   border: 1px solid rgba(215,180,106,.34) !important;
   box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,.74),
-    inset 0 0 0 7px rgba(0,0,0,.13),
-    inset 0 0 64px rgba(215,180,106,.065) !important;
+    inset 0 0 0 1px rgba(0,0,0,.60),
+    inset 0 0 48px rgba(215,180,106,.045) !important;
 }
 
 .home-sidebar {
@@ -88,8 +89,8 @@ body:has(.home-screen) {
   margin: 0 !important;
   border-right: 1px solid rgba(215,180,106,.20) !important;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.64), rgba(0,0,0,.22)),
-    linear-gradient(180deg, rgba(215,180,106,.03), transparent 32%, rgba(0,0,0,.20)) !important;
+    linear-gradient(90deg, rgba(0,0,0,.60), rgba(0,0,0,.20)),
+    linear-gradient(180deg, rgba(215,180,106,.025), transparent 32%, rgba(0,0,0,.18)) !important;
   color: #f2d58f !important;
   box-sizing: border-box !important;
 }
@@ -128,7 +129,7 @@ body:has(.home-screen) {
   margin: 0 !important;
   font-size: 50px !important;
   color: #f2d58f !important;
-  text-shadow: 0 0 24px rgba(215,180,106,.38) !important;
+  text-shadow: 0 0 20px rgba(215,180,106,.32) !important;
 }
 
 .home-title {
@@ -151,7 +152,7 @@ body:has(.home-screen) {
   letter-spacing: -.06em !important;
   white-space: nowrap !important;
   color: #f4cf82 !important;
-  text-shadow: 0 12px 36px rgba(0,0,0,.90) !important;
+  text-shadow: 0 10px 28px rgba(0,0,0,.82) !important;
 }
 
 .home-title p {
@@ -186,18 +187,21 @@ body:has(.home-screen) {
   gap: 16px !important;
   padding: 0 28px !important;
   color: rgba(242,213,143,.72) !important;
-  background: linear-gradient(90deg, rgba(0,0,0,.76), rgba(8,14,16,.62), rgba(0,0,0,.44)) !important;
-  border: 1px solid rgba(215,180,106,.25) !important;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.66), 0 10px 24px rgba(0,0,0,.22) !important;
+  background: rgba(3, 6, 9, .72) !important;
+  border: 1px solid rgba(196,154,85,.45) !important;
+  box-shadow: inset 0 0 24px rgba(0,0,0,.72) !important;
   cursor: pointer !important;
   text-align: left !important;
   box-sizing: border-box !important;
 }
 
 .home-menu-button.is-active {
-  color: #ffe9aa !important;
-  border-color: rgba(215,180,106,.64) !important;
-  background: linear-gradient(90deg, rgba(10,9,6,.94), rgba(17,24,22,.74), rgba(0,0,0,.56)) !important;
+  color: #e2bf75 !important;
+  border-color: rgba(226,191,117,.95) !important;
+  background: rgba(10, 9, 5, .82) !important;
+  box-shadow:
+    0 0 12px rgba(196,154,85,.28),
+    inset 0 0 16px rgba(196,154,85,.10) !important;
 }
 
 .home-menu-icon {
@@ -239,9 +243,9 @@ body:has(.home-screen) {
   display: grid !important;
   place-items: center !important;
   color: #f2d58f !important;
-  background: rgba(0,0,0,.56) !important;
-  border: 1px solid rgba(215,180,106,.30) !important;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.72) !important;
+  background: rgba(0,0,0,.50) !important;
+  border: 1px solid rgba(215,180,106,.28) !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.58) !important;
 }
 
 .home-sidebar-cross {
@@ -279,11 +283,11 @@ body:has(.home-screen) {
   box-sizing: border-box !important;
   color: #f2d58f !important;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.48), transparent, rgba(0,0,0,.48)),
+    linear-gradient(90deg, rgba(0,0,0,.44), transparent, rgba(0,0,0,.44)),
     var(--home-asset-title-frame) !important;
   background-size: cover, 100% 100% !important;
-  border: 1px solid rgba(215,180,106,.44) !important;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.70), 0 14px 34px rgba(0,0,0,.32) !important;
+  border: 1px solid rgba(215,180,106,.40) !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.54), 0 10px 24px rgba(0,0,0,.24) !important;
 }
 
 .home-act-title strong {
@@ -316,8 +320,8 @@ body:has(.home-screen) {
   display: grid !important;
   place-items: center !important;
   color: #f2d58f !important;
-  background: rgba(0,0,0,.56) !important;
-  border: 1px solid rgba(215,180,106,.30) !important;
+  background: rgba(0,0,0,.50) !important;
+  border: 1px solid rgba(215,180,106,.28) !important;
 }
 
 .home-top-icons span {
@@ -342,13 +346,13 @@ body:has(.home-screen) {
   box-sizing: border-box !important;
   overflow: hidden !important;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.05), rgba(0,0,0,.20)),
-    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.78)),
+    linear-gradient(90deg, rgba(0,0,0,.04), rgba(0,0,0,.18)),
+    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.72)),
     var(--home-asset-main-card) !important;
   background-size: cover !important;
   background-position: center !important;
-  border: 2px solid rgba(215,180,106,.50) !important;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.66), 0 22px 58px rgba(0,0,0,.34) !important;
+  border: 1px solid rgba(215,180,106,.50) !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.48), 0 14px 42px rgba(0,0,0,.24) !important;
 }
 
 .home-chapter-copy {
@@ -427,11 +431,11 @@ body:has(.home-screen) {
   padding: 23px 26px !important;
   color: #f2d58f !important;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.80)),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.76)),
     var(--home-asset-locked-frame) !important;
   background-size: cover, 100% 100% !important;
-  border: 1px solid rgba(215,180,106,.32) !important;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.72) !important;
+  border: 1px solid rgba(215,180,106,.30) !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.56) !important;
 }
 
 .home-chapter-card span {
