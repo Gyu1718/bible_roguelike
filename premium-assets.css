@@ -1,13 +1,12 @@
 /* Premium asset override layer
-   현재 GitHub 커넥터는 PNG/WebP 바이너리 직접 업로드가 제한될 수 있으므로,
-   우선 assets/premium 경로에 SVG fallback을 배치하고 같은 경로 체계를 사용합니다.
-   추후 WebP/PNG 파일을 업로드하면 아래 변수의 확장자만 교체하면 됩니다.
+   업로드된 WebP 에셋을 우선 사용합니다.
+   패널/버튼/프레임은 아직 SVG fallback을 유지합니다.
 */
 
 :root {
-  --premium-main-bg: url("./assets/premium/main/main_bg.svg");
-  --premium-play-bg: url("./assets/premium/play/play_bg.svg");
-  --premium-ending-bg: url("./assets/premium/ending/ending_liberation_bg.svg");
+  --premium-main-bg: url("./assets/premium/main/main_bg.webp");
+  --premium-play-bg: url("./assets/premium/play/play_bg.webp");
+  --premium-ending-bg: url("./assets/premium/ending/ending_liberation_bg.webp");
 
   --premium-illustration-frame: url("./assets/ui/frames/illustration_frame.svg");
   --premium-story-panel: url("./assets/ui/panels/story_panel.svg");
@@ -23,13 +22,9 @@
 }
 
 /*
-최종 WebP/PNG 투입 시 전환할 목표값:
+추후 프레임/패널/버튼 WebP까지 업로드하면 아래 값들도 전환합니다.
 
 :root {
-  --premium-main-bg: url("./assets/premium/main/main_bg.webp");
-  --premium-play-bg: url("./assets/premium/play/play_bg.webp");
-  --premium-ending-bg: url("./assets/premium/ending/ending_liberation_bg.webp");
-
   --premium-illustration-frame: url("./assets/premium/play/illustration_frame.webp");
   --premium-story-panel: url("./assets/premium/play/story_panel.webp");
   --premium-witness-panel: url("./assets/premium/play/witness_panel.webp");
