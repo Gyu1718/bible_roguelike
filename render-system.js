@@ -1,93 +1,90 @@
-function statIconSrc(key) {
-  return {
-    endurance: "./assets/ui/icons/icon_endurance.svg",
-    panic: "./assets/ui/icons/icon_panic.svg",
-    witness: "./assets/ui/icons/icon_witness.svg",
-  }[key] || "";
-}
-
 function choiceIcon(choice) {
   return window.NW_ROLL.isRollChoice(choice)
     ? `<span class="choice-icon dice" title="판정 선택"><img src="./assets/ui/icons/icon_dice.svg" alt="판정" /></span>`
     : `<span class="choice-icon none" aria-hidden="true"></span>`;
 }
 
-function premiumChoiceButton(choice, index) {
+function stageChoiceButton(choice, index) {
   return `
-    <button class="premium-choice-btn" onclick="choose(${index})">
-      <div class="premium-choice-row">
-        <span><span class="premium-choice-index">${String(index + 1).padStart(2, "0")}</span>${choice.label}</span>
+    <button class="stage-choice" onclick="choose(${index})">
+      <div class="stage-choice-row">
+        <span><span class="stage-choice-index">${String(index + 1).padStart(2, "0")}</span>${choice.label}</span>
         ${choiceIcon(choice)}
       </div>
     </button>
   `;
 }
 
-function premiumWitnessCard(name, role, value, iconKey) {
+function stageWitnessCard(name, role, value) {
   return `
-    <article class="witness-card">
-      <div class="witness-portrait"></div>
+    <article class="stage-witness-card">
+      <div class="stage-portrait"></div>
       <div>
-        <div class="witness-name"><span>${name}</span><small>${role}</small></div>
-        <div class="witness-meter"><span style="width:${Math.min(100, value * 8)}%"></span></div>
+        <div class="stage-witness-name"><span>${name}</span><small>${role}</small></div>
+        <div class="stage-meter"><span style="width:${Math.min(100, value * 8)}%"></span></div>
       </div>
     </article>
   `;
 }
 
-function premiumPlayScreen(state, scenes) {
+function stagePlayScreen(state, scenes) {
   const scene = scenes[state.index];
   const stats = state.stats;
   const artSrc = scene.artSrc || "./assets/scenes/exodus/scene_01_brickyard.svg";
   const artLabel = scene.artLabel || scene.art || "장면 삽화";
 
   return `
-    <main class="premium-play">
-      <section class="premium-topbar">
-        <div class="premium-location">EXODUS · CHAPTER 01</div>
-        <div class="premium-title">이름 없는 증인들</div>
-        <div class="premium-progress">장면 ${state.index + 1}/${scenes.length}<span>증언 ${stats.witness}</span></div>
-      </section>
+    <main class="stage-shell">
+      <section class="game-stage stage-play">
+        <img class="stage-bg" src="./assets/backgrounds/play/play_bg_dark_sea.svg" alt="" />
+        <div class="stage-vignette"></div>
 
-      <section class="premium-illustration">
-        <img class="scene-asset-img" src="${artSrc}" alt="${artLabel}" />
-        <div class="premium-art-caption">
-          <p class="eyebrow">ILLUSTRATION</p>
-          <h2>${scene.art}</h2>
-        </div>
-      </section>
+        <section class="stage-topbar">
+          <div class="location">EXODUS · CHAPTER 01</div>
+          <div class="title">이름 없는 증인들</div>
+          <div class="progress">장면 ${state.index + 1}/${scenes.length} · 증언 ${stats.witness}</div>
+        </section>
 
-      <section class="premium-story">
-        <div class="premium-story-head">
-          <p class="eyebrow">벽돌과 바다 · ${state.index + 1}/${scenes.length}</p>
-          <h2>${scene.title}</h2>
-        </div>
-        <div class="premium-story-body">
-          <p>${scene.text}</p>
-          <div class="premium-question">당신은 이 순간을 어떻게 통과하겠습니까?</div>
-        </div>
-        <div class="premium-choices">
-          ${scene.choices.map(premiumChoiceButton).join("")}
-        </div>
-      </section>
+        <section class="stage-art">
+          <img src="${artSrc}" alt="${artLabel}" />
+          <div class="stage-art-caption">
+            <p class="eyebrow">ILLUSTRATION</p>
+            <h2>${scene.art}</h2>
+          </div>
+        </section>
 
-      <aside class="premium-witness-panel">
-        <h3>증인단</h3>
-        <div class="witness-list">
-          ${premiumWitnessCard("이름 없는 자", "생존", stats.endurance, "endurance")}
-          ${premiumWitnessCard("떨리는 마음", "공포", 14 - stats.panic, "panic")}
-          ${premiumWitnessCard("기억하는 입", "증언", stats.witness, "witness")}
-        </div>
-        <h3>기록</h3>
-        <div class="premium-log">
-          ${state.log.map((entry) => `<p>${entry}</p>`).join("")}
-        </div>
-      </aside>
+        <section class="stage-story">
+          <div>
+            <p class="eyebrow">벽돌과 바다 · ${state.index + 1}/${scenes.length}</p>
+            <h2>${scene.title}</h2>
+          </div>
+          <div>
+            <p>${scene.text}</p>
+            <div class="stage-question">당신은 이 순간을 어떻게 통과하겠습니까?</div>
+          </div>
+          <div class="stage-choices">
+            ${scene.choices.map(stageChoiceButton).join("")}
+          </div>
+        </section>
 
-      <section class="premium-bottombar">
-        <div class="verse">“너희는 가만히 있어 여호와께서 오늘 너희를 위하여 행하시는 구원을 보라”</div>
-        <div class="chapter-step">${scene.id}</div>
-        <div class="objective">목표 · 해방을 목격하고 증언으로 남기십시오</div>
+        <aside class="stage-party">
+          <h3>증인단</h3>
+          <div class="stage-witness-list">
+            ${stageWitnessCard("이름 없는 자", "생존", stats.endurance)}
+            ${stageWitnessCard("떨리는 마음", "공포 저항", 14 - stats.panic)}
+            ${stageWitnessCard("기억하는 입", "증언", stats.witness)}
+          </div>
+          <h3>기록</h3>
+          <div class="stage-log">
+            ${state.log.map((entry) => `<p>${entry}</p>`).join("")}
+          </div>
+        </aside>
+
+        <section class="stage-bottom-bar">
+          <div class="verse">“너희는 가만히 있어 여호와께서 오늘 너희를 위하여 행하시는 구원을 보라”</div>
+          <div class="chapter-step">${scene.id}</div>
+          <div class="objective">목표 · 해방을 목격하고 증언으로 남기십시오</div>
+        </section>
       </section>
     </main>
   `;
@@ -170,7 +167,7 @@ function renderApp(state, scenes, saveData) {
     state.screen === "roll" ? rollScreen(state, scenes) :
     state.screen === "feedback" ? feedbackScreen(state, scenes) :
     state.screen === "ending" ? endingScreen(state) :
-    premiumPlayScreen(state, scenes);
+    stagePlayScreen(state, scenes);
 
   return `
     <div class="app screen-${state.screen}">
@@ -189,7 +186,7 @@ function renderApp(state, scenes, saveData) {
 
 window.NW_RENDER = {
   renderApp,
-  playScreen: premiumPlayScreen,
+  playScreen: stagePlayScreen,
   rollScreen,
   feedbackScreen,
   endingScreen,
