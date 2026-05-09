@@ -1,12 +1,16 @@
 /* Premium asset override layer
    업로드된 WebP 에셋을 우선 사용합니다.
-   패널/버튼/프레임은 아직 SVG fallback을 유지합니다.
+   홈/플레이/엔딩 배경과 일부 홈 UI는 WebP 경로를 사용합니다.
 */
 
 :root {
   --premium-main-bg: url("./assets/premium/main/main_bg.webp");
   --premium-play-bg: url("./assets/premium/play/play_bg.webp");
   --premium-ending-bg: url("./assets/premium/ending/ending_liberation_bg.webp");
+
+  --premium-main-left-panel: url("./assets/premium/main/left_menu_panel.webp");
+  --premium-main-feature-card: url("./assets/premium/main/featured_chapter_frame.webp");
+  --premium-main-locked-card: url("./assets/premium/main/locked_chapter_card.webp");
 
   --premium-illustration-frame: url("./assets/ui/frames/illustration_frame.svg");
   --premium-story-panel: url("./assets/ui/panels/story_panel.svg");
@@ -22,7 +26,7 @@
 }
 
 /*
-추후 프레임/패널/버튼 WebP까지 업로드하면 아래 값들도 전환합니다.
+추후 플레이 프레임/패널/버튼 WebP까지 업로드하면 아래 값들도 전환합니다.
 
 :root {
   --premium-illustration-frame: url("./assets/premium/play/illustration_frame.webp");
@@ -33,8 +37,6 @@
   --premium-choice-normal: url("./assets/premium/play/choice_button_normal.webp");
   --premium-choice-hover: url("./assets/premium/play/choice_button_hover.webp");
   --premium-choice-pressed: url("./assets/premium/play/choice_button_pressed.webp");
-  --premium-locked-card: url("./assets/premium/main/locked_chapter_card.webp");
-  --premium-active-card: url("./assets/premium/main/featured_chapter_frame.webp");
   --premium-ribbon: url("./assets/premium/ending/testimony_ribbon.webp");
 }
 */
@@ -79,7 +81,7 @@
 
 .stage-locked-grid article,
 .stage-archive-grid article {
-  background-image: var(--premium-locked-card);
+  background-image: var(--premium-main-locked-card), var(--premium-locked-card);
 }
 
 .stage-ending-panel {
