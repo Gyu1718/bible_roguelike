@@ -1,15 +1,15 @@
-/* Home Assets Pack 01
-   홈 화면 전용 에셋 매핑 레이어입니다.
-   실제 이미지 파일을 교체할 때는 이 파일의 변수만 바꾸면 됩니다.
+/* Home Assets Pack 04
+   홈 화면 전용 SVG 에셋을 실제 홈 화면 변수에 연결합니다.
+   JS와 렌더링 로직은 건드리지 않습니다.
 */
 
 :root {
-  --home-asset-bg: url("./assets/premium/main/main_bg.webp");
-  --home-asset-main-card: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
-  --home-asset-locked-02: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
-  --home-asset-locked-03: url("./assets/premium/play/scenes/scene_02_red_sea.webp");
-  --home-asset-locked-04: url("./assets/premium/play/scenes/scene_03_pursuit.webp");
-  --home-asset-locked-05: url("./assets/premium/play/scenes/scene_04_wilderness.webp");
+  --home-asset-bg: url("./assets/premium/home/bg_home_exodus.svg");
+  --home-asset-main-card: url("./assets/premium/home/card_chapter_01.svg");
+  --home-asset-locked-02: url("./assets/premium/home/card_chapter_02_locked.svg");
+  --home-asset-locked-03: url("./assets/premium/home/card_chapter_03_locked.svg");
+  --home-asset-locked-04: url("./assets/premium/home/card_chapter_04_locked.svg");
+  --home-asset-locked-05: url("./assets/premium/home/card_chapter_05_locked.svg");
 
   --home-asset-title-frame: url("./assets/premium/ui_v2/chapter_header_bar_v2.png");
   --home-asset-locked-frame: url("./assets/premium/ui_v2/chapter_card_locked_v2.png");
