@@ -1,13 +1,13 @@
-/* Home Blueprint Overlay Mode 02
+/* Home Blueprint Overlay Mode 03
    사용법: URL 뒤에 ?blueprint=1 또는 &blueprint=1을 붙이면 기준 이미지가 반투명 설계도처럼 표시됩니다.
-   기준 이미지는 assets/premium/home/blueprint_home_reference.png 입니다.
+   기준 이미지는 assets/premium/home/blueprint_home_reference_Real.png 입니다.
 */
 
 :root {
   --home-blueprint-opacity: .46;
   --home-blueprint-outline: rgba(0, 255, 255, .65);
   --home-blueprint-gold: rgba(255, 214, 122, .75);
-  --home-blueprint-image: url("./assets/premium/home/blueprint_home_reference.png");
+  --home-blueprint-image: url("./assets/premium/home/blueprint_home_reference_Real.png");
 }
 
 body:not(.show-home-blueprint) .home-blueprint-layer,
@@ -17,7 +17,7 @@ body:not(.show-home-blueprint) .home-blueprint-label {
 }
 
 body.show-home-blueprint .home-screen::after {
-  content: "BLUEPRINT MODE";
+  content: "BLUEPRINT MODE · REAL REF";
   position: absolute;
   right: 18px;
   top: 18px;
