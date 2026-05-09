@@ -1,5 +1,5 @@
-/* Home Screen Visual Match 03
-   목표: 첨부 기준 이미지와 더 가까운 프레임 밀도, 배경 크롭, 카드 구도를 맞춥니다.
+/* Home Assets Pack 02
+   목표: 홈 화면 이미지 경로를 home-assets.css 변수로 분리합니다.
 */
 
 .home-screen-shell {
@@ -33,7 +33,7 @@
   background:
     linear-gradient(90deg, rgba(0,0,0,.12), rgba(0,0,0,.04) 48%, rgba(0,0,0,.42)),
     linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.52)),
-    url("./assets/premium/main/main_bg.webp"),
+    var(--home-asset-bg),
     #030405;
   background-size: cover;
   background-position: center 48%;
@@ -264,7 +264,7 @@
   color: #f2d58f;
   background:
     linear-gradient(90deg, rgba(0,0,0,.48), transparent, rgba(0,0,0,.48)),
-    url("./assets/premium/ui_v2/chapter_header_bar_v2.png");
+    var(--home-asset-title-frame);
   background-size: cover, 100% 100%;
   border: 1px solid rgba(215,180,106,.44);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.70), 0 14px 34px rgba(0,0,0,.32);
@@ -294,7 +294,7 @@
   background:
     linear-gradient(90deg, rgba(0,0,0,.05), rgba(0,0,0,.20)),
     linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.78)),
-    url("./assets/premium/play/scenes/scene_01_brickyard.webp");
+    var(--home-asset-main-card);
   background-size: 118% auto;
   background-position: center 46%;
   border: 2px solid rgba(215,180,106,.50);
@@ -377,16 +377,16 @@
   color: #f2d58f;
   background:
     linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.80)),
-    url("./assets/premium/ui_v2/chapter_card_locked_v2.png");
+    var(--home-asset-locked-frame);
   background-size: cover, 100% 100%;
   border: 1px solid rgba(215,180,106,.32);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.72);
 }
 
-.home-chapter-card.card-02 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), url("./assets/premium/play/scenes/scene_01_brickyard.webp"); background-position: center 52%; }
-.home-chapter-card.card-03 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), url("./assets/premium/play/scenes/scene_02_red_sea.webp"); background-position: center 50%; }
-.home-chapter-card.card-04 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), url("./assets/premium/play/scenes/scene_03_pursuit.webp"); background-position: center 52%; }
-.home-chapter-card.card-05 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), url("./assets/premium/play/scenes/scene_04_wilderness.webp"); background-position: center 52%; }
+.home-chapter-card.card-02 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), var(--home-asset-locked-02); background-position: center 52%; }
+.home-chapter-card.card-03 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), var(--home-asset-locked-03); background-position: center 50%; }
+.home-chapter-card.card-04 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), var(--home-asset-locked-04); background-position: center 52%; }
+.home-chapter-card.card-05 { background-image: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.84)), var(--home-asset-locked-05); background-position: center 52%; }
 
 .home-chapter-card span {
   position: relative;
