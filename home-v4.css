@@ -27,6 +27,9 @@
   object-fit: cover;
   filter: brightness(.58) contrast(1.12) saturate(.9);
   z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .home-v4-vignette {
@@ -48,6 +51,15 @@
   border: 1px solid rgba(215,180,106,.18);
   pointer-events: none;
   z-index: 20;
+}
+
+.home-v4-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: transparent;
 }
 
 .home-v4-left,
