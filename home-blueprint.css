@@ -1,0 +1,106 @@
+/* Home Blueprint Overlay Mode 01
+   사용법: URL 뒤에 ?blueprint=1 또는 &blueprint=1을 붙이면 기준 설계도 레이어가 표시됩니다.
+   이 레이어는 클릭을 막지 않으며, 실제 게임 UI 위에 반투명으로 올라갑니다.
+*/
+
+:root {
+  --home-blueprint-opacity: .42;
+  --home-blueprint-outline: rgba(0, 255, 255, .65);
+  --home-blueprint-gold: rgba(255, 214, 122, .75);
+}
+
+body:not(.show-home-blueprint) .home-blueprint-layer,
+body:not(.show-home-blueprint) .home-blueprint-grid,
+body:not(.show-home-blueprint) .home-blueprint-label {
+  display: none !important;
+}
+
+body.show-home-blueprint .home-screen::after {
+  content: "BLUEPRINT MODE";
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  z-index: 9999;
+  padding: 6px 9px;
+  color: #061015;
+  background: rgba(0, 255, 255, .82);
+  border: 1px solid rgba(255,255,255,.55);
+  font: 900 11px/1 system-ui, sans-serif;
+  letter-spacing: .08em;
+  pointer-events: none;
+}
+
+.home-blueprint-layer,
+.home-blueprint-grid,
+.home-blueprint-label {
+  position: absolute;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+}
+
+.home-blueprint-layer {
+  opacity: var(--home-blueprint-opacity);
+  mix-blend-mode: screen;
+}
+
+.home-blueprint-layer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(0, 255, 255, .75);
+  background:
+    linear-gradient(90deg, transparent 0 31%, rgba(0,255,255,.16) 31% 31.2%, transparent 31.2% 100%),
+    linear-gradient(90deg, transparent 0 43%, rgba(255,214,122,.14) 43% 43.2%, transparent 43.2% 100%),
+    linear-gradient(90deg, transparent 0 91.8%, rgba(255,214,122,.14) 91.8% 92%, transparent 92% 100%),
+    linear-gradient(180deg, transparent 0 6%, rgba(255,214,122,.14) 6% 6.2%, transparent 6.2% 100%),
+    linear-gradient(180deg, transparent 0 15.5%, rgba(0,255,255,.14) 15.5% 15.7%, transparent 15.7% 100%),
+    linear-gradient(180deg, transparent 0 84%, rgba(255,214,122,.14) 84% 84.2%, transparent 84.2% 100%);
+}
+
+.home-blueprint-grid {
+  opacity: .28;
+  background-image:
+    linear-gradient(rgba(0,255,255,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,.5) 1px, transparent 1px),
+    linear-gradient(rgba(255,214,122,.38) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,214,122,.38) 1px, transparent 1px);
+  background-size: 5% 5%, 5% 5%, 10% 10%, 10% 10%;
+}
+
+.home-blueprint-label {
+  font: 800 11px/1.2 system-ui, sans-serif;
+  color: #00ffff;
+  text-shadow: 0 1px 3px #000;
+}
+
+.home-blueprint-label span {
+  position: absolute;
+  padding: 4px 6px;
+  background: rgba(0,0,0,.58);
+  border: 1px solid rgba(0,255,255,.55);
+}
+
+.home-blueprint-label .bp-sidebar { left: 2%; top: 4%; }
+.home-blueprint-label .bp-title { left: 61%; top: 7%; }
+.home-blueprint-label .bp-main-card { left: 47%; top: 24%; }
+.home-blueprint-label .bp-lock-grid { left: 47%; top: 58%; }
+.home-blueprint-label .bp-footer { left: 45%; bottom: 9%; }
+
+body.show-home-blueprint .home-sidebar {
+  outline: 2px solid rgba(0,255,255,.42) !important;
+  outline-offset: -2px !important;
+}
+
+body.show-home-blueprint .home-board {
+  outline: 2px solid rgba(255,214,122,.50) !important;
+  outline-offset: -2px !important;
+}
+
+body.show-home-blueprint .home-act-title,
+body.show-home-blueprint .home-chapter-main,
+body.show-home-blueprint .home-chapter-grid,
+body.show-home-blueprint .home-footer {
+  outline: 1px solid rgba(0,255,255,.55) !important;
+  outline-offset: -1px !important;
+}
