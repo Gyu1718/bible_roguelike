@@ -28,7 +28,7 @@ body .home-v4-screen {
     #050608 !important;
   background-size: cover, cover, cover, cover !important;
   background-position: center !important;
-  border: 3px solid #ffcc00 !important;
+  border: 1px solid rgba(215,180,106,.32) !important;
   border-radius: 28px !important;
   isolation: isolate !important;
   box-sizing: border-box !important;
@@ -39,7 +39,7 @@ body .home-v4-screen::before {
   position: absolute !important;
   inset: 10px !important;
   z-index: 1 !important;
-  border: 1px solid rgba(215,180,106,.26) !important;
+  border: 1px solid rgba(215,180,106,.18) !important;
   background: transparent !important;
   pointer-events: none !important;
 }
@@ -89,7 +89,7 @@ body .home-v4-left {
     rgba(0,0,0,.75) !important;
   background-size: cover, 100% 100%, cover !important;
   background-position: center !important;
-  border: 2px solid rgba(215,180,106,.45) !important;
+  border: 1px solid rgba(215,180,106,.32) !important;
   color: #f2d58f !important;
   outline: none !important;
 }
@@ -183,7 +183,7 @@ body .home-v4-header {
     linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55)),
     url("./assets/premium/ui_v2/chapter_header_bar_v2.png") !important;
   background-size: 100% 100% !important;
-  border: 2px solid rgba(215,180,106,.38) !important;
+  border: 1px solid rgba(215,180,106,.30) !important;
 }
 
 body .home-v4-header p,
@@ -209,7 +209,7 @@ body .home-v4-feature {
     url("./assets/premium/play/scenes/scene_01_brickyard.webp") !important;
   background-size: cover !important;
   background-position: center !important;
-  border: 2px solid rgba(215,180,106,.45) !important;
+  border: 1px solid rgba(215,180,106,.35) !important;
 }
 
 body .home-v4-feature-copy,
@@ -251,7 +251,7 @@ body .home-v4-locked {
   gap: 10px !important;
   padding: 10px !important;
   background: rgba(0,0,0,.42) !important;
-  border: 2px solid rgba(215,180,106,.24) !important;
+  border: 1px solid rgba(215,180,106,.20) !important;
 }
 
 body .home-v4-locked article {
@@ -261,7 +261,7 @@ body .home-v4-locked article {
     linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.78)),
     url("./assets/premium/ui_v2/chapter_card_locked_v2.png") !important;
   background-size: 100% 100% !important;
-  border: 1px solid rgba(215,180,106,.28) !important;
+  border: 1px solid rgba(215,180,106,.24) !important;
 }
 
 body .home-v4-locked article span,
@@ -278,7 +278,7 @@ body .home-v4-footer {
   align-items: center !important;
   padding: 0 24px !important;
   background: rgba(0,0,0,.68) !important;
-  border: 1px solid rgba(215,180,106,.26) !important;
+  border: 1px solid rgba(215,180,106,.22) !important;
   color: #f2d58f !important;
 }
 
