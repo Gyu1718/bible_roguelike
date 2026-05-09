@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06101a"/><stop offset=".5" stop-color="#143b58"/><stop offset="1" stop-color="#05070a"/></linearGradient>
+    <radialGradient id="moon" cx="66%" cy="20%" r="45%"><stop offset="0" stop-color="#d5c89e" stop-opacity=".45"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sea)"/>
+  <rect width="1200" height="800" fill="url(#moon)"/>
+  <path d="M0 465c140-55 265-25 420-80 180-64 420-90 780-28v443H0z" fill="#07131e"/>
+  <path d="M0 585c160-60 320-10 500-50 230-52 460-20 700-80" stroke="#6bb4d0" stroke-opacity=".35" stroke-width="34" fill="none"/>
+  <path d="M0 670c210-52 380 18 560-20 220-46 420 8 640-36" stroke="#d7b46a" stroke-opacity=".12" stroke-width="20" fill="none"/>
+  <g fill="#0b0908">
+    <circle cx="280" cy="570" r="19"/><path d="M258 592h45l24 95h-90z"/>
+    <circle cx="350" cy="590" r="15"/><path d="M332 608h36l20 72h-75z"/>
+    <circle cx="445" cy="560" r="18"/><path d="M424 580h42l22 92h-86z"/>
+    <circle cx="530" cy="590" r="15"/><path d="M512 608h36l20 72h-75z"/>
+  </g>
+  <g opacity=".9">
+    <path d="M930 470c80 22 132 76 150 160" stroke="#080706" stroke-width="34" stroke-linecap="round" fill="none"/>
+    <circle cx="927" cy="454" r="20" fill="#080706"/>
+    <path d="M985 530l70 8" stroke="#d7b46a" stroke-opacity=".25" stroke-width="8"/>
+  </g>
+  <circle cx="820" cy="120" r="62" fill="#d5c89e" opacity=".26"/>
+</svg>
