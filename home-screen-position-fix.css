@@ -1,6 +1,6 @@
-/* Home Screen Position Fix 05
-   좌표는 거의 일치한 상태에서, 크기만 기준 이미지에 맞추는 스케일 보정입니다.
-   핵심 수정: vw/vh/고정 px 혼용 제거, 기준 화면 내부 % 중심으로 통일.
+/* Home Screen Position Fix 06
+   좌표/크기는 거의 일치한 상태에서, 좌측 패널과 메인 타이틀 위치를 기준 좌표로 재고정합니다.
+   기준: 원본 이미지 1672 × 941px, 좌상단 원점.
 */
 
 /* 좌측 사이드바: 기준 x=0, y=0, w=322, h=941 */
@@ -9,27 +9,49 @@ body .home-screen .home-sidebar {
   top: 0 !important;
   bottom: 0 !important;
   width: 19.26% !important;
-  padding: 3.72% 1.8% 0 2.51% !important;
+  padding: 0 !important;
   box-sizing: border-box !important;
 }
 
+/* 로고: x=48, y=35, w=74, h=103 */
 body .home-screen .home-emblem {
-  width: 23.0% !important;
-  height: 10.9% !important;
+  position: absolute !important;
+  left: 14.91% !important;
+  top: 3.72% !important;
+  width: 22.98% !important;
+  height: 10.95% !important;
   min-width: 0 !important;
   min-height: 0 !important;
-  margin: 0 0 0.8% 0 !important;
+  margin: 0 !important;
   font-size: clamp(28px, 2.65vw, 44px) !important;
+}
+
+/* 메인 타이틀: x=158, y=66 / 서브타이틀: x=158, y=119 */
+body .home-screen .home-title {
+  position: absolute !important;
+  left: 49.07% !important;
+  top: 7.01% !important;
+  width: 89.13% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 body .home-screen .home-title h1 {
   font-size: clamp(25px, 2.03vw, 34px) !important;
   line-height: 1.05 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
 }
 
 body .home-screen .home-title p {
+  position: absolute !important;
+  left: 0 !important;
+  top: 5.63vh !important;
   font-size: clamp(11px, .84vw, 14px) !important;
-  margin: 0.8% 0 4.0% 0 !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
 }
 
 /* 메뉴: x=42, y=203, w=246, h=75 */
@@ -39,13 +61,14 @@ body .home-screen .home-menu {
   top: 21.57% !important;
   width: 76.40% !important;
   display: grid !important;
-  gap: 1.06% !important;
+  grid-template-rows: repeat(6, 7.97vh) !important;
+  gap: 1.06vh !important;
 }
 
 body .home-screen .home-menu-button {
   width: 100% !important;
   min-height: 0 !important;
-  height: 7.97% !important;
+  height: 7.97vh !important;
   grid-template-columns: 20.5% 1fr !important;
   gap: 7.2% !important;
   padding: 0 8.0% !important;
@@ -68,20 +91,24 @@ body .home-screen .home-menu-text em {
 
 /* 하단 아이콘: x=50/116/184/251, y=783, w=57, h=64 */
 body .home-screen .home-quick-icons {
+  position: absolute !important;
   left: 15.53% !important;
-  bottom: 9.99% !important;
+  top: 83.21% !important;
+  bottom: auto !important;
   gap: 2.8% !important;
 }
 
 body .home-screen .home-quick-icons button {
   width: 17.70% !important;
-  height: 6.80% !important;
+  height: 6.80vh !important;
   min-width: 0 !important;
 }
 
 body .home-screen .home-sidebar-cross {
+  position: absolute !important;
   left: 20.81% !important;
-  bottom: 2.2% !important;
+  top: 92.35% !important;
+  bottom: auto !important;
   font-size: clamp(24px, 1.91vw, 32px) !important;
 }
 
