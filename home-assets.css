@@ -1,15 +1,15 @@
-/* Home Assets Pack 04
-   홈 화면 전용 SVG 에셋을 실제 홈 화면 변수에 연결합니다.
-   JS와 렌더링 로직은 건드리지 않습니다.
+/* Home Assets Pack 05
+   현재 기준 화면에서는 임시 SVG보다 기존 고품질 WebP 에셋이 더 자연스럽습니다.
+   SVG 파일은 보관하되, 실제 홈 화면 변수는 기존 프리미엄 에셋으로 되돌립니다.
 */
 
 :root {
-  --home-asset-bg: url("./assets/premium/home/bg_home_exodus.svg");
-  --home-asset-main-card: url("./assets/premium/home/card_chapter_01.svg");
-  --home-asset-locked-02: url("./assets/premium/home/card_chapter_02_locked.svg");
-  --home-asset-locked-03: url("./assets/premium/home/card_chapter_03_locked.svg");
-  --home-asset-locked-04: url("./assets/premium/home/card_chapter_04_locked.svg");
-  --home-asset-locked-05: url("./assets/premium/home/card_chapter_05_locked.svg");
+  --home-asset-bg: url("./assets/premium/main/main_bg.webp");
+  --home-asset-main-card: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
+  --home-asset-locked-02: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
+  --home-asset-locked-03: url("./assets/premium/play/scenes/scene_02_red_sea.webp");
+  --home-asset-locked-04: url("./assets/premium/play/scenes/scene_03_pursuit.webp");
+  --home-asset-locked-05: url("./assets/premium/play/scenes/scene_04_wilderness.webp");
 
   --home-asset-title-frame: url("./assets/premium/ui_v2/chapter_header_bar_v2.png");
   --home-asset-locked-frame: url("./assets/premium/ui_v2/chapter_card_locked_v2.png");
