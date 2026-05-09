@@ -5,9 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="이름 없는 증인들: 성경 세계관 텍스트 로그라이크" />
     <title>이름 없는 증인들</title>
+    <style>
+      body {
+        margin: 0;
+        background: #080706;
+        color: #f4efe6;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      #fallback {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      #fallback > div {
+        max-width: 720px;
+        border: 1px solid rgba(222, 190, 125, 0.22);
+        border-radius: 28px;
+        padding: 28px;
+        background: rgba(24, 20, 17, 0.86);
+      }
+      #fallback h1 { margin: 0 0 12px; }
+      #fallback p { color: #b9aa92; line-height: 1.7; }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="fallback">
+        <div>
+          <h1>이름 없는 증인들</h1>
+          <p>게임을 불러오는 중입니다. 이 화면이 계속 보이면 GitHub Pages 배포 설정 또는 React 빌드 오류를 확인해야 합니다.</p>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
