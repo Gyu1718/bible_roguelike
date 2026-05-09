@@ -4,69 +4,226 @@
   --ui2-card-locked: url("./assets/premium/ui_v2/chapter_card_locked_v2.png");
 }
 
+/* Clean UI Pass 02: home composition refinement */
+
 .stage-main-screen {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-rows: 1fr 74px;
-  gap: 18px;
-  padding: 14px;
+  grid-template-columns: clamp(270px, 23.5vw, 340px) 1fr;
+  grid-template-rows: 1fr 64px;
+  gap: clamp(12px, 1vw, 18px);
+  padding: clamp(12px, 1vw, 18px);
 }
 
 .stage-main-left {
   grid-column: 1;
   grid-row: 1 / span 2;
-  background: linear-gradient(180deg, rgba(0,0,0,.60), rgba(0,0,0,.72)), var(--ui2-left-menu);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.52), rgba(0,0,0,.74)),
+    var(--ui2-left-menu);
   background-size: cover, 100% 100%;
+  background-position: center;
   background-repeat: no-repeat;
   border: 1px solid rgba(215,180,106,.25);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.6), 0 24px 64px rgba(0,0,0,.4);
-  padding: 28px 20px 24px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.62), 0 24px 64px rgba(0,0,0,.42);
+  padding: clamp(26px, 3.3vh, 42px) clamp(18px, 1.45vw, 26px) clamp(20px, 2.4vh, 32px);
+}
+
+.stage-logo-block {
+  margin-bottom: clamp(18px, 3vh, 34px);
+}
+
+.stage-logo-block h2 {
+  font-size: clamp(31px, 2.45vw, 47px);
+  line-height: 1.12;
+  letter-spacing: -.06em;
+  color: #f2d58f;
+}
+
+.stage-logo-block p {
+  max-width: 220px;
+  font-size: clamp(12px, .82vw, 15px);
+  line-height: 1.55;
+  color: rgba(232,211,174,.75);
+}
+
+.stage-main-menu-list {
+  gap: clamp(8px, 1.15vh, 13px);
+}
+
+.stage-menu-button {
+  min-height: clamp(44px, 5.8vh, 62px);
+  padding: 0 clamp(12px, 1.1vw, 18px);
+  border-radius: 0;
+  border: 1px solid rgba(215,180,106,.20);
+  background: linear-gradient(90deg, rgba(0,0,0,.56), rgba(13,18,23,.48), rgba(0,0,0,.50));
+}
+
+.stage-menu-button span {
+  width: clamp(30px, 2.5vw, 38px);
+  height: clamp(30px, 2.5vw, 38px);
+  font-size: clamp(13px, 1vw, 17px);
+}
+
+.stage-menu-button strong {
+  font-size: clamp(15px, 1.08vw, 20px);
 }
 
 .stage-main-content {
   grid-column: 2;
   grid-row: 1;
+  min-height: 0;
   background: transparent;
   border: 0;
   box-shadow: none;
   padding: 0;
 }
 
+.stage-main-chapters {
+  display: grid;
+  grid-template-rows: clamp(64px, 8.6vh, 92px) minmax(220px, 42vh) 1fr;
+  gap: clamp(12px, 1.15vw, 18px);
+  min-height: 0;
+}
+
 .stage-main-head {
   position: relative;
-  min-height: 78px;
-  padding: 18px 28px;
-  background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.45)), var(--ui2-chapter-header);
+  min-height: 0;
+  padding: clamp(13px, 1.6vh, 20px) clamp(22px, 2vw, 34px);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.33), rgba(0,0,0,.49)),
+    var(--ui2-chapter-header);
   background-size: cover, 100% 100%;
+  background-position: center;
   background-repeat: no-repeat;
   border: 1px solid rgba(215,180,106,.28);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.48);
+}
+
+.clean-main-head .eyebrow,
+.stage-main-head .eyebrow {
+  margin-bottom: 2px;
+  color: rgba(241,216,154,.68);
+  letter-spacing: .19em;
+}
+
+.stage-main-head h2 {
+  font-size: clamp(23px, 2vw, 38px);
+  line-height: 1.05;
+  color: #f2d58f;
+}
+
+.stage-main-chips {
+  display: none;
 }
 
 .stage-feature-card {
-  min-height: 260px;
+  min-height: 0;
+  height: 100%;
+  padding: clamp(28px, 4.2vh, 48px) clamp(30px, 3vw, 58px);
+  display: flex;
+  align-items: flex-end;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.15), rgba(0,0,0,.35)),
-    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.78)),
+    linear-gradient(90deg, rgba(0,0,0,.12), rgba(0,0,0,.34)),
+    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.82)),
     url("./assets/premium/play/scenes/scene_01_brickyard.webp");
   background-size: cover;
-  background-position: center;
+  background-position: center 48%;
   border: 1px solid rgba(215,180,106,.38);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.5), 0 20px 60px rgba(0,0,0,.4);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.54), 0 20px 60px rgba(0,0,0,.4);
+}
+
+.stage-feature-card > div {
+  max-width: min(480px, 54%);
+}
+
+.stage-feature-card span {
+  font-size: clamp(11px, .82vw, 14px);
+  color: rgba(241,216,154,.72);
+}
+
+.stage-feature-card h3 {
+  margin-top: 4px;
+  font-size: clamp(38px, 4.4vw, 72px);
+  line-height: .98;
+}
+
+.stage-feature-card p {
+  max-width: 390px;
+  margin-top: 10px;
+  font-size: clamp(13px, .94vw, 16px);
+  line-height: 1.55;
+}
+
+.stage-start-actions {
+  margin-top: clamp(16px, 2.3vh, 26px);
+}
+
+.stage-start-primary,
+.stage-start-secondary {
+  min-height: clamp(42px, 5.2vh, 56px);
+  padding: 0 clamp(20px, 2vw, 34px);
+  border-radius: 0;
+}
+
+.stage-locked-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, .95vw, 16px);
+  min-height: 0;
 }
 
 .stage-locked-grid article,
 .stage-archive-grid article {
-  min-height: 140px;
+  min-height: clamp(86px, 12.5vh, 132px);
+  padding: clamp(18px, 1.55vw, 26px);
+  justify-content: center;
+  text-align: center;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.75)),
+    linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.78)),
     var(--ui2-card-locked);
   background-size: cover, 100% 100%;
+  background-position: center;
   background-repeat: no-repeat;
-  border: 1px solid rgba(215,180,106,.2);
+  border: 1px solid rgba(215,180,106,.20);
+}
+
+.clean-locked-grid article em,
+.stage-locked-grid article em {
+  display: none;
+}
+
+.stage-locked-grid article span,
+.stage-archive-grid article span {
+  font-size: clamp(10px, .72vw, 12px);
+  letter-spacing: .14em;
+  color: rgba(218,191,139,.58);
+}
+
+.stage-locked-grid article strong,
+.stage-archive-grid article strong {
+  margin-top: 4px;
+  font-size: clamp(15px, 1.15vw, 20px);
+  color: rgba(245,225,186,.86);
 }
 
 .stage-main-bottom {
   grid-column: 2;
   grid-row: 2;
-  height: 74px;
+  height: 64px;
+  min-height: 0;
+  padding: 0 clamp(20px, 2vw, 34px);
+}
+
+.clean-bottom-bar .verse,
+.stage-main-bottom .verse {
+  font-size: clamp(13px, .95vw, 17px);
+  color: rgba(241,216,154,.82);
+}
+
+@media (max-width: 980px) {
+  .stage-main-screen,
+  .stage-main-chapters,
+  .stage-locked-grid {
+    display: block;
+  }
 }
