@@ -410,7 +410,7 @@ export default function App() {
 
           <aside className="side-panel">
             <section className="stats-card">
-              <h3>목격자 상태</h3>
+              <h3>상태</h3>
               {statEntries.map(([key, value]) => (
                 <div className="stat-row" key={key}>
                   <span>{statLabels[key] || key}</span>
