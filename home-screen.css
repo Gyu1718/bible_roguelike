@@ -1,5 +1,5 @@
-/* Home Visual Match 04
-   스크린샷 기준: 기존 고품질 WebP 복구 + 우측 보드 재배치 + 제목 패널 겹침 제거.
+/* Home Visual Match 05
+   스크린샷 기준: 홈 CSS를 마지막 로드하고, 홈 전용 선택자 우선순위를 강화합니다.
 */
 
 .home-screen-shell {
@@ -242,12 +242,12 @@
 .home-board {
   position: absolute;
   z-index: 6;
-  left: 720px;
+  left: 640px;
   right: 58px;
   top: 58px;
   bottom: 128px;
   display: grid;
-  grid-template-rows: 72px minmax(0, 1.28fr) minmax(0, 1fr);
+  grid-template-rows: 72px minmax(0, 1.34fr) minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -258,8 +258,10 @@
   top: auto;
   transform: none;
   justify-self: center;
-  width: min(520px, 70%);
-  height: 66px;
+  align-self: stretch;
+  width: min(540px, 70%);
+  height: auto;
+  min-height: 66px;
   display: grid;
   place-items: center;
   color: #f2d58f;
@@ -470,6 +472,38 @@
   z-index: 8;
   right: 64px;
   bottom: 48px;
+}
+
+/* Home-only hard overrides: keep menu screen independent from later shared CSS. */
+body .home-screen .home-board {
+  left: 640px !important;
+  right: 58px !important;
+  top: 58px !important;
+  bottom: 128px !important;
+  display: grid !important;
+  grid-template-rows: 72px minmax(0, 1.34fr) minmax(0, 1fr) !important;
+  gap: 16px !important;
+}
+
+body .home-screen .home-act-title {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  grid-row: 1 !important;
+  justify-self: center !important;
+  align-self: stretch !important;
+  width: min(540px, 70%) !important;
+  height: auto !important;
+  min-height: 66px !important;
+}
+
+body .home-screen .home-chapter-main {
+  grid-row: 2 !important;
+}
+
+body .home-screen .home-chapter-grid {
+  grid-row: 3 !important;
 }
 
 @media (max-width: 980px) {
