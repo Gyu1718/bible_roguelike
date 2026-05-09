@@ -1,12 +1,13 @@
 /* Premium asset override layer
-   실제 WebP/PNG 에셋을 넣으면 이 파일의 경로만 사용해 고화질 스킨으로 교체합니다.
-   현재는 image-set이 아니라 fallback 계층을 유지하기 위해 기존 SVG를 기본값으로 둡니다.
+   현재 GitHub 커넥터는 PNG/WebP 바이너리 직접 업로드가 제한될 수 있으므로,
+   우선 assets/premium 경로에 SVG fallback을 배치하고 같은 경로 체계를 사용합니다.
+   추후 WebP/PNG 파일을 업로드하면 아래 변수의 확장자만 교체하면 됩니다.
 */
 
 :root {
-  --premium-main-bg: url("./assets/backgrounds/menu/menu_bg_brickworks.svg");
-  --premium-play-bg: url("./assets/backgrounds/play/play_bg_dark_sea.svg");
-  --premium-ending-bg: url("./assets/backgrounds/ending/ending_bg_liberation.svg");
+  --premium-main-bg: url("./assets/premium/main/main_bg.svg");
+  --premium-play-bg: url("./assets/premium/play/play_bg.svg");
+  --premium-ending-bg: url("./assets/premium/ending/ending_liberation_bg.svg");
 
   --premium-illustration-frame: url("./assets/ui/frames/illustration_frame.svg");
   --premium-story-panel: url("./assets/ui/panels/story_panel.svg");
@@ -22,8 +23,7 @@
 }
 
 /*
-고해상도 에셋을 추가한 뒤 아래 주석을 해제하면 됩니다.
-파일이 없는 상태에서 해제하면 브라우저가 404를 요청합니다.
+최종 WebP/PNG 투입 시 전환할 목표값:
 
 :root {
   --premium-main-bg: url("./assets/premium/main/main_bg.webp");
