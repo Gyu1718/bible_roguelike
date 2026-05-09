@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b0f0a"/>
+      <stop offset="0.42" stop-color="#3d2616"/>
+      <stop offset="0.7" stop-color="#7d5b34"/>
+      <stop offset="1" stop-color="#142b3b"/>
+    </linearGradient>
+    <radialGradient id="dawn" cx="72%" cy="24%" r="48%">
+      <stop offset="0" stop-color="#ffe2a0" stop-opacity="0.68"/>
+      <stop offset="0.45" stop-color="#d4874a" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000" flood-opacity="0.5"/></filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <rect width="1200" height="800" fill="url(#dawn)"/>
+  <g opacity="0.38">
+    <path d="M120 200h100v380H120zM260 145h130v435H260zM430 250h90v330H430z" fill="#060606"/>
+    <path d="M108 200h126M246 145h158" stroke="#d7b46a" stroke-opacity="0.08" stroke-width="10"/>
+  </g>
+  <path d="M0 596c180-70 348-58 538-98 230-48 410-14 662-78v380H0z" fill="#100b08" opacity="0.88"/>
+  <path d="M250 690c186-86 400-120 676-118" stroke="#d7b46a" stroke-opacity="0.16" stroke-width="32" fill="none"/>
+  <g fill="#060505" opacity="0.93" filter="url(#shadow)">
+    <circle cx="260" cy="610" r="18"/><path d="M238 630h44l22 98h-88z"/>
+    <circle cx="350" cy="585" r="21"/><path d="M325 608h50l26 116h-102z"/>
+    <circle cx="455" cy="622" r="16"/><path d="M436 640h38l20 82h-78z"/>
+    <circle cx="560" cy="568" r="20"/><path d="M536 590h48l25 112h-98z"/>
+    <circle cx="720" cy="595" r="18"/><path d="M699 615h42l22 90h-86z"/>
+    <circle cx="840" cy="550" r="24"/><path d="M812 576h56l30 124H782z"/>
+  </g>
+  <path d="M185 560c72-56 158-72 260-46" stroke="#fff0bd" stroke-opacity="0.1" stroke-width="11" fill="none"/>
+  <path d="M754 520c126-46 238-40 360 24" stroke="#fff0bd" stroke-opacity="0.12" stroke-width="12" fill="none"/>
+  <rect width="1200" height="800" fill="#000" opacity="0.08"/>
+</svg>
