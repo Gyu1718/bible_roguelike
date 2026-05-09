@@ -1,10 +1,11 @@
-/* Home Blueprint Overlay Mode 03
+/* Home Blueprint Overlay Mode 04
    사용법: URL 뒤에 ?blueprint=1 또는 &blueprint=1을 붙이면 기준 이미지가 반투명 설계도처럼 표시됩니다.
    기준 이미지는 assets/premium/home/blueprint_home_reference_Real.png 입니다.
+   Fixed canvas 전환 이후 실제 UI 크기를 더 쉽게 비교하도록 opacity를 낮춥니다.
 */
 
 :root {
-  --home-blueprint-opacity: .46;
+  --home-blueprint-opacity: .28;
   --home-blueprint-outline: rgba(0, 255, 255, .65);
   --home-blueprint-gold: rgba(255, 214, 122, .75);
   --home-blueprint-image: url("./assets/premium/home/blueprint_home_reference_Real.png");
@@ -17,7 +18,7 @@ body:not(.show-home-blueprint) .home-blueprint-label {
 }
 
 body.show-home-blueprint .home-screen::after {
-  content: "BLUEPRINT MODE · REAL REF";
+  content: "BLUEPRINT MODE · REAL REF · 1672 CANVAS";
   position: absolute;
   right: 18px;
   top: 18px;
@@ -61,16 +62,16 @@ body.show-home-blueprint .home-screen::after {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, transparent 0 31%, rgba(0,255,255,.22) 31% 31.2%, transparent 31.2% 100%),
-    linear-gradient(90deg, transparent 0 43%, rgba(255,214,122,.18) 43% 43.2%, transparent 43.2% 100%),
-    linear-gradient(90deg, transparent 0 91.8%, rgba(255,214,122,.18) 91.8% 92%, transparent 92% 100%),
-    linear-gradient(180deg, transparent 0 6%, rgba(255,214,122,.18) 6% 6.2%, transparent 6.2% 100%),
-    linear-gradient(180deg, transparent 0 15.5%, rgba(0,255,255,.18) 15.5% 15.7%, transparent 15.7% 100%),
-    linear-gradient(180deg, transparent 0 84%, rgba(255,214,122,.18) 84% 84.2%, transparent 84.2% 100%);
+    linear-gradient(90deg, transparent 0 31%, rgba(0,255,255,.16) 31% 31.2%, transparent 31.2% 100%),
+    linear-gradient(90deg, transparent 0 43%, rgba(255,214,122,.12) 43% 43.2%, transparent 43.2% 100%),
+    linear-gradient(90deg, transparent 0 91.8%, rgba(255,214,122,.12) 91.8% 92%, transparent 92% 100%),
+    linear-gradient(180deg, transparent 0 6%, rgba(255,214,122,.12) 6% 6.2%, transparent 6.2% 100%),
+    linear-gradient(180deg, transparent 0 15.5%, rgba(0,255,255,.12) 15.5% 15.7%, transparent 15.7% 100%),
+    linear-gradient(180deg, transparent 0 84%, rgba(255,214,122,.12) 84% 84.2%, transparent 84.2% 100%);
 }
 
 .home-blueprint-grid {
-  opacity: .22;
+  opacity: .14;
   background-image:
     linear-gradient(rgba(0,255,255,.5) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,255,255,.5) 1px, transparent 1px),
