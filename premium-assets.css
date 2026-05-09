@@ -1,6 +1,6 @@
 /* Premium asset override layer
    업로드된 WebP 에셋을 우선 사용합니다.
-   홈/플레이/엔딩 배경과 일부 홈 UI는 WebP 경로를 사용합니다.
+   홈/플레이/엔딩 배경과 홈/플레이 UI 일부는 WebP 경로를 사용합니다.
 */
 
 :root {
@@ -13,30 +13,24 @@
   --premium-main-locked-card: url("./assets/premium/main/locked_chapter_card.webp");
 
   --premium-illustration-frame: url("./assets/ui/frames/illustration_frame.svg");
-  --premium-story-panel: url("./assets/ui/panels/story_panel.svg");
-  --premium-witness-panel: url("./assets/ui/panels/status_panel.svg");
+  --premium-story-panel: url("./assets/premium/play/story_panel.webp");
+  --premium-witness-panel: url("./assets/premium/play/witness_panel.webp");
   --premium-ending-panel: url("./assets/ui/panels/ending_result_panel.svg");
 
-  --premium-choice-normal: url("./assets/ui/buttons/choice_button_normal.svg");
-  --premium-choice-hover: url("./assets/ui/buttons/choice_button_hover.svg");
-  --premium-choice-pressed: url("./assets/ui/buttons/choice_button_pressed.svg");
+  --premium-choice-normal: url("./assets/premium/play/choice_button_normal.webp");
+  --premium-choice-hover: url("./assets/premium/play/choice_button_hover.webp");
+  --premium-choice-pressed: url("./assets/premium/play/choice_button_pressed.webp");
   --premium-locked-card: url("./assets/ui/cards/chapter_card_locked.svg");
   --premium-active-card: url("./assets/ui/cards/chapter_card_active.svg");
   --premium-ribbon: url("./assets/ui/ribbons/testimony_type_ribbon.svg");
 }
 
 /*
-추후 플레이 프레임/패널/버튼 WebP까지 업로드하면 아래 값들도 전환합니다.
+추후 남은 WebP 에셋 업로드 시 전환 후보:
 
 :root {
   --premium-illustration-frame: url("./assets/premium/play/illustration_frame.webp");
-  --premium-story-panel: url("./assets/premium/play/story_panel.webp");
-  --premium-witness-panel: url("./assets/premium/play/witness_panel.webp");
   --premium-ending-panel: url("./assets/premium/ending/ending_result_panel.webp");
-
-  --premium-choice-normal: url("./assets/premium/play/choice_button_normal.webp");
-  --premium-choice-hover: url("./assets/premium/play/choice_button_hover.webp");
-  --premium-choice-pressed: url("./assets/premium/play/choice_button_pressed.webp");
   --premium-ribbon: url("./assets/premium/ending/testimony_ribbon.webp");
 }
 */
