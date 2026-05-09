@@ -38,24 +38,16 @@ body .game-stage.home-v4-screen::before {
 }
 
 body .game-stage.home-v4-screen::after {
-  content: "HOME V4 LAST OVERRIDE" !important;
-  position: absolute !important;
-  inset: auto !important;
-  left: auto !important;
-  bottom: auto !important;
-  right: 18px !important;
-  top: 18px !important;
-  z-index: 999999 !important;
-  display: block !important;
-  width: auto !important;
-  height: auto !important;
+  content: none !important;
+  display: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
   min-width: 0 !important;
   min-height: 0 !important;
-  padding: 7px 10px !important;
-  background: #00ffff !important;
-  color: #001111 !important;
-  border: 2px solid #001111 !important;
-  font: 900 12px/1 system-ui !important;
+  padding: 0 !important;
+  inset: auto !important;
   pointer-events: none !important;
 }
 
@@ -100,7 +92,7 @@ body .home-v4-left {
   background-position: center !important;
   border: 2px solid rgba(215,180,106,.45) !important;
   color: #f2d58f !important;
-  outline: 3px solid rgba(255,0,255,.45) !important;
+  outline: none !important;
 }
 
 body .home-v4-logo,
@@ -168,7 +160,7 @@ body .home-v4-board {
   min-height: 0 !important;
   grid-template-rows: 72px minmax(190px, 38%) minmax(190px, 1fr) !important;
   gap: 14px !important;
-  outline: 4px solid rgba(0,255,255,.65) !important;
+  outline: none !important;
 }
 
 body .home-v4-header,
