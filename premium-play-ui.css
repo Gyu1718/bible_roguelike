@@ -1,0 +1,115 @@
+/* Premium play UI asset polish
+   업로드된 WebP 패널/버튼을 실제 플레이 화면에 자연스럽게 맞춥니다.
+*/
+
+.stage-story,
+.stage-result-card {
+  border: 0;
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow: none;
+  padding: clamp(28px, 2.1vw, 42px) clamp(30px, 2.3vw, 46px);
+  position: relative;
+}
+
+.stage-story::before,
+.stage-result-card::before {
+  content: "";
+  position: absolute;
+  inset: 11% 9% 10%;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.3));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stage-story > *,
+.stage-result-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.stage-story-text,
+.stage-result-card p,
+.stage-result-card li {
+  color: #eadcc5;
+  text-shadow: 0 4px 18px rgba(0,0,0,.72);
+}
+
+.stage-party {
+  border: 0;
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow: none;
+  padding: clamp(28px, 2vw, 42px) clamp(24px, 1.8vw, 38px);
+  position: relative;
+}
+
+.stage-party::before {
+  content: "";
+  position: absolute;
+  inset: 12% 10% 8%;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(0,0,0,.14), rgba(0,0,0,.34));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stage-party > * {
+  position: relative;
+  z-index: 1;
+}
+
+.stage-choice {
+  border: 0;
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow: none;
+  padding: clamp(17px, 1.25vw, 24px) clamp(28px, 2vw, 42px);
+  min-height: clamp(72px, 8.3vh, 94px);
+  color: #f1dfbd;
+  text-shadow: 0 3px 14px rgba(0,0,0,.84);
+}
+
+.stage-choice:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06) saturate(1.03);
+}
+
+.stage-choice:active {
+  transform: translateY(1px) scale(.997);
+  filter: brightness(.96) saturate(.96);
+}
+
+.stage-choice strong,
+.stage-choice span,
+.stage-choice p {
+  position: relative;
+  z-index: 1;
+}
+
+.stage-choice .dice-mark,
+.stage-choice .choice-dice,
+.stage-choice .roll-icon {
+  filter: drop-shadow(0 0 10px rgba(240,207,123,.28));
+}
+
+@media (max-width: 980px) {
+  .stage-story,
+  .stage-result-card,
+  .stage-party {
+    border: 1px solid rgba(215,180,106,.18);
+    background-image: linear-gradient(180deg, rgba(8,9,11,.86), rgba(15,11,8,.82));
+    padding: 22px;
+  }
+
+  .stage-choice {
+    background-image: linear-gradient(90deg, rgba(22,16,11,.9), rgba(7,8,10,.88));
+    border: 1px solid rgba(215,180,106,.18);
+    min-height: 64px;
+    padding: 16px 18px;
+  }
+}
