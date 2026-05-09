@@ -1,0 +1,66 @@
+{
+  "version": "home-assets-pack-03",
+  "purpose": "Home screen dedicated assets for Bible Roguelike main menu visual match.",
+  "backgrounds": [
+    {
+      "id": "home_exodus_bg",
+      "path": "assets/premium/home/bg_home_exodus.webp",
+      "status": "planned",
+      "description": "Main home background: dark brickworks, sea, night sky, cinematic biblical atmosphere."
+    }
+  ],
+  "chapterCards": [
+    {
+      "id": "chapter_01",
+      "path": "assets/premium/home/card_chapter_01.webp",
+      "status": "planned",
+      "description": "Large horizontal card for chapter 1: Bricks and Sea."
+    },
+    {
+      "id": "chapter_02_locked",
+      "path": "assets/premium/home/card_chapter_02_locked.webp",
+      "status": "planned",
+      "description": "Locked card for chapter 2."
+    },
+    {
+      "id": "chapter_03_locked",
+      "path": "assets/premium/home/card_chapter_03_locked.webp",
+      "status": "planned",
+      "description": "Locked card for chapter 3."
+    },
+    {
+      "id": "chapter_04_locked",
+      "path": "assets/premium/home/card_chapter_04_locked.webp",
+      "status": "planned",
+      "description": "Locked card for chapter 4."
+    },
+    {
+      "id": "chapter_05_locked",
+      "path": "assets/premium/home/card_chapter_05_locked.webp",
+      "status": "planned",
+      "description": "Locked card for chapter 5."
+    }
+  ],
+  "ui": [
+    "assets/premium/home/ui/frame_outer.png",
+    "assets/premium/home/ui/panel_sidebar.png",
+    "assets/premium/home/ui/panel_act_title.png",
+    "assets/premium/home/ui/frame_chapter_large.png",
+    "assets/premium/home/ui/frame_chapter_small.png",
+    "assets/premium/home/ui/footer_frame.png",
+    "assets/premium/home/ui/button_menu_normal.png",
+    "assets/premium/home/ui/button_menu_active.png",
+    "assets/premium/home/ui/icon_story.png",
+    "assets/premium/home/ui/icon_witness.png",
+    "assets/premium/home/ui/icon_record.png",
+    "assets/premium/home/ui/icon_achievement.png",
+    "assets/premium/home/ui/icon_training.png",
+    "assets/premium/home/ui/icon_setting.png",
+    "assets/premium/home/ui/icon_hourglass.png"
+  ],
+  "integration": {
+    "cssEntry": "home-assets.css",
+    "screenCss": "home-screen.css",
+    "note": "Do not hard-code home asset paths in home-screen.css. Use variables from home-assets.css."
+  }
+}
