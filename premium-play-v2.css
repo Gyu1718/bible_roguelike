@@ -1,0 +1,38 @@
+:root {
+  --ui2-story-panel: url("./assets/premium/ui_v2/story_panel_v2.png");
+  --ui2-chapter-header: url("./assets/premium/ui_v2/chapter_header_bar_v2.png");
+}
+
+.stage-play,
+.stage-roll,
+.stage-feedback {
+  display: grid;
+  grid-template-columns: 34% 1fr 28%;
+  grid-template-rows: 70px 1fr 72px;
+  gap: 14px;
+  padding: 12px;
+}
+
+.stage-topbar {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+}
+
+.stage-art { grid-column: 1; grid-row: 2; }
+.stage-story { 
+  grid-column: 2; 
+  grid-row: 2; 
+  background: linear-gradient(180deg, rgba(0,0,0,.38), rgba(0,0,0,.55)), var(--ui2-story-panel);
+  background-size: cover, 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(215,180,106,.24);
+  padding: 34px 32px;
+}
+.stage-party { grid-column: 3; grid-row: 2; }
+.stage-bottom-bar { grid-column: 1 / span 3; grid-row: 3; }
+
+.stage-art-caption {
+  background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.65)), var(--ui2-chapter-header);
+  background-size: cover, 100% 100%;
+  border: 1px solid rgba(215,180,106,.28);
+}

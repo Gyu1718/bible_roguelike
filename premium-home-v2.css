@@ -1,0 +1,72 @@
+:root {
+  --ui2-left-menu: url("./assets/premium/ui_v2/left_menu_panel_v2.png");
+  --ui2-chapter-header: url("./assets/premium/ui_v2/chapter_header_bar_v2.png");
+  --ui2-card-locked: url("./assets/premium/ui_v2/chapter_card_locked_v2.png");
+}
+
+.stage-main-screen {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr 74px;
+  gap: 18px;
+  padding: 14px;
+}
+
+.stage-main-left {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  background: linear-gradient(180deg, rgba(0,0,0,.60), rgba(0,0,0,.72)), var(--ui2-left-menu);
+  background-size: cover, 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(215,180,106,.25);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.6), 0 24px 64px rgba(0,0,0,.4);
+  padding: 28px 20px 24px;
+}
+
+.stage-main-content {
+  grid-column: 2;
+  grid-row: 1;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.stage-main-head {
+  position: relative;
+  min-height: 78px;
+  padding: 18px 28px;
+  background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.45)), var(--ui2-chapter-header);
+  background-size: cover, 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(215,180,106,.28);
+}
+
+.stage-feature-card {
+  min-height: 260px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.15), rgba(0,0,0,.35)),
+    linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.78)),
+    url("./assets/premium/play/scenes/scene_01_brickyard.webp");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(215,180,106,.38);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.5), 0 20px 60px rgba(0,0,0,.4);
+}
+
+.stage-locked-grid article,
+.stage-archive-grid article {
+  min-height: 140px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.75)),
+    var(--ui2-card-locked);
+  background-size: cover, 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(215,180,106,.2);
+}
+
+.stage-main-bottom {
+  grid-column: 2;
+  grid-row: 2;
+  height: 74px;
+}

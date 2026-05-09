@@ -1,0 +1,3 @@
+Add these lines after premium-play-ui.css in index.html:
+<link rel="stylesheet" href="./premium-home-v2.css" />
+<link rel="stylesheet" href="./premium-play-v2.css" />
