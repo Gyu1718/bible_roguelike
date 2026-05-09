@@ -22,17 +22,33 @@ export const endings = {
     title: "침묵한 생존자",
     text: "당신은 모든 것을 보았다. 그러나 그것을 말로 남기지 못했다. 바다는 갈라졌지만, 당신 안의 언어는 아직 열리지 않았다.",
   },
+  rebellionCrushed: {
+    title: "채찍 아래의 반란",
+    text: "당신은 감독관에게 달려들었다. 분노는 정당했지만, 그날의 힘은 당신 편이 아니었다. 제국은 당신의 분노를 빌미로 더 많은 등을 찢었다.",
+  },
   informer: {
     title: "밀고자의 밤",
     text: "당신은 모세의 소문을 감독관에게 넘겼다. 그날 밤, 노예들의 집에는 더 긴 침묵이 내려앉았다. 살아남았지만, 당신의 이름은 누구의 증언에도 남지 않았다.",
+  },
+  egyptianShelter: {
+    title: "남의 문 아래 숨은 자",
+    text: "당신은 애굽인의 집으로 숨어들었다. 익숙한 권력 곁이면 안전할 줄 알았다. 그러나 그 밤, 남의 문은 당신을 지켜주지 못했다.",
   },
   unmarkedDoor: {
     title: "표식 없는 문",
     text: "당신은 피를 바르지 않았다. 그 밤이 지나간 뒤, 집 안의 침묵은 다시는 이전의 침묵이 아니었다. 말씀을 판단 대상으로만 남겨둔 대가는 너무 무거웠다.",
   },
+  leftHouse: {
+    title: "문밖의 밤",
+    text: "당신은 불안을 견디지 못하고 문밖으로 나갔다. 밤은 이미 지나가고 있었고, 당신은 표식 아래 머무르라는 말의 무게를 너무 늦게 이해했다.",
+  },
   returnEgypt: {
     title: "돌아간 발걸음",
     text: "병거 소리가 가까워지자 당신은 행렬을 벗어나 애굽 쪽으로 달렸다. 그러나 노예의 땅은 도망자를 품어주지 않았다. 뒤돌아간 발은 자유의 길을 보지 못했다.",
+  },
+  chariotRush: {
+    title: "병거 앞으로 달려간 자",
+    text: "당신은 공포를 이기기 위해 앞으로 달렸다. 그러나 애굽의 병거는 개인의 용기로 막을 수 있는 것이 아니었다. 무모함은 용기가 아니었다.",
   },
   drownedFear: {
     title: "먼저 뛰어든 자",
@@ -68,10 +84,36 @@ const exodusScenes = [
     ],
   },
   {
-    id: "rumor_moses",
-    title: "모세라는 이름",
-    image: "staff",
-    text: "일이 끝난 뒤, 장로들 사이에서 한 이름이 돈다. 모세. 그는 바로에게 가서 우리를 보내라고 말했다고 한다. 그러나 다음 날부터 짚은 주어지지 않았다.",
+    id: "overseer_beating",
+    title: "채찍 소리",
+    image: "brick",
+    text: "정오가 가까워질 때, 감독관이 노인을 끌어낸다. 그는 오늘 몫을 채우지 못했다. 사람들은 고개를 숙이고, 채찍은 이미 올라가 있다.",
+    choices: [
+      {
+        label: "고개를 숙이고 살아남는다",
+        effects: { endurance: 1, panic: 2, witness: -1 },
+        feedbackTitle: "살아남았지만 장면이 남았다",
+        feedback: "당신은 눈을 내렸다. 몸은 안전했지만, 채찍 소리는 마음 안쪽에 더 오래 남았다.",
+      },
+      {
+        label: "노인을 대신해 한 걸음 나선다",
+        effects: { endurance: -3, witness: 3, panic: 1 },
+        feedbackTitle: "한 걸음의 대가",
+        feedback: "당신은 맞을 것을 알면서도 한 걸음 나섰다. 제국은 그것을 어리석음이라 불렀지만, 당신은 그 얼굴을 잊지 않았다.",
+      },
+      {
+        label: "감독관에게 달려든다",
+        badEnding: "rebellionCrushed",
+        feedbackTitle: "즉시 배드엔딩 분기",
+        feedback: "분노는 정당했다. 그러나 지금 이 자리의 반란은 공동체 전체를 더 위험하게 만들었다.",
+      },
+    ],
+  },
+  {
+    id: "straw_decree",
+    title: "짚 없는 명령",
+    image: "brick",
+    text: "다음 날, 짚은 주어지지 않았다. 그러나 벽돌 수량은 그대로였다. 사람들은 모세의 이름을 원망하기 시작하고, 장로들의 얼굴은 굳어간다.",
     choices: [
       {
         label: "모세 때문에 고통이 커졌다고 원망한다",
@@ -94,10 +136,36 @@ const exodusScenes = [
     ],
   },
   {
-    id: "plagues",
-    title: "재앙의 땅",
+    id: "night_whisper",
+    title: "밤의 속삭임",
+    image: "staff",
+    text: "밤이 되자 장로들이 낮은 목소리로 말한다. ‘여호와께서 우리를 돌보셨다.’ 누군가는 울고, 누군가는 비웃는다. 당신도 아직 무엇을 믿어야 할지 모른다.",
+    choices: [
+      {
+        label: "듣기만 하고 판단을 미룬다",
+        effects: { witness: 1, panic: -1 },
+        feedbackTitle: "성급한 판단을 멈추다",
+        feedback: "당신은 대답하지 않았다. 그러나 듣는 일을 멈추지도 않았다. 어떤 증언은 침묵 속에서 자란다.",
+      },
+      {
+        label: "장로들의 말을 조심스럽게 되묻는다",
+        effects: { witness: 2, endurance: -1 },
+        feedbackTitle: "질문은 남았다",
+        feedback: "당신은 믿는다고 말하지 못했다. 하지만 질문했다. 그 질문은 무너짐이 아니라 길을 찾는 움직임이었다.",
+      },
+      {
+        label: "모두 헛소리라며 자리를 박차고 나간다",
+        effects: { panic: 2, witness: -2 },
+        feedbackTitle: "비웃음은 방패가 되지 못했다",
+        feedback: "당신은 웃으며 자리를 떴다. 그러나 웃음은 오래가지 않았다. 두려움은 조롱 뒤에 숨어 있었다.",
+      },
+    ],
+  },
+  {
+    id: "blood_nile",
+    title: "피처럼 변한 강",
     image: "plague",
-    text: "나일은 피처럼 붉어지고, 어둠이 대낮을 삼킨다. 애굽의 신들은 하나씩 침묵한다. 그러나 노예의 집에도 두려움은 들어온다.",
+    text: "나일이 붉게 변했다는 소식이 퍼진다. 애굽인들이 강가에 모여 소리친다. 당신은 그들이 처음으로 자기 신들을 의심하는 얼굴을 본다.",
     choices: [
       {
         label: "강하던 자들의 두려움을 지켜본다",
@@ -106,10 +174,10 @@ const exodusScenes = [
         feedback: "당신은 처음으로 강한 자들의 얼굴에서 공포를 보았다. 세상은 생각보다 단단하지 않았다.",
       },
       {
-        label: "문을 닫고 지나가기만 기다린다",
+        label: "집 안으로 돌아가 문을 닫는다",
         effects: { panic: -1, endurance: 1 },
         feedbackTitle: "살아남는 일도 선택이다",
-        feedback: "당신은 문을 닫았다. 비겁함만은 아니었다. 어떤 밤은 해석보다 생존이 먼저다.",
+        feedback: "당신은 문을 닫았다. 비겁함만은 아니었다. 어떤 날은 해석보다 생존이 먼저다.",
       },
       {
         label: "이 일이 우연이 아니라고 생각한다",
@@ -120,7 +188,59 @@ const exodusScenes = [
     ],
   },
   {
-    id: "passover",
+    id: "darkness",
+    title: "어둠의 사흘",
+    image: "plague",
+    text: "낮인데도 어둠이 내려앉는다. 애굽의 집들은 숨죽이고, 사람들은 벽을 더듬는다. 그러나 히브리인의 집마다 희미한 빛과 속삭임이 남아 있다.",
+    choices: [
+      {
+        label: "어둠 속에서 본 일을 마음에 새긴다",
+        effects: { witness: 3, panic: -1 },
+        feedbackTitle: "어둠 속의 구별",
+        feedback: "당신은 빛을 설명하지 못했다. 그러나 그 구별을 보았다. 훗날 증언은 설명보다 목격에서 시작될 것이다.",
+      },
+      {
+        label: "공포에 눌려 아무 말도 하지 않는다",
+        effects: { panic: 2, witness: -1 },
+        feedbackTitle: "침묵이 깊어진다",
+        feedback: "말하지 않는다고 공포가 사라지지는 않았다. 침묵은 때로 두려움의 방이 되었다.",
+      },
+      {
+        label: "애굽인의 집으로 숨어들어 보호를 구한다",
+        badEnding: "egyptianShelter",
+        feedbackTitle: "즉시 배드엔딩 분기",
+        feedback: "당신은 권력 곁이 안전하다고 생각했다. 그러나 그 밤의 안전은 권력의 지붕 아래 있지 않았다.",
+      },
+    ],
+  },
+  {
+    id: "passover_prep",
+    title: "어린 양을 고르는 날",
+    image: "door",
+    text: "집마다 어린 양을 고른다. 누군가는 손을 떨고, 누군가는 왜 이런 일을 해야 하느냐고 묻는다. 당신도 아직 그 의미를 다 알지 못한다.",
+    choices: [
+      {
+        label: "말씀대로 준비를 돕는다",
+        effects: { witness: 2, endurance: -1 },
+        feedbackTitle: "이해보다 먼저 온 순종",
+        feedback: "당신은 다 이해하지 못했다. 그러나 준비했다. 때로 길은 납득한 뒤가 아니라 따르는 동안 열린다.",
+      },
+      {
+        label: "의미를 묻고 어른들의 설명을 듣는다",
+        effects: { witness: 2, panic: -1 },
+        feedbackTitle: "질문이 기억을 만든다",
+        feedback: "당신의 질문은 불신만이 아니었다. 누군가의 대답은 그 밤을 기억으로 바꾸기 시작했다.",
+      },
+      {
+        label: "준비를 거부하고 혼자 버티겠다고 말한다",
+        effects: { panic: 2, witness: -2 },
+        feedbackTitle: "혼자 버티는 마음",
+        feedback: "당신은 홀로 서고 싶었다. 그러나 그 밤은 개인의 용기만으로 통과하는 밤이 아니었다.",
+      },
+    ],
+  },
+  {
+    id: "passover_night",
     title: "문설주의 피",
     image: "door",
     text: "그 밤, 말씀은 구체적이었다. 어린 양, 피, 문설주, 허리에 띤 띠, 발의 신, 손의 지팡이. 해방은 감정이 아니라 순종의 자세로 다가왔다.",
@@ -138,15 +258,15 @@ const exodusScenes = [
         feedback: "당신은 표식을 미루었다. 그러나 그 밤은 미룬 결정을 기다려주지 않았다.",
       },
       {
-        label: "신을 신고 지팡이를 든 채 기다린다",
-        effects: { witness: 2, endurance: -1 },
-        feedbackTitle: "몸이 먼저 출발을 배웠다",
-        feedback: "아직 문밖으로 나가지 않았지만, 당신의 몸은 이미 떠날 준비를 하고 있었다.",
+        label: "불안을 견디지 못해 문밖으로 나간다",
+        badEnding: "leftHouse",
+        feedbackTitle: "즉시 배드엔딩 분기",
+        feedback: "당신은 문밖의 상황을 확인하고 싶었다. 그러나 그 밤에는 머무름이 순종이었다.",
       },
     ],
   },
   {
-    id: "flight",
+    id: "departure",
     title: "급히 떠나는 새벽",
     image: "desert",
     text: "울음소리와 외침이 애굽을 가른다. 당신은 아직 부풀지 않은 반죽을 들고 집을 나선다. 자유는 노래보다 먼저 혼란의 발걸음으로 왔다.",
@@ -172,6 +292,32 @@ const exodusScenes = [
     ],
   },
   {
+    id: "wilderness_noise",
+    title: "뒤에서 들리는 병거",
+    image: "desert",
+    text: "광야의 먼지 사이로 낮은 진동이 들린다. 처음에는 바람인 줄 알았지만, 곧 모두가 안다. 병거다. 애굽이 따라오고 있다.",
+    choices: [
+      {
+        label: "행렬 안쪽으로 들어가 숨을 고른다",
+        effects: { panic: -1, endurance: 1 },
+        feedbackTitle: "공포를 늦추다",
+        feedback: "당신은 멈추지 않았다. 다만 숨을 고르고 다시 걸었다. 공포는 사라지지 않았지만, 당신을 끌고 가지도 못했다.",
+      },
+      {
+        label: "주변 사람들에게 병거가 온다고 외친다",
+        effects: { panic: 2, witness: 1 },
+        feedbackTitle: "경고는 필요했지만 공포도 번졌다",
+        feedback: "당신의 외침은 사람들을 깨웠다. 그러나 공포도 함께 퍼졌다. 말은 살리기도 하고 흔들기도 한다.",
+      },
+      {
+        label: "병거 쪽으로 달려가 항복하겠다고 외친다",
+        badEnding: "returnEgypt",
+        feedbackTitle: "즉시 배드엔딩 분기",
+        feedback: "당신은 목숨을 구하려고 돌아섰다. 그러나 그 길은 구원이 아니라 다시 묶임으로 이어졌다.",
+      },
+    ],
+  },
+  {
     id: "red_sea",
     title: "바다 앞에서",
     image: "sea",
@@ -188,6 +334,12 @@ const exodusScenes = [
         effects: { panic: -1, witness: 2 },
         feedbackTitle: "아무것도 못할 때 보는 법을 배운다",
         feedback: "할 수 있는 일이 없을 때, 당신은 처음으로 보는 일을 배웠다. 그 밤의 침묵은 패배가 아니었다.",
+      },
+      {
+        label: "병거 앞으로 달려가 막으려 한다",
+        badEnding: "chariotRush",
+        feedbackTitle: "즉시 배드엔딩 분기",
+        feedback: "당신은 공포를 이기기 위해 몸을 던졌다. 그러나 용기와 무모함은 같은 말이 아니었다.",
       },
       {
         label: "기다리지 못하고 바다로 먼저 뛰어든다",
@@ -289,8 +441,8 @@ export const chapters = [
 export function evaluateEnding(stats) {
   if (stats.endurance <= 0) return endings.collapse;
   if (stats.panic >= 12) return endings.terror;
-  if (stats.witness >= 10 && stats.panic <= 7) return endings.trueWitness;
-  if (stats.witness <= 3) return endings.silent;
+  if (stats.witness >= 14 && stats.panic <= 7) return endings.trueWitness;
+  if (stats.witness <= 5) return endings.silent;
   return endings.survivor;
 }
 
