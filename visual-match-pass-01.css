@@ -1,0 +1,276 @@
+/* Visual Match Pass 01
+   목적: 기능은 건드리지 않고 예시 시안의 금장 프레임, 장식선, 광택 밀도를 강화합니다.
+*/
+
+:root {
+  --vm-gold: rgba(215, 180, 106, .72);
+  --vm-gold-soft: rgba(241, 216, 154, .62);
+  --vm-gold-faint: rgba(215, 180, 106, .18);
+  --vm-dark: rgba(0, 0, 0, .72);
+}
+
+.game-stage {
+  position: relative;
+}
+
+.game-stage::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid var(--vm-gold-faint);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.72),
+    inset 0 0 38px rgba(215,180,106,.05);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.game-stage::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(215,180,106,.09);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.stage-bg {
+  transform: scale(1.004);
+}
+
+.stage-vignette {
+  box-shadow: inset 0 0 160px rgba(0,0,0,.55);
+}
+
+/* Home screen ornament pass */
+.stage-main-left,
+.stage-main-head,
+.stage-feature-card,
+.stage-locked-grid article,
+.stage-archive-grid article,
+.stage-main-bottom {
+  position: relative;
+}
+
+.stage-main-left::after,
+.stage-main-head::after,
+.stage-feature-card::after,
+.stage-locked-grid article::after,
+.stage-archive-grid article::after,
+.stage-main-bottom::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(215,180,106,.12);
+  pointer-events: none;
+}
+
+.stage-main-left::before {
+  background:
+    radial-gradient(circle at 50% 5%, rgba(241,216,154,.09), transparent 26%),
+    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.34));
+}
+
+.stage-logo-block h2,
+.stage-main-head h2,
+.stage-feature-card h3 {
+  text-shadow:
+    0 2px 0 rgba(0,0,0,.55),
+    0 0 24px rgba(215,180,106,.16),
+    0 14px 42px rgba(0,0,0,.88);
+}
+
+.stage-menu-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-menu-button::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 5px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(241,216,154,.28), transparent);
+  pointer-events: none;
+}
+
+.stage-menu-button.active::after,
+.stage-menu-button:hover::after {
+  background: linear-gradient(90deg, transparent, rgba(241,216,154,.62), transparent);
+}
+
+.stage-feature-card::before {
+  opacity: .9;
+}
+
+.stage-feature-card .stage-start-primary,
+.stage-feature-card .stage-start-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-start-primary::after,
+.stage-start-secondary::after,
+.stage-ending-actions button::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 6px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,241,201,.4), transparent);
+  pointer-events: none;
+}
+
+/* Play screen ornament pass */
+.stage-topbar,
+.stage-art,
+.stage-story,
+.stage-party,
+.stage-bottom-bar:not(.stage-main-bottom),
+.stage-choice,
+.stage-witness-card,
+.stage-log {
+  position: relative;
+}
+
+.stage-topbar::after,
+.stage-art::after,
+.stage-story::after,
+.stage-party::after,
+.stage-bottom-bar:not(.stage-main-bottom)::after,
+.stage-witness-card::after,
+.stage-log::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(215,180,106,.10);
+  pointer-events: none;
+}
+
+.stage-topbar::before,
+.stage-bottom-bar:not(.stage-main-bottom)::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 7px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(241,216,154,.32), transparent);
+  pointer-events: none;
+}
+
+.stage-art::before {
+  opacity: .96;
+}
+
+.stage-art-caption::after,
+.stage-story::before,
+.stage-party::before {
+  box-shadow: inset 0 0 24px rgba(215,180,106,.04);
+}
+
+.stage-choice {
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.64),
+    inset 0 0 22px rgba(215,180,106,.035);
+}
+
+.stage-choice::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 7px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(241,216,154,.22), transparent);
+  pointer-events: none;
+}
+
+.stage-choice:hover::after {
+  background: linear-gradient(90deg, transparent, rgba(241,216,154,.54), transparent);
+}
+
+.stage-choice:hover {
+  border-color: rgba(215,180,106,.44);
+}
+
+.choice-icon.dice img {
+  filter:
+    drop-shadow(0 0 8px rgba(241,216,154,.32))
+    drop-shadow(0 2px 4px rgba(0,0,0,.6));
+}
+
+.stage-state-label {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 8px;
+  border: 1px solid rgba(215,180,106,.13);
+  background: rgba(0,0,0,.18);
+}
+
+.stage-portrait {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(241,216,154,.12), transparent 44%),
+    linear-gradient(180deg, rgba(16,22,28,.92), rgba(4,7,10,.92));
+}
+
+/* Ending screen ornament pass */
+.stage-ending-panel {
+  overflow: visible;
+}
+
+.stage-ending-panel::after {
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    inset 0 0 42px rgba(104,70,26,.06);
+}
+
+.stage-ending-panel h2 {
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.38),
+    0 8px 28px rgba(104,70,26,.12);
+}
+
+.type-ribbon {
+  position: relative;
+  overflow: hidden;
+}
+
+.type-ribbon::before,
+.type-ribbon::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(241,216,154,.45), transparent);
+  pointer-events: none;
+}
+
+.type-ribbon::before { top: 7px; }
+.type-ribbon::after { bottom: 7px; }
+
+.stage-ending-stats div {
+  position: relative;
+}
+
+.stage-ending-stats div::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(104,70,26,.18), transparent);
+}
+
+@media (max-width: 980px) {
+  .game-stage::before,
+  .game-stage::after {
+    display: none;
+  }
+}
