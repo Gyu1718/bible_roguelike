@@ -26,17 +26,9 @@ p { color: #d6cbbb; line-height: 1.8; font-size: 17px; }
 .choice-btn { text-align: left; color: #f4efe6; background: rgba(215,180,106,.1); border: 1px solid rgba(215,180,106,.24); display: grid; gap: 9px; }
 .choice-btn:hover { background: rgba(215,180,106,.18); }
 .choice-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.risk-badge { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px; font-size: 12px; letter-spacing: .02em; white-space: nowrap; border: 1px solid rgba(255,255,255,.14); }
-.risk-low { color: #d8f3cf; background: rgba(77, 139, 61, .18); }
-.risk-mid { color: #ffe3a3; background: rgba(179, 126, 36, .2); }
-.risk-high { color: #ffc0b7; background: rgba(162, 59, 48, .24); }
-.risk-lethal { color: #ffe1dd; background: rgba(168, 37, 37, .38); border-color: rgba(255, 128, 117, .36); }
-.risk-meter { height: 7px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
-.risk-fill { height: 100%; border-radius: 999px; background: #d7b46a; }
-.risk-fill.low { background: #78b866; }
-.risk-fill.mid { background: #d7b46a; }
-.risk-fill.high { background: #d6784d; }
-.risk-fill.lethal { background: #b7352d; }
+.choice-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 12px; color: #f4efe6; background: rgba(215,180,106,.14); border: 1px solid rgba(215,180,106,.28); font-size: 18px; flex: 0 0 auto; }
+.choice-icon.dice { background: rgba(215,180,106,.2); }
+.choice-icon.none { opacity: .18; }
 .effects { color: #b9aa92; font-size: 13px; font-weight: 700; }
 .primary { background: linear-gradient(135deg, #e3c887, #9d6a32); color: #16100c; }
 .secondary { background: rgba(255,255,255,.06); color: #f4efe6; border: 1px solid rgba(255,255,255,.14); }
