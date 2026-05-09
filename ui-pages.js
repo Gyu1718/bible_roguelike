@@ -130,7 +130,7 @@ function homeScreen(activeMenu, save) {
   return `
     <main class="stage-shell">
       <section class="game-stage home-v4-screen">
-        <img class="home-v4-bg" src="./assets/premium/main/main_bg.webp" alt="" />
+        <img class="home-v4-bg" src="./assets/premium/main/main_bg.webp" alt="" draggable="false" />
         <div class="home-v4-vignette"></div>
         <aside class="home-v4-left">
           <div class="home-v4-logo">
