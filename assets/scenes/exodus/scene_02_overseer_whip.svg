@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#25150c"/>
+      <stop offset="0.52" stop-color="#0d0b0a"/>
+      <stop offset="1" stop-color="#071018"/>
+    </linearGradient>
+    <radialGradient id="dust" cx="34%" cy="42%" r="58%">
+      <stop offset="0" stop-color="#c8793e" stop-opacity="0.44"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="s"><feDropShadow dx="0" dy="20" stdDeviation="14" flood-color="#000" flood-opacity="0.55"/></filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#dust)"/>
+  <path d="M0 560c220-78 380-15 585-65 244-60 390-55 615-110v415H0z" fill="#120c08" opacity="0.92"/>
+  <g opacity="0.54">
+    <rect x="84" y="620" width="110" height="42" fill="#8a4a2b"/><rect x="205" y="620" width="110" height="42" fill="#593120"/>
+    <rect x="152" y="670" width="110" height="42" fill="#a45a34"/><rect x="272" y="670" width="110" height="42" fill="#5e3524"/>
+  </g>
+  <g filter="url(#s)">
+    <g fill="#070606">
+      <circle cx="384" cy="492" r="27"/><path d="M348 522h74l38 180H310z"/>
+      <path d="M390 536c-42 50-84 83-136 100" stroke="#070606" stroke-width="20" stroke-linecap="round"/>
+      <path d="M420 536c50 37 100 50 160 42" stroke="#070606" stroke-width="19" stroke-linecap="round"/>
+    </g>
+    <g fill="#050505">
+      <circle cx="742" cy="430" r="30"/><path d="M704 464h82l42 220H662z"/>
+      <path d="M762 470c56-20 105-64 146-130" stroke="#050505" stroke-width="22" stroke-linecap="round"/>
+      <path d="M906 330c64-40 113-70 164-118" stroke="#d7b46a" stroke-opacity="0.45" stroke-width="7" stroke-linecap="round" fill="none"/>
+    </g>
+  </g>
+  <path d="M912 326c78 33 126 84 144 158" stroke="#9b3c25" stroke-opacity="0.34" stroke-width="9" fill="none"/>
+  <g fill="#050505" opacity="0.75">
+    <circle cx="580" cy="584" r="18"/><path d="M558 604h44l24 104h-92z"/>
+    <circle cx="220" cy="575" r="17"/><path d="M200 596h40l22 96h-84z"/>
+  </g>
+  <rect width="1200" height="800" fill="#000" opacity="0.1"/>
+</svg>
