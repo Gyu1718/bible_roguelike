@@ -142,20 +142,27 @@ function endingScreen(state) {
   const ending = state.ending;
   const type = window.NW_PROFILE.getType(state.profile);
   return `
-    <main class="ending-screen">
-      <section class="ending-panel">
-        <p class="eyebrow">엔딩</p>
-        <h2>${ending.title}</h2>
-        <div class="type-ribbon">당신의 증언 유형: ${type.title}</div>
-        <p>${ending.text}</p>
-        <p>${type.text}</p>
-        <div class="meta">
-          <div><span>생존</span><strong>${state.stats.endurance}</strong></div>
-          <div><span>공포</span><strong>${state.stats.panic}</strong></div>
-          <div><span>증언</span><strong>${state.stats.witness}</strong></div>
-          <div><span>기록</span><strong>${state.log.length}개</strong></div>
-        </div>
-        <div class="row"><button class="primary" onclick="restart()">다시 도전</button><button class="secondary" onclick="goHome('chapters')">처음으로</button></div>
+    <main class="stage-shell">
+      <section class="game-stage stage-ending-screen">
+        <img class="stage-bg" src="./assets/backgrounds/ending/ending_bg_liberation.svg" alt="" />
+        <div class="stage-vignette"></div>
+        <section class="stage-ending-panel">
+          <p class="eyebrow">ENDING</p>
+          <h2>${ending.title}</h2>
+          <div class="type-ribbon">당신의 증언 유형: ${type.title}</div>
+          <p>${ending.text}</p>
+          <p>${type.text}</p>
+          <div class="stage-ending-stats">
+            <div><span>생존</span><strong>${state.stats.endurance}</strong></div>
+            <div><span>공포</span><strong>${state.stats.panic}</strong></div>
+            <div><span>증언</span><strong>${state.stats.witness}</strong></div>
+            <div><span>기록</span><strong>${state.log.length}개</strong></div>
+          </div>
+          <div class="stage-ending-actions">
+            <button class="primary" onclick="restart()">다시 도전</button>
+            <button class="secondary" onclick="goHome('chapters')">처음으로</button>
+          </div>
+        </section>
       </section>
     </main>
   `;
