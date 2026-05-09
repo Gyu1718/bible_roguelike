@@ -8,7 +8,7 @@ function clamp(value, min, max) {
 function applyEffects(stats, effects = {}) {
   const next = { ...stats };
   Object.entries(effects).forEach(([key, value]) => {
-    next[key] = clamp((next[key] ?? 0) + value, 0, key === "fear" ? 14 : 12);
+    next[key] = clamp((next[key] ?? 0) + value, 0, key === "panic" ? 14 : 12);
   });
   return next;
 }
@@ -246,7 +246,7 @@ export default function App() {
   const { enabled, toggle } = useAmbientAudio();
 
   const scene = chapter.scenes?.[sceneIndex];
-  const isFailed = stats.body <= 0 || stats.fear >= 14;
+  const isFailed = stats.endurance <= 0 || stats.panic >= 14;
   const totalScenes = chapter.scenes?.length ?? 0;
 
   useEffect(() => {
@@ -280,7 +280,7 @@ export default function App() {
     setStats(nextStats);
     setLog((prev) => [choice.log, ...prev].filter(Boolean).slice(0, 9));
 
-    if (nextStats.body <= 0 || nextStats.fear >= 14) {
+    if (nextStats.endurance <= 0 || nextStats.panic >= 14) {
       const result = evaluateEnding(nextStats);
       setEnding(result);
       setCompletedEndings(setCompletedEnding(result.title));
@@ -373,7 +373,7 @@ export default function App() {
             <p>{chapter.prototypeText}</p>
             <div className="meta-grid">
               <div><span>본문 모티프</span><strong>{chapter.reference}</strong></div>
-              <div><span>톤</span><strong>{chapter.tone}</strong></div>
+              <div><span>목표</span><strong>{chapter.goal}</strong></div>
             </div>
             <p className="muted">이 챕터는 아직 완주형 스토리로 확장 전이다. 현재 1편 《벽돌과 바다》가 완주 가능한 기준 챕터이다.</p>
             <button className="primary-btn" onClick={() => startChapter(chapters[0])}>완주 가능한 1편으로 이동</button>
@@ -386,8 +386,8 @@ export default function App() {
           <section className="visual-column">
             <SceneIllustration type={scene.image} />
             <div className="progress-card">
-              <span>진행도</span>
-              <strong>{sceneIndex + 1} / {totalScenes}</strong>
+              <span>목표</span>
+              <strong>{chapter.goal}</strong>
               <div className="progress-bar"><div style={{ width: `${((sceneIndex + 1) / totalScenes) * 100}%` }} /></div>
             </div>
           </section>
@@ -414,7 +414,7 @@ export default function App() {
               {statEntries.map(([key, value]) => (
                 <div className="stat-row" key={key}>
                   <span>{statLabels[key] || key}</span>
-                  <div className="mini-bar"><div className={key === "fear" ? "fear" : ""} style={{ width: `${Math.min(100, value * 8)}%` }} /></div>
+                  <div className="mini-bar"><div className={key === "panic" ? "fear" : ""} style={{ width: `${Math.min(100, value * 8)}%` }} /></div>
                   <strong>{value}</strong>
                 </div>
               ))}
