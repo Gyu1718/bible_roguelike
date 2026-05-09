@@ -1,0 +1,22 @@
+/* Home Assets Pack 01
+   홈 화면 전용 에셋 매핑 레이어입니다.
+   실제 이미지 파일을 교체할 때는 이 파일의 변수만 바꾸면 됩니다.
+*/
+
+:root {
+  --home-asset-bg: url("./assets/premium/main/main_bg.webp");
+  --home-asset-main-card: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
+  --home-asset-locked-02: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
+  --home-asset-locked-03: url("./assets/premium/play/scenes/scene_02_red_sea.webp");
+  --home-asset-locked-04: url("./assets/premium/play/scenes/scene_03_pursuit.webp");
+  --home-asset-locked-05: url("./assets/premium/play/scenes/scene_04_wilderness.webp");
+
+  --home-asset-title-frame: url("./assets/premium/ui_v2/chapter_header_bar_v2.png");
+  --home-asset-locked-frame: url("./assets/premium/ui_v2/chapter_card_locked_v2.png");
+  --home-asset-sidebar-frame: url("./assets/premium/ui_v2/left_menu_panel_v2.png");
+
+  --home-gold: rgba(215, 180, 106, .86);
+  --home-gold-soft: rgba(242, 213, 143, .72);
+  --home-gold-faint: rgba(215, 180, 106, .24);
+  --home-black-panel: rgba(0, 0, 0, .58);
+}
