@@ -44,30 +44,12 @@ function testimonyType() {
   }
 
   const types = {
-    obedience: {
-      title: "두려움 속의 순종자",
-      text: "당신은 모든 것을 이해해서 움직인 사람이 아니다. 그러나 떨림 속에서도 주어진 말씀과 표식 앞에 몸을 맞추는 쪽을 선택했다.",
-    },
-    witness: {
-      title: "해방의 증언자",
-      text: "당신은 사건을 단순한 생존으로만 넘기지 않았다. 본 것을 마음에 새기고, 그 의미를 언어로 남기려는 방향을 택했다.",
-    },
-    survival: {
-      title: "상처 입은 생존자",
-      text: "당신은 먼저 살아남아야 했다. 그 선택은 비겁함만이 아니라, 오래 억압받은 사람이 몸으로 배운 현실적인 지혜이기도 했다.",
-    },
-    fear: {
-      title: "공포에 흔들린 사람",
-      text: "당신의 선택은 자주 두려움에 끌려갔다. 그러나 그 두려움은 단순한 약함이 아니라, 노예의 시간 속에서 새겨진 상처의 흔적이었다.",
-    },
-    resistance: {
-      title: "무모한 저항자",
-      text: "당신은 불의 앞에서 쉽게 침묵하지 않았다. 다만 분노가 앞설 때, 용기와 무모함의 경계가 흐려지기도 했다.",
-    },
-    avoidance: {
-      title: "피하려는 생존자",
-      text: "당신은 위험을 피하고 익숙한 안전을 찾으려 했다. 그러나 해방의 길은 때로 안전해 보이는 곳을 떠나는 결단을 요구했다.",
-    },
+    obedience: { title: "두려움 속의 순종자", text: "당신은 모든 것을 이해해서 움직인 사람이 아니다. 그러나 떨림 속에서도 주어진 말씀과 표식 앞에 몸을 맞추는 쪽을 선택했다." },
+    witness: { title: "해방의 증언자", text: "당신은 사건을 단순한 생존으로만 넘기지 않았다. 본 것을 마음에 새기고, 그 의미를 언어로 남기려는 방향을 택했다." },
+    survival: { title: "상처 입은 생존자", text: "당신은 먼저 살아남아야 했다. 그 선택은 비겁함만이 아니라, 오래 억압받은 사람이 몸으로 배운 현실적인 지혜이기도 했다." },
+    fear: { title: "공포에 흔들린 사람", text: "당신의 선택은 자주 두려움에 끌려갔다. 그러나 그 두려움은 단순한 약함이 아니라, 노예의 시간 속에서 새겨진 상처의 흔적이었다." },
+    resistance: { title: "무모한 저항자", text: "당신은 불의 앞에서 쉽게 침묵하지 않았다. 다만 분노가 앞설 때, 용기와 무모함의 경계가 흐려지기도 했다." },
+    avoidance: { title: "피하려는 생존자", text: "당신은 위험을 피하고 익숙한 안전을 찾으려 했다. 그러나 해방의 길은 때로 안전해 보이는 곳을 떠나는 결단을 요구했다." },
   };
 
   return types[key];
@@ -264,10 +246,22 @@ function goHome() {
   render();
 }
 
+function statIconSrc(key) {
+  const icons = {
+    endurance: "./assets/ui/icons/icon_endurance.svg",
+    panic: "./assets/ui/icons/icon_panic.svg",
+    witness: "./assets/ui/icons/icon_witness.svg",
+  };
+  return icons[key] || "";
+}
+
 function statBar(label, value, key) {
   return `
     <div class="stat">
-      <div class="stat-row"><span>${label}</span><strong>${value}</strong></div>
+      <div class="stat-row">
+        <span class="stat-label"><img class="stat-icon" src="${statIconSrc(key)}" alt="${label}" /><span>${label}</span></span>
+        <strong>${value}</strong>
+      </div>
       <div class="bar"><div class="fill ${key === "panic" ? "panic" : ""}" style="width:${Math.min(100, value * 8)}%"></div></div>
     </div>
   `;
@@ -290,7 +284,9 @@ function side() {
 }
 
 function choiceIcon(choice) {
-  if (isRollChoice(choice)) return `<span class="choice-icon dice" title="판정 선택">⚂</span>`;
+  if (isRollChoice(choice)) {
+    return `<span class="choice-icon dice" title="판정 선택"><img src="./assets/ui/icons/icon_dice.svg" alt="판정" /></span>`;
+  }
   return `<span class="choice-icon none" aria-hidden="true"></span>`;
 }
 
@@ -302,6 +298,21 @@ function choiceButton(choice, index) {
         ${choiceIcon(choice)}
       </div>
     </button>
+  `;
+}
+
+function sceneArtSection(scene, eyebrowText = "ILLUSTRATION") {
+  const artSrc = scene.artSrc || "./assets/scenes/exodus/scene_01_brickyard.svg";
+  const artLabel = scene.artLabel || scene.art || "장면 삽화";
+
+  return `
+    <section class="art scene-art asset-art">
+      <img class="scene-asset-img" src="${artSrc}" alt="${artLabel}" />
+      <div>
+        <p class="eyebrow">${eyebrowText}</p>
+        <h2>${scene.art}</h2>
+      </div>
+    </section>
   `;
 }
 
@@ -340,7 +351,7 @@ function playScreen() {
   const scene = scenes[state.index];
   return `
     <main class="layout play-screen">
-      <section class="art scene-art"><div><p class="eyebrow">ILLUSTRATION</p><h2>${scene.art}</h2></div></section>
+      ${sceneArtSection(scene, "ILLUSTRATION")}
       <section class="card story-card">
         <p class="eyebrow">벽돌과 바다 · ${state.index + 1}/${scenes.length}</p>
         <h2>${scene.title}</h2>
@@ -362,7 +373,7 @@ function rollScreen() {
 
   return `
     <main class="layout play-screen roll-screen">
-      <section class="art scene-art"><div><p class="eyebrow">2D6 CHECK</p><h2>${scene.art}</h2></div></section>
+      ${sceneArtSection(scene, "2D6 CHECK")}
       <section class="card story-card">
         <p class="eyebrow">판정</p>
         <h2>${choice.label}</h2>
@@ -385,7 +396,7 @@ function feedbackScreen() {
   const feedback = state.feedback;
   return `
     <main class="layout play-screen feedback-screen">
-      <section class="art scene-art"><div><p class="eyebrow">선택의 결과</p><h2>${scene.art}</h2></div></section>
+      ${sceneArtSection(scene, "선택의 결과")}
       <section class="card story-card">
         <p class="eyebrow">선택의 결과</p>
         <h2>${feedback.title}</h2>
