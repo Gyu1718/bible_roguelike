@@ -1,145 +1,220 @@
-/* Home Screen Position Fix 02
-   Real blueprint 기준 1차 좌표 보정입니다.
-   기준 이미지 위에서 실제 UI 요소의 큰 틀 위치를 맞춥니다.
+/* Home Screen Position Fix 03
+   Real blueprint 기준 2차 정밀 좌표 보정입니다.
+   피드백 반영:
+   1. 좌측 메뉴는 위치가 유사하므로 크기만 소폭 축소
+   2. 대표 카드 박스는 기준 이미지 좌표에 맞게 절대 배치
+   3. 잠금 카드 그리드도 기준 이미지 좌표에 맞게 절대 배치
+   4. 성구 박스는 더 작고 좁게 조정
 */
 
 body .home-screen .home-sidebar {
-  width: 330px !important;
-  padding-top: 28px !important;
-  padding-left: 42px !important;
+  width: 324px !important;
+  padding-top: 26px !important;
+  padding-left: 40px !important;
+  padding-right: 26px !important;
+}
+
+body .home-screen .home-emblem {
+  width: 54px !important;
+  height: 54px !important;
+  font-size: 39px !important;
 }
 
 body .home-screen .home-title h1 {
-  font-size: 34px !important;
+  font-size: 31px !important;
+}
+
+body .home-screen .home-title p {
+  font-size: 12px !important;
+  margin-bottom: 20px !important;
 }
 
 body .home-screen .home-menu {
-  gap: 8px !important;
+  gap: 7px !important;
 }
 
 body .home-screen .home-menu-button {
-  min-height: 58px !important;
+  min-height: 54px !important;
+  grid-template-columns: 38px 1fr !important;
+  padding: 0 14px !important;
 }
 
+body .home-screen .home-menu-icon {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 19px !important;
+}
+
+body .home-screen .home-menu-text strong {
+  font-size: 16px !important;
+}
+
+body .home-screen .home-menu-text em {
+  font-size: 9px !important;
+}
+
+body .home-screen .home-quick-icons {
+  left: 54px !important;
+  bottom: 72px !important;
+  gap: 8px !important;
+}
+
+body .home-screen .home-quick-icons button {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+body .home-screen .home-sidebar-cross {
+  left: 72px !important;
+  bottom: 18px !important;
+  font-size: 28px !important;
+}
+
+/* 우측 영역은 grid가 아니라 기준 이미지 좌표에 맞춘 absolute canvas로 사용합니다. */
 body .home-screen .home-board {
-  left: 408px !important;
-  right: 76px !important;
-  top: 52px !important;
-  bottom: 126px !important;
+  position: absolute !important;
+  left: 37.2% !important;
+  right: 4.2% !important;
+  top: 5.7% !important;
+  bottom: 15.0% !important;
   width: auto !important;
+  height: auto !important;
   max-width: none !important;
   min-width: 0 !important;
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) !important;
-  grid-template-rows: 68px minmax(0, 1.38fr) minmax(0, 1fr) !important;
-  gap: 15px !important;
-  justify-items: stretch !important;
-  align-items: stretch !important;
+  display: block !important;
   box-sizing: border-box !important;
+  outline-offset: -2px !important;
 }
 
 body .home-screen .home-act-title {
-  grid-row: 1 !important;
-  grid-column: 1 !important;
-  position: relative !important;
-  left: auto !important;
-  right: auto !important;
-  top: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  justify-self: center !important;
-  align-self: stretch !important;
-  width: min(520px, 48%) !important;
+  position: absolute !important;
+  left: 27.0% !important;
+  top: 0 !important;
+  width: 42.0% !important;
+  min-width: 0 !important;
   max-width: none !important;
-  min-width: 390px !important;
-  height: auto !important;
-  min-height: 62px !important;
+  height: 10.2% !important;
+  min-height: 0 !important;
+  transform: none !important;
+  display: grid !important;
+  place-items: center !important;
   box-sizing: border-box !important;
 }
 
 body .home-screen .home-act-title strong {
-  font-size: 19px !important;
+  font-size: 18px !important;
+}
+
+body .home-screen .home-act-cross {
+  top: -18px !important;
+  font-size: 26px !important;
 }
 
 body .home-screen .home-chapter-main {
-  grid-row: 2 !important;
-  grid-column: 1 !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 15.7% !important;
   width: 100% !important;
-  max-width: none !important;
+  height: 36.5% !important;
   min-width: 0 !important;
-  justify-self: stretch !important;
-  align-self: stretch !important;
+  max-width: none !important;
+  padding: 24px 34px !important;
+  display: flex !important;
+  align-items: flex-end !important;
   box-sizing: border-box !important;
-  padding: 30px 36px !important;
 }
 
 body .home-screen .home-chapter-copy {
-  max-width: 390px !important;
+  max-width: 360px !important;
+}
+
+body .home-screen .home-chapter-kicker {
+  font-size: 15px !important;
+  margin-bottom: 5px !important;
 }
 
 body .home-screen .home-chapter-copy h2 {
-  font-size: 43px !important;
+  font-size: 39px !important;
+  line-height: 0.98 !important;
 }
 
 body .home-screen .home-chapter-copy p {
-  font-size: 14px !important;
+  font-size: 13px !important;
+  margin: 6px 0 13px !important;
 }
 
 body .home-screen .home-chapter-copy button {
-  height: 39px !important;
-  min-width: 172px !important;
+  height: 35px !important;
+  min-width: 154px !important;
+  padding: 0 16px !important;
+  font-size: 13px !important;
 }
 
 body .home-screen .home-chapter-grid {
-  grid-row: 3 !important;
-  grid-column: 1 !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 55.0% !important;
   width: 100% !important;
-  max-width: none !important;
+  height: 25.0% !important;
   min-width: 0 !important;
-  justify-self: stretch !important;
-  align-self: stretch !important;
+  max-width: none !important;
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
-  gap: 14px !important;
+  gap: 12px !important;
   box-sizing: border-box !important;
 }
 
 body .home-screen .home-chapter-card {
   width: 100% !important;
+  height: 100% !important;
   max-width: none !important;
   min-width: 0 !important;
   box-sizing: border-box !important;
-  padding: 18px 20px !important;
+  padding: 14px 18px !important;
 }
 
 body .home-screen .home-chapter-card span {
-  font-size: 16px !important;
+  font-size: 14px !important;
 }
 
 body .home-screen .home-chapter-card strong {
   max-width: 48% !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
+  line-height: 1.22 !important;
 }
 
 body .home-screen .home-chapter-card i {
-  width: 52px !important;
-  height: 52px !important;
-  font-size: 23px !important;
+  width: 42px !important;
+  height: 42px !important;
+  font-size: 19px !important;
+  top: 53% !important;
 }
 
+/* 성구 박스: 기준 이미지보다 크다는 피드백 반영, 더 작고 좁게 */
 body .home-screen .home-footer {
-  left: 408px !important;
-  right: 220px !important;
-  bottom: 54px !important;
+  left: 44.0% !important;
+  right: 23.0% !important;
+  bottom: 9.0% !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
 }
 
 body .home-screen .home-footer p {
-  font-size: 14px !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
 }
 
 body .home-screen .home-footer strong {
-  font-size: 13px !important;
+  font-size: 11px !important;
+  margin-top: 3px !important;
+}
+
+body .home-screen .home-hourglass {
+  right: 5.5% !important;
+  bottom: 8.0% !important;
+  width: 40px !important;
+  height: 40px !important;
 }
 
 @media (max-width: 980px) {
@@ -153,6 +228,7 @@ body .home-screen .home-footer strong {
     top: auto !important;
     bottom: auto !important;
     width: auto !important;
+    height: auto !important;
     min-width: 0 !important;
   }
 }
