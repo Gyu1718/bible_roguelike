@@ -1,11 +1,11 @@
 function stageMenuButton(activeMenu, id, label, icon) {
   const active = activeMenu === id ? "active" : "";
-  return `<button class="stage-menu-button ${active}" onclick="setMenu('${id}')"><span>${icon}</span><strong>${label}</strong></button>`;
+  return `<button class="home-v4-menu-button ${active}" onclick="setMenu('${id}')"><span>${icon}</span><strong>${label}</strong></button>`;
 }
 
 function stageMenu(activeMenu) {
   return `
-    <nav class="stage-main-menu-list">
+    <nav class="home-v4-menu-list">
       ${stageMenuButton(activeMenu, "chapters", "이야기", "I")}
       ${stageMenuButton(activeMenu, "witnesses", "증인들", "W")}
       ${stageMenuButton(activeMenu, "records", "기록", "R")}
@@ -28,16 +28,14 @@ function formatDate(iso) {
 function stageChaptersPage(save) {
   const cleared = save.clearedChapters?.includes("exodus");
   return `
-    <section class="home-v3-chapters">
-      <header class="home-v3-header">
-        <div>
-          <p>제1막</p>
-          <h2>시작의 증인</h2>
-        </div>
+    <section class="home-v4-board">
+      <header class="home-v4-header">
+        <p>제1막</p>
+        <h2>시작의 증인</h2>
       </header>
 
-      <article class="home-v3-feature">
-        <div class="home-v3-feature-copy">
+      <article class="home-v4-feature">
+        <div class="home-v4-feature-copy">
           <span>${cleared ? "다시 열리는 기록" : "열린 이야기"}</span>
           <h3>벽돌과 바다</h3>
           <p>제국의 벽돌가마 아래에서 시작된 이름 없는 사람의 기록.</p>
@@ -45,7 +43,7 @@ function stageChaptersPage(save) {
         </div>
       </article>
 
-      <section class="home-v3-locked-board">
+      <section class="home-v4-locked">
         <article><span>잠김</span><strong>광야의 메아리</strong></article>
         <article><span>잠김</span><strong>무너진 성벽</strong></article>
         <article><span>잠김</span><strong>불 가운데서</strong></article>
@@ -131,20 +129,20 @@ function stageHomeContent(activeMenu, save) {
 function homeScreen(activeMenu, save) {
   return `
     <main class="stage-shell">
-      <section class="game-stage stage-main-screen">
-        <img class="stage-bg" src="./assets/backgrounds/menu/menu_bg_brickworks.svg" alt="" />
-        <div class="stage-vignette"></div>
-        <aside class="stage-main-left">
-          <div class="stage-logo-block">
+      <section class="game-stage home-v4-screen">
+        <img class="home-v4-bg" src="./assets/premium/main/main_bg.webp" alt="" />
+        <div class="home-v4-vignette"></div>
+        <aside class="home-v4-left">
+          <div class="home-v4-logo">
             <h2>이름 없는<br />증인들</h2>
             <p>사건의 중심이 아니라, 그 곁에서 본 사람의 기록.</p>
           </div>
           ${stageMenu(activeMenu)}
         </aside>
         ${stageHomeContent(activeMenu, save)}
-        <section class="stage-bottom-bar stage-main-bottom clean-bottom-bar">
-          <div class="verse">“너희는 가만히 있어 여호와께서 오늘 너희를 위하여 행하시는 구원을 보라”</div>
-        </section>
+        <footer class="home-v4-footer">
+          <div>“너희는 가만히 있어 여호와께서 오늘 너희를 위하여 행하시는 구원을 보라”</div>
+        </footer>
       </section>
     </main>
   `;
