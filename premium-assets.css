@@ -1,0 +1,96 @@
+/* Premium asset override layer
+   실제 WebP/PNG 에셋을 넣으면 이 파일의 경로만 사용해 고화질 스킨으로 교체합니다.
+   현재는 image-set이 아니라 fallback 계층을 유지하기 위해 기존 SVG를 기본값으로 둡니다.
+*/
+
+:root {
+  --premium-main-bg: url("./assets/backgrounds/menu/menu_bg_brickworks.svg");
+  --premium-play-bg: url("./assets/backgrounds/play/play_bg_dark_sea.svg");
+  --premium-ending-bg: url("./assets/backgrounds/ending/ending_bg_liberation.svg");
+
+  --premium-illustration-frame: url("./assets/ui/frames/illustration_frame.svg");
+  --premium-story-panel: url("./assets/ui/panels/story_panel.svg");
+  --premium-witness-panel: url("./assets/ui/panels/status_panel.svg");
+  --premium-ending-panel: url("./assets/ui/panels/ending_result_panel.svg");
+
+  --premium-choice-normal: url("./assets/ui/buttons/choice_button_normal.svg");
+  --premium-choice-hover: url("./assets/ui/buttons/choice_button_hover.svg");
+  --premium-choice-pressed: url("./assets/ui/buttons/choice_button_pressed.svg");
+  --premium-locked-card: url("./assets/ui/cards/chapter_card_locked.svg");
+  --premium-active-card: url("./assets/ui/cards/chapter_card_active.svg");
+  --premium-ribbon: url("./assets/ui/ribbons/testimony_type_ribbon.svg");
+}
+
+/*
+고해상도 에셋을 추가한 뒤 아래 주석을 해제하면 됩니다.
+파일이 없는 상태에서 해제하면 브라우저가 404를 요청합니다.
+
+:root {
+  --premium-main-bg: url("./assets/premium/main/main_bg.webp");
+  --premium-play-bg: url("./assets/premium/play/play_bg.webp");
+  --premium-ending-bg: url("./assets/premium/ending/ending_liberation_bg.webp");
+
+  --premium-illustration-frame: url("./assets/premium/play/illustration_frame.webp");
+  --premium-story-panel: url("./assets/premium/play/story_panel.webp");
+  --premium-witness-panel: url("./assets/premium/play/witness_panel.webp");
+  --premium-ending-panel: url("./assets/premium/ending/ending_result_panel.webp");
+
+  --premium-choice-normal: url("./assets/premium/play/choice_button_normal.webp");
+  --premium-choice-hover: url("./assets/premium/play/choice_button_hover.webp");
+  --premium-choice-pressed: url("./assets/premium/play/choice_button_pressed.webp");
+  --premium-locked-card: url("./assets/premium/main/locked_chapter_card.webp");
+  --premium-active-card: url("./assets/premium/main/featured_chapter_frame.webp");
+  --premium-ribbon: url("./assets/premium/ending/testimony_ribbon.webp");
+}
+*/
+
+.stage-bg[src$="menu_bg_brickworks.svg"] {
+  content: var(--premium-main-bg);
+}
+
+.stage-bg[src$="play_bg_dark_sea.svg"] {
+  content: var(--premium-play-bg);
+}
+
+.stage-bg[src$="ending_bg_liberation.svg"] {
+  content: var(--premium-ending-bg);
+}
+
+.stage-art::before,
+.stage-feature-card::before {
+  background-image: var(--premium-illustration-frame);
+}
+
+.stage-story,
+.stage-result-card {
+  background-image: var(--premium-story-panel);
+}
+
+.stage-party {
+  background-image: var(--premium-witness-panel);
+}
+
+.stage-choice {
+  background-image: var(--premium-choice-normal);
+}
+
+.stage-choice:hover {
+  background-image: var(--premium-choice-hover);
+}
+
+.stage-choice:active {
+  background-image: var(--premium-choice-pressed);
+}
+
+.stage-locked-grid article,
+.stage-archive-grid article {
+  background-image: var(--premium-locked-card);
+}
+
+.stage-ending-panel {
+  background-image: var(--premium-ending-panel);
+}
+
+.type-ribbon {
+  background-image: var(--premium-ribbon);
+}
