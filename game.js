@@ -1,17 +1,6 @@
 const { endings, scenes } = window.GAME_DATA;
 
-let state = {
-  screen: "home",
-  activeMenu: "chapters",
-  index: 0,
-  stats: { endurance: 10, panic: 5, witness: 0 },
-  profile: window.NW_PROFILE.defaultProfile(),
-  feedback: null,
-  pendingChoice: null,
-  roll: null,
-  ending: null,
-  log: ["새로운 목격자의 기록이 열렸다."],
-};
+let state = window.NW_STATE.createInitialState();
 
 function clamp(v, min, max) {
   return Math.max(min, Math.min(max, v));
@@ -65,27 +54,27 @@ function needsFeedback(choice) {
   return false;
 }
 
+function enterEnding(ending) {
+  state.ending = ending;
+  state.screen = "ending";
+  window.NW_AUDIO?.sfx(ending === endings.trueWitness || ending === endings.survivor ? "ending" : "badEnding");
+  render();
+}
+
 function goNextOrEnd() {
   if (state.stats.endurance <= 0 || state.stats.panic >= 14) {
-    state.ending = evaluate();
-    state.screen = "ending";
-    render();
+    enterEnding(evaluate());
     return;
   }
 
   state.index += 1;
 
   if (!scenes[state.index] || scenes[state.index]?.final) {
-    state.ending = evaluate();
-    state.screen = "ending";
-    render();
+    enterEnding(evaluate());
     return;
   }
 
-  state.feedback = null;
-  state.pendingChoice = null;
-  state.roll = null;
-  state.screen = "play";
+  state = window.NW_STATE.clearTransientState(state, "play");
   render();
 }
 
@@ -95,9 +84,9 @@ function choose(index) {
 
   if (choice.badEnding) {
     state.feedback = { ...choice, next: "bad" };
-    state.log.unshift(choice.text);
-    state.log = state.log.slice(0, 6);
+    state = window.NW_STATE.appendLog(state, choice.text);
     state.screen = "feedback";
+    window.NW_AUDIO?.sfx("fail");
     render();
     return;
   }
@@ -106,13 +95,13 @@ function choose(index) {
     state.pendingChoice = choice;
     state.roll = window.NW_ROLL.makeRoll(choice, state.stats);
     state.screen = "roll";
+    window.NW_AUDIO?.sfx("roll");
     render();
     return;
   }
 
   apply(choice.effects);
-  state.log.unshift(choice.text);
-  state.log = state.log.slice(0, 6);
+  state = window.NW_STATE.appendLog(state, choice.text);
   state.feedback = { ...choice, next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue" };
 
   if (needsFeedback(choice)) {
@@ -137,7 +126,8 @@ function resolveRoll() {
       text: choice.successText || choice.text,
       next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue",
     };
-    state.log.unshift(choice.successText || choice.text);
+    state = window.NW_STATE.appendLog(state, choice.successText || choice.text);
+    window.NW_AUDIO?.sfx("success");
   } else {
     const fail = window.NW_ROLL.failureEffects(choice);
     apply(fail);
@@ -147,26 +137,22 @@ function resolveRoll() {
       text: choice.failText || "위험한 선택은 뜻대로 풀리지 않았다. 몸과 마음이 흔들렸다.",
       next: state.stats.endurance <= 0 || state.stats.panic >= 14 ? "ending" : "continue",
     };
-    state.log.unshift(state.feedback.text);
+    state = window.NW_STATE.appendLog(state, state.feedback.text);
+    window.NW_AUDIO?.sfx("fail");
   }
 
-  state.log = state.log.slice(0, 6);
   state.screen = "feedback";
   render();
 }
 
 function proceed() {
   if (state.feedback?.next === "bad") {
-    state.ending = endings[state.feedback.badEnding];
-    state.screen = "ending";
-    render();
+    enterEnding(endings[state.feedback.badEnding]);
     return;
   }
 
   if (state.feedback?.next === "ending") {
-    state.ending = evaluate();
-    state.screen = "ending";
-    render();
+    enterEnding(evaluate());
     return;
   }
 
@@ -174,39 +160,27 @@ function proceed() {
 }
 
 function restart() {
-  state = {
-    ...state,
-    screen: "play",
-    index: 0,
-    stats: { endurance: 10, panic: 5, witness: 0 },
-    profile: window.NW_PROFILE.defaultProfile(),
-    feedback: null,
-    pendingChoice: null,
-    roll: null,
-    ending: null,
-    log: ["벽돌과 바다 기록을 시작했다."],
-  };
+  state = window.NW_STATE.startRunState(state);
+  window.NW_AUDIO?.unlock();
+  window.NW_AUDIO?.sfx("click");
   render();
 }
 
 function goHome(menu = state.activeMenu || "chapters") {
-  state.screen = "home";
-  state.activeMenu = menu;
-  state.feedback = null;
-  state.pendingChoice = null;
-  state.roll = null;
+  state = window.NW_STATE.homeState(state, menu);
   render();
 }
 
 function setMenu(menu) {
-  state.activeMenu = menu;
-  state.screen = "home";
+  state = window.NW_STATE.setMenuState(state, menu);
   render();
 }
 
 function render() {
   const root = document.getElementById("root");
   root.innerHTML = window.NW_RENDER.renderApp(state, scenes, getSaveData());
+  window.state = state;
+  window.NW_AUDIO?.syncToScreen(state.screen);
 }
 
 window.restart = restart;
