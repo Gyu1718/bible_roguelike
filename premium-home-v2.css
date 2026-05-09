@@ -4,19 +4,24 @@
   --ui2-card-locked: url("./assets/premium/ui_v2/chapter_card_locked_v2.png");
 }
 
-/* Clean UI Pass 02: home composition refinement */
+/* Home Stability Pass 01 + Clean UI Pass 02
+   큰 패널 하나만 보이는 문제를 막기 위해 홈 화면 세로 공간을 명시적으로 분배합니다.
+*/
 
 .stage-main-screen {
   display: grid;
-  grid-template-columns: clamp(270px, 23.5vw, 340px) 1fr;
-  grid-template-rows: 1fr 64px;
-  gap: clamp(12px, 1vw, 18px);
-  padding: clamp(12px, 1vw, 18px);
+  grid-template-columns: clamp(270px, 23.5vw, 340px) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 60px;
+  gap: clamp(10px, .9vw, 16px);
+  padding: clamp(10px, .9vw, 16px);
+  overflow: hidden;
 }
 
 .stage-main-left {
   grid-column: 1;
   grid-row: 1 / span 2;
+  min-height: 0;
+  overflow: hidden;
   background:
     linear-gradient(180deg, rgba(0,0,0,.52), rgba(0,0,0,.74)),
     var(--ui2-left-menu);
@@ -25,15 +30,15 @@
   background-repeat: no-repeat;
   border: 1px solid rgba(215,180,106,.25);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.62), 0 24px 64px rgba(0,0,0,.42);
-  padding: clamp(26px, 3.3vh, 42px) clamp(18px, 1.45vw, 26px) clamp(20px, 2.4vh, 32px);
+  padding: clamp(24px, 3vh, 38px) clamp(16px, 1.35vw, 24px) clamp(18px, 2vh, 28px);
 }
 
 .stage-logo-block {
-  margin-bottom: clamp(18px, 3vh, 34px);
+  margin-bottom: clamp(16px, 2.5vh, 28px);
 }
 
 .stage-logo-block h2 {
-  font-size: clamp(31px, 2.45vw, 47px);
+  font-size: clamp(30px, 2.35vw, 44px);
   line-height: 1.12;
   letter-spacing: -.06em;
   color: #f2d58f;
@@ -41,37 +46,40 @@
 
 .stage-logo-block p {
   max-width: 220px;
-  font-size: clamp(12px, .82vw, 15px);
-  line-height: 1.55;
+  font-size: clamp(12px, .8vw, 14px);
+  line-height: 1.5;
   color: rgba(232,211,174,.75);
 }
 
 .stage-main-menu-list {
-  gap: clamp(8px, 1.15vh, 13px);
+  gap: clamp(7px, 1vh, 11px);
 }
 
 .stage-menu-button {
-  min-height: clamp(44px, 5.8vh, 62px);
-  padding: 0 clamp(12px, 1.1vw, 18px);
+  min-height: clamp(40px, 5.1vh, 56px);
+  padding: 0 clamp(12px, 1vw, 18px);
   border-radius: 0;
   border: 1px solid rgba(215,180,106,.20);
   background: linear-gradient(90deg, rgba(0,0,0,.56), rgba(13,18,23,.48), rgba(0,0,0,.50));
 }
 
 .stage-menu-button span {
-  width: clamp(30px, 2.5vw, 38px);
-  height: clamp(30px, 2.5vw, 38px);
-  font-size: clamp(13px, 1vw, 17px);
+  width: clamp(28px, 2.25vw, 36px);
+  height: clamp(28px, 2.25vw, 36px);
+  font-size: clamp(12px, .95vw, 16px);
 }
 
 .stage-menu-button strong {
-  font-size: clamp(15px, 1.08vw, 20px);
+  font-size: clamp(14px, 1vw, 18px);
 }
 
 .stage-main-content {
   grid-column: 2;
   grid-row: 1;
+  min-width: 0;
   min-height: 0;
+  height: 100%;
+  overflow: hidden;
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -80,15 +88,18 @@
 
 .stage-main-chapters {
   display: grid;
-  grid-template-rows: clamp(64px, 8.6vh, 92px) minmax(220px, 42vh) 1fr;
-  gap: clamp(12px, 1.15vw, 18px);
+  height: 100%;
   min-height: 0;
+  grid-template-rows: clamp(58px, 7.4vh, 78px) minmax(170px, 36%) minmax(160px, 1fr);
+  gap: clamp(9px, .85vw, 14px);
+  overflow: hidden;
 }
 
 .stage-main-head {
   position: relative;
   min-height: 0;
-  padding: clamp(13px, 1.6vh, 20px) clamp(22px, 2vw, 34px);
+  overflow: hidden;
+  padding: clamp(11px, 1.35vh, 17px) clamp(20px, 1.8vw, 30px);
   background:
     linear-gradient(180deg, rgba(0,0,0,.33), rgba(0,0,0,.49)),
     var(--ui2-chapter-header);
@@ -101,13 +112,13 @@
 
 .clean-main-head .eyebrow,
 .stage-main-head .eyebrow {
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   color: rgba(241,216,154,.68);
-  letter-spacing: .19em;
+  letter-spacing: .18em;
 }
 
 .stage-main-head h2 {
-  font-size: clamp(23px, 2vw, 38px);
+  font-size: clamp(21px, 1.75vw, 34px);
   line-height: 1.05;
   color: #f2d58f;
 }
@@ -117,9 +128,12 @@
 }
 
 .stage-feature-card {
+  position: relative;
   min-height: 0;
-  height: 100%;
-  padding: clamp(28px, 4.2vh, 48px) clamp(30px, 3vw, 58px);
+  height: auto;
+  max-height: none;
+  overflow: hidden;
+  padding: clamp(22px, 3.2vh, 38px) clamp(26px, 2.5vw, 46px);
   display: flex;
   align-items: flex-end;
   background:
@@ -132,52 +146,64 @@
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.54), 0 20px 60px rgba(0,0,0,.4);
 }
 
+.stage-feature-card::before {
+  inset: 0 !important;
+  pointer-events: none;
+  opacity: .62 !important;
+}
+
 .stage-feature-card > div {
-  max-width: min(480px, 54%);
+  max-width: min(430px, 52%);
+  position: relative;
+  z-index: 2;
 }
 
 .stage-feature-card span {
-  font-size: clamp(11px, .82vw, 14px);
+  font-size: clamp(10px, .78vw, 13px);
   color: rgba(241,216,154,.72);
 }
 
 .stage-feature-card h3 {
-  margin-top: 4px;
-  font-size: clamp(38px, 4.4vw, 72px);
+  margin-top: 3px;
+  font-size: clamp(34px, 3.85vw, 64px);
   line-height: .98;
 }
 
 .stage-feature-card p {
-  max-width: 390px;
-  margin-top: 10px;
-  font-size: clamp(13px, .94vw, 16px);
-  line-height: 1.55;
+  max-width: 360px;
+  margin-top: 8px;
+  font-size: clamp(12px, .86vw, 15px);
+  line-height: 1.5;
 }
 
 .stage-start-actions {
-  margin-top: clamp(16px, 2.3vh, 26px);
+  margin-top: clamp(12px, 1.8vh, 20px);
 }
 
 .stage-start-primary,
 .stage-start-secondary {
-  min-height: clamp(42px, 5.2vh, 56px);
-  padding: 0 clamp(20px, 2vw, 34px);
+  min-height: clamp(38px, 4.6vh, 50px);
+  padding: 0 clamp(18px, 1.7vw, 30px);
   border-radius: 0;
 }
 
 .stage-locked-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(10px, .95vw, 16px);
   min-height: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+  gap: clamp(8px, .8vw, 12px);
+  overflow: hidden;
 }
 
 .stage-locked-grid article,
 .stage-archive-grid article {
-  min-height: clamp(86px, 12.5vh, 132px);
-  padding: clamp(18px, 1.55vw, 26px);
+  min-height: 0;
+  height: 100%;
+  padding: clamp(14px, 1.25vw, 22px);
   justify-content: center;
   text-align: center;
+  overflow: hidden;
   background:
     linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.78)),
     var(--ui2-card-locked);
@@ -194,29 +220,30 @@
 
 .stage-locked-grid article span,
 .stage-archive-grid article span {
-  font-size: clamp(10px, .72vw, 12px);
-  letter-spacing: .14em;
+  font-size: clamp(9px, .68vw, 11px);
+  letter-spacing: .13em;
   color: rgba(218,191,139,.58);
 }
 
 .stage-locked-grid article strong,
 .stage-archive-grid article strong {
-  margin-top: 4px;
-  font-size: clamp(15px, 1.15vw, 20px);
+  margin-top: 3px;
+  font-size: clamp(14px, 1.05vw, 18px);
   color: rgba(245,225,186,.86);
 }
 
 .stage-main-bottom {
   grid-column: 2;
   grid-row: 2;
-  height: 64px;
+  height: 60px;
   min-height: 0;
-  padding: 0 clamp(20px, 2vw, 34px);
+  padding: 0 clamp(18px, 1.7vw, 30px);
+  overflow: hidden;
 }
 
 .clean-bottom-bar .verse,
 .stage-main-bottom .verse {
-  font-size: clamp(13px, .95vw, 17px);
+  font-size: clamp(12px, .88vw, 16px);
   color: rgba(241,216,154,.82);
 }
 
@@ -225,5 +252,12 @@
   .stage-main-chapters,
   .stage-locked-grid {
     display: block;
+    overflow: visible;
+  }
+
+  .stage-main-content,
+  .stage-main-left {
+    height: auto;
+    overflow: visible;
   }
 }
