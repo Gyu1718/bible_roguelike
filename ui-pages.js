@@ -1,17 +1,22 @@
-function stageMenuButton(activeMenu, id, label, icon) {
-  const active = activeMenu === id ? "active" : "";
-  return `<button class="home-v4-menu-button ${active}" onclick="setMenu('${id}')"><span>${icon}</span><strong>${label}</strong></button>`;
+function homeMenuButton(activeMenu, id, label, sublabel, icon) {
+  const active = activeMenu === id ? "is-active" : "";
+  return `
+    <button class="home-menu-button ${active}" onclick="setMenu('${id}')">
+      <span class="home-menu-icon">${icon}</span>
+      <span class="home-menu-text"><strong>${label}</strong><em>${sublabel}</em></span>
+    </button>
+  `;
 }
 
-function stageMenu(activeMenu) {
+function homeMenu(activeMenu) {
   return `
-    <nav class="home-v4-menu-list">
-      ${stageMenuButton(activeMenu, "chapters", "이야기", "I")}
-      ${stageMenuButton(activeMenu, "witnesses", "증인들", "W")}
-      ${stageMenuButton(activeMenu, "records", "기록", "R")}
-      ${stageMenuButton(activeMenu, "artifacts", "유물", "A")}
-      ${stageMenuButton(activeMenu, "achievements", "업적", "T")}
-      ${stageMenuButton(activeMenu, "settings", "설정", "S")}
+    <nav class="home-menu">
+      ${homeMenuButton(activeMenu, "chapters", "이야기", "장 선택", "▰")}
+      ${homeMenuButton(activeMenu, "witnesses", "증인들", "인물과 기록", "◉")}
+      ${homeMenuButton(activeMenu, "records", "기록", "문서와 유물", "▤")}
+      ${homeMenuButton(activeMenu, "achievements", "업적", "여정의 발자취", "♕")}
+      ${homeMenuButton(activeMenu, "artifacts", "훈련", "기술과 전투", "⚔")}
+      ${homeMenuButton(activeMenu, "settings", "설정", "옵션과 지원", "⚙")}
     </nav>
   `;
 }
@@ -25,29 +30,29 @@ function formatDate(iso) {
   }
 }
 
-function stageChaptersPage(save) {
+function homeChaptersPage(save) {
   const cleared = save.clearedChapters?.includes("exodus");
   return `
-    <section class="home-v4-board">
-      <header class="home-v4-header">
-        <p>제1막</p>
-        <h2>시작의 증인</h2>
+    <section class="home-board home-board-chapters">
+      <header class="home-act-title">
+        <span class="home-act-cross">✛</span>
+        <strong>제 1 막 · 시작의 증인</strong>
       </header>
 
-      <article class="home-v4-feature">
-        <div class="home-v4-feature-copy">
-          <span>${cleared ? "다시 열리는 기록" : "열린 이야기"}</span>
-          <h3>벽돌과 바다</h3>
-          <p>제국의 벽돌가마 아래에서 시작된 이름 없는 사람의 기록.</p>
-          <button onclick="restart()">${cleared ? "다시 시작하기" : "이야기 시작"}</button>
+      <article class="home-chapter-main">
+        <div class="home-chapter-copy">
+          <span class="home-chapter-kicker">1장</span>
+          <h2>벽돌과 바다</h2>
+          <p>믿음으로 세운 성벽</p>
+          <button onclick="restart()">${cleared ? "다시 걷기" : "이야기 계속하기"} ›</button>
         </div>
       </article>
 
-      <section class="home-v4-locked">
-        <article><span>잠김</span><strong>광야의 메아리</strong></article>
-        <article><span>잠김</span><strong>무너진 성벽</strong></article>
-        <article><span>잠김</span><strong>불 가운데서</strong></article>
-        <article><span>잠김</span><strong>포로의 강가</strong></article>
+      <section class="home-chapter-grid">
+        <article class="home-chapter-card locked card-02"><span>2장</span><strong>광야의 메아리</strong><i>🔒</i></article>
+        <article class="home-chapter-card locked card-03"><span>3장</span><strong>갈라진 밤바다</strong><i>🔒</i></article>
+        <article class="home-chapter-card locked card-04"><span>4장</span><strong>불기둥 아래서</strong><i>🔒</i></article>
+        <article class="home-chapter-card locked card-05"><span>5장</span><strong>무너진 왕궁</strong><i>🔒</i></article>
       </section>
     </section>
   `;
@@ -114,9 +119,9 @@ function settingsPage() {
   return `<section class="stage-main-content stage-archive-content"><div class="stage-main-head"><div><p class="eyebrow">설정</p><h2>설정</h2></div></div><button class="stage-start-secondary" onclick="window.NW_SAVE?.reset()">저장 데이터 초기화</button><div class="stage-archive-grid"><article><span>예정</span><strong>소리</strong></article><article><span>예정</span><strong>텍스트</strong></article><article><span>예정</span><strong>접근성</strong></article></div></section>`;
 }
 
-function stageHomeContent(activeMenu, save) {
+function homeContent(activeMenu, save) {
   const pages = {
-    chapters: () => stageChaptersPage(save),
+    chapters: () => homeChaptersPage(save),
     witnesses: () => witnessesPage(save),
     records: () => recordsPage(save),
     artifacts: () => artifactsPage(save),
@@ -128,20 +133,37 @@ function stageHomeContent(activeMenu, save) {
 
 function homeScreen(activeMenu, save) {
   return `
-    <main class="home-v4-shell">
-      <section class="home-v4-screen">
-        <div class="home-v4-vignette"></div>
-        <aside class="home-v4-left">
-          <div class="home-v4-logo">
-            <h2>이름 없는<br />증인들</h2>
-            <p>사건의 중심이 아니라, 그 곁에서 본 사람의 기록.</p>
+    <main class="home-screen-shell">
+      <section class="home-screen">
+        <div class="home-bg"></div>
+        <div class="home-vignette"></div>
+        <div class="home-outer-frame"></div>
+
+        <aside class="home-sidebar">
+          <div class="home-emblem">♜</div>
+          <div class="home-title">
+            <h1>이름 없는 증인들</h1>
+            <p>하나님의 이야기를 따라 걷는 여정</p>
           </div>
-          ${stageMenu(activeMenu)}
+          ${homeMenu(activeMenu)}
+          <div class="home-quick-icons">
+            <button>♛</button><button>♕</button><button>▤</button><button>♙</button>
+          </div>
+          <div class="home-sidebar-cross">✝</div>
         </aside>
-        ${stageHomeContent(activeMenu, save)}
-        <footer class="home-v4-footer">
-          <div>“너희는 가만히 있어 여호와께서 오늘 너희를 위하여 행하시는 구원을 보라”</div>
+
+        ${homeContent(activeMenu, save)}
+
+        <div class="home-top-icons">
+          <button>▣</button><button>⚙</button><button>⚑</button><span>증인력 전<br />12%</span>
+        </div>
+
+        <footer class="home-footer">
+          <p>이로하실지 너를 위하여 싸우시리니 너희는 가만히 있을지니라</p>
+          <strong>출애굽기 14:14</strong>
         </footer>
+
+        <button class="home-hourglass">⌛</button>
       </section>
     </main>
   `;
