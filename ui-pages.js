@@ -128,8 +128,8 @@ function stageHomeContent(activeMenu, save) {
 
 function homeScreen(activeMenu, save) {
   return `
-    <main class="stage-shell">
-      <section class="game-stage home-v4-screen">
+    <main class="home-v4-shell">
+      <section class="home-v4-screen">
         <div class="home-v4-vignette"></div>
         <aside class="home-v4-left">
           <div class="home-v4-logo">
