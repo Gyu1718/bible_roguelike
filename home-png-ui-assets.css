@@ -1,16 +1,136 @@
-/* Home PNG/WebP UI Asset Pack 01
-   Connect after home-fixed-canvas.css.
+/* Home PNG/WebP UI Asset Pack 02
+   목적: ::before 프레임 중첩 문제를 줄이고, PNG/WebP 에셋을 배경 레이어로 안정화합니다.
 */
-.home-outer-frame{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/frame-outer.webp") center/100% 100% no-repeat!important;}
-.home-menu-button{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/menu-button-normal.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
-.home-menu-button.is-active{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/menu-button-active.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
-.home-act-title{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/top-banner-frame.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
-.home-chapter-main,.home-chapter-card{border:none!important;box-shadow:none!important;}
-.home-chapter-main::after,.home-chapter-card::after{display:none!important;}
-.home-chapter-main::before{display:block!important;content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:url("./assets/premium/home/ui/chapter-card-large-frame.webp") center/100% 100% no-repeat!important;z-index:4!important;}
-.home-chapter-card.card-02::before,.home-chapter-card.card-04::before{display:block!important;content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:url("./assets/premium/home/ui/chapter-card-small-frame-left.webp") center/100% 100% no-repeat!important;z-index:4!important;}
-.home-chapter-card.card-03::before,.home-chapter-card.card-05::before{display:block!important;content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:url("./assets/premium/home/ui/chapter-card-small-frame-right.webp") center/100% 100% no-repeat!important;z-index:4!important;}
-.home-emblem{color:transparent!important;background:url("./assets/premium/home/ui/logo-flame.png") center/contain no-repeat!important;}
-.home-chapter-card i{color:transparent!important;background:url("./assets/premium/home/ui/icon-lock.png") center/contain no-repeat!important;border:none!important;background-color:transparent!important;}
-.home-hourglass{color:transparent!important;background:url("./assets/premium/home/ui/icon-hourglass.png") center/contain no-repeat!important;border:none!important;background-color:transparent!important;}
-.home-quick-icons button,.home-top-icons button{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/icon-button-frame.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
+
+.home-outer-frame {
+  border: none !important;
+  box-shadow: none !important;
+  background: url("./assets/premium/home/ui/frame-outer.webp") center / 100% 100% no-repeat !important;
+}
+
+.home-menu-button {
+  border: none !important;
+  box-shadow: none !important;
+  background: url("./assets/premium/home/ui/menu-button-normal.webp") center / 100% 100% no-repeat !important;
+  background-color: transparent !important;
+}
+
+.home-menu-button.is-active {
+  border: none !important;
+  box-shadow: none !important;
+  background: url("./assets/premium/home/ui/menu-button-active.webp") center / 100% 100% no-repeat !important;
+  background-color: transparent !important;
+}
+
+.home-act-title {
+  border: none !important;
+  box-shadow: none !important;
+  background: url("./assets/premium/home/ui/top-banner-frame.webp") center / 100% 100% no-repeat !important;
+  background-color: transparent !important;
+}
+
+.home-chapter-main,
+.home-chapter-card {
+  border: none !important;
+  box-shadow: none !important;
+  isolation: isolate !important;
+}
+
+/* 기존 CSS가 쓰던 장식선 pseudo layer 완전 비활성화 */
+.home-chapter-main::before,
+.home-chapter-main::after,
+.home-chapter-card::before,
+.home-chapter-card::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 대표 카드는 배경 일러스트 + 프레임을 직접 다중 background로 합성 */
+.home-chapter-main {
+  background-image:
+    url("./assets/premium/home/ui/chapter-card-large-frame.webp"),
+    linear-gradient(90deg, rgba(0,0,0,.04), rgba(0,0,0,.18)),
+    linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.72)),
+    var(--home-asset-main-card) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, cover !important;
+  background-position: center, center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 잠금 카드도 배경 일러스트 + 프레임을 직접 다중 background로 합성 */
+.home-chapter-card.card-02,
+.home-chapter-card.card-04 {
+  background-image:
+    url("./assets/premium/home/ui/chapter-card-small-frame-left.webp"),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.76)),
+    var(--home-asset-locked-02) !important;
+  background-size: 100% 100%, 100% 100%, cover !important;
+  background-position: center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+.home-chapter-card.card-03 {
+  background-image:
+    url("./assets/premium/home/ui/chapter-card-small-frame-right.webp"),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.76)),
+    var(--home-asset-locked-03) !important;
+  background-size: 100% 100%, 100% 100%, cover !important;
+  background-position: center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+.home-chapter-card.card-04 {
+  background-image:
+    url("./assets/premium/home/ui/chapter-card-small-frame-left.webp"),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.76)),
+    var(--home-asset-locked-04) !important;
+}
+
+.home-chapter-card.card-05 {
+  background-image:
+    url("./assets/premium/home/ui/chapter-card-small-frame-right.webp"),
+    linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.76)),
+    var(--home-asset-locked-05) !important;
+  background-size: 100% 100%, 100% 100%, cover !important;
+  background-position: center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 텍스트와 잠금 아이콘은 프레임 위에 보이도록 명시 */
+.home-chapter-copy,
+.home-chapter-card span,
+.home-chapter-card strong,
+.home-chapter-card i {
+  position: relative !important;
+  z-index: 6 !important;
+}
+
+.home-emblem {
+  color: transparent !important;
+  background: url("./assets/premium/home/ui/logo-flame.png") center / contain no-repeat !important;
+}
+
+.home-chapter-card i {
+  color: transparent !important;
+  background: url("./assets/premium/home/ui/icon-lock.png") center / contain no-repeat !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.home-hourglass {
+  color: transparent !important;
+  background: url("./assets/premium/home/ui/icon-hourglass.png") center / contain no-repeat !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.home-quick-icons button,
+.home-top-icons button {
+  border: none !important;
+  box-shadow: none !important;
+  background: url("./assets/premium/home/ui/icon-button-frame.webp") center / 100% 100% no-repeat !important;
+  background-color: transparent !important;
+}
