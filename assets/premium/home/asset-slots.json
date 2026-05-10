@@ -1,0 +1,106 @@
+{
+  "version": "home-asset-separation-01",
+  "baseResolution": {
+    "width": 1672,
+    "height": 941
+  },
+  "principle": "Background and visual assets are separated from HTML text and clickable UI. All Korean text remains DOM text.",
+  "requiredAssets": {
+    "backgrounds": [
+      {
+        "id": "home_bg",
+        "targetPath": "assets/premium/home/home-bg.png",
+        "size": "1672x941",
+        "purpose": "Full home background without UI, text, menus, cards, icons, or borders.",
+        "status": "needed"
+      },
+      {
+        "id": "chapter_1_bg",
+        "targetPath": "assets/premium/home/chapter-1-bg.png",
+        "size": "909x292",
+        "purpose": "Large chapter card background without text, button, UI border, or icons.",
+        "status": "needed"
+      },
+      {
+        "id": "chapter_2_bg",
+        "targetPath": "assets/premium/home/chapter-2-bg.png",
+        "size": "426x160",
+        "purpose": "Locked chapter 2 preview background without text, border, or lock icon.",
+        "status": "needed"
+      },
+      {
+        "id": "chapter_3_bg",
+        "targetPath": "assets/premium/home/chapter-3-bg.png",
+        "size": "470x160",
+        "purpose": "Locked chapter 3 preview background without text, border, or lock icon.",
+        "status": "needed"
+      },
+      {
+        "id": "chapter_4_bg",
+        "targetPath": "assets/premium/home/chapter-4-bg.png",
+        "size": "426x160",
+        "purpose": "Locked chapter 4 preview background without text, border, or lock icon.",
+        "status": "needed"
+      },
+      {
+        "id": "chapter_5_bg",
+        "targetPath": "assets/premium/home/chapter-5-bg.png",
+        "size": "470x160",
+        "purpose": "Locked chapter 5 preview background without text, border, or lock icon.",
+        "status": "needed"
+      }
+    ],
+    "icons": [
+      {
+        "id": "logo_flame",
+        "targetPath": "assets/premium/home/ui/logo-flame.svg",
+        "size": "74x103 display, source SVG or 512x512 PNG",
+        "status": "needed"
+      },
+      {
+        "id": "lock",
+        "targetPath": "assets/premium/home/ui/icon-lock.svg",
+        "size": "67x67 display",
+        "status": "needed"
+      },
+      {
+        "id": "hourglass",
+        "targetPath": "assets/premium/home/ui/icon-hourglass.svg",
+        "size": "57x64 display",
+        "status": "needed"
+      },
+      {
+        "id": "menu_icons",
+        "targetPath": "assets/premium/home/ui/icon-*.svg",
+        "size": "34x34 display",
+        "status": "needed"
+      }
+    ],
+    "cssFrames": [
+      "outer gold frame",
+      "menu button normal/active",
+      "large chapter card frame",
+      "small chapter card frame",
+      "top banner frame",
+      "icon button frame"
+    ]
+  },
+  "doNotGenerateInsideImages": [
+    "Korean text",
+    "English text",
+    "UI labels",
+    "buttons",
+    "menus",
+    "lock icons",
+    "borders",
+    "frames",
+    "readable symbols"
+  ],
+  "implementation": {
+    "canvas": "1672x941 fixed canvas",
+    "positioning": "absolute px coordinates",
+    "scale": "transform scale(min(viewportWidth/1672, viewportHeight/941))",
+    "text": "HTML DOM text only",
+    "clickableUI": "separate DOM elements"
+  }
+}
