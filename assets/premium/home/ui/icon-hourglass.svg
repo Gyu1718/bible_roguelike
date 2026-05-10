@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#c49a55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="1.1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g filter="url(#glow)">
+
+    <path d="M20 10 H44"/><path d="M20 54 H44"/>
+    <path d="M23 10 C23 24 41 24 41 32 C41 40 23 40 23 54"/>
+    <path d="M41 10 C41 24 23 24 23 32 C23 40 41 40 41 54"/>
+    <path d="M27 20 H37"/><path d="M28 47 H36"/>
+
+  </g>
+</svg>
