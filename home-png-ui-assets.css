@@ -1,0 +1,16 @@
+/* Home PNG/WebP UI Asset Pack 01
+   Connect after home-fixed-canvas.css.
+*/
+.home-outer-frame{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/frame-outer.webp") center/100% 100% no-repeat!important;}
+.home-menu-button{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/menu-button-normal.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
+.home-menu-button.is-active{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/menu-button-active.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
+.home-act-title{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/top-banner-frame.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
+.home-chapter-main,.home-chapter-card{border:none!important;box-shadow:none!important;}
+.home-chapter-main::after,.home-chapter-card::after{display:none!important;}
+.home-chapter-main::before{display:block!important;content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:url("./assets/premium/home/ui/chapter-card-large-frame.webp") center/100% 100% no-repeat!important;z-index:4!important;}
+.home-chapter-card.card-02::before,.home-chapter-card.card-04::before{display:block!important;content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:url("./assets/premium/home/ui/chapter-card-small-frame-left.webp") center/100% 100% no-repeat!important;z-index:4!important;}
+.home-chapter-card.card-03::before,.home-chapter-card.card-05::before{display:block!important;content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:url("./assets/premium/home/ui/chapter-card-small-frame-right.webp") center/100% 100% no-repeat!important;z-index:4!important;}
+.home-emblem{color:transparent!important;background:url("./assets/premium/home/ui/logo-flame.png") center/contain no-repeat!important;}
+.home-chapter-card i{color:transparent!important;background:url("./assets/premium/home/ui/icon-lock.png") center/contain no-repeat!important;border:none!important;background-color:transparent!important;}
+.home-hourglass{color:transparent!important;background:url("./assets/premium/home/ui/icon-hourglass.png") center/contain no-repeat!important;border:none!important;background-color:transparent!important;}
+.home-quick-icons button,.home-top-icons button{border:none!important;box-shadow:none!important;background:url("./assets/premium/home/ui/icon-button-frame.webp") center/100% 100% no-repeat!important;background-color:transparent!important;}
