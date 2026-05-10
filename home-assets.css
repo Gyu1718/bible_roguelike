@@ -1,9 +1,23 @@
-/* Home Assets Pack 05
-   현재 기준 화면에서는 임시 SVG보다 기존 고품질 WebP 에셋이 더 자연스럽습니다.
-   SVG 파일은 보관하되, 실제 홈 화면 변수는 기존 프리미엄 에셋으로 되돌립니다.
+/* Home Assets Pack 06
+   Home Asset Separation 01
+   원칙: 배경/카드 배경/아이콘을 분리 에셋 슬롯으로 관리합니다.
+   실제 분리 에셋이 준비되기 전까지는 기존 프리미엄 에셋을 fallback으로 유지합니다.
 */
 
 :root {
+  /* Future separated asset slots */
+  --home-slot-bg: url("./assets/premium/home/home-bg.png");
+  --home-slot-chapter-1-bg: url("./assets/premium/home/chapter-1-bg.png");
+  --home-slot-chapter-2-bg: url("./assets/premium/home/chapter-2-bg.png");
+  --home-slot-chapter-3-bg: url("./assets/premium/home/chapter-3-bg.png");
+  --home-slot-chapter-4-bg: url("./assets/premium/home/chapter-4-bg.png");
+  --home-slot-chapter-5-bg: url("./assets/premium/home/chapter-5-bg.png");
+
+  --home-slot-logo: url("./assets/premium/home/ui/logo-flame.svg");
+  --home-slot-lock: url("./assets/premium/home/ui/icon-lock.svg");
+  --home-slot-hourglass: url("./assets/premium/home/ui/icon-hourglass.svg");
+
+  /* Active runtime assets with current fallback */
   --home-asset-bg: url("./assets/premium/main/main_bg.webp");
   --home-asset-main-card: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
   --home-asset-locked-02: url("./assets/premium/play/scenes/scene_01_brickyard.webp");
